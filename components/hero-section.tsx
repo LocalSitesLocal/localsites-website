@@ -70,7 +70,7 @@ export function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white/20 text-white hover:bg-white/5 hover:text-white text-base px-8"
+                className="border-white/20 bg-white/95 text-[#0B1220] hover:bg-white hover:text-[#0B1220] text-base px-8 shadow-lg shadow-white/10"
               >
                 <a href="#demos">
                   Demo-Websites ansehen

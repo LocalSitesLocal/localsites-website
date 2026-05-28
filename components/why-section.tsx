@@ -47,13 +47,13 @@ export function WhySection() {
             <div className="bg-gradient-to-br from-[#0F2A43] to-[#0B1220] rounded-2xl border border-white/10 p-8 shadow-2xl">
               <div className="space-y-6">
                 {/* Stat Cards */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold gradient-text mb-1">100%</div>
                     <div className="text-xs text-white/60">Fokus auf lokale Betriebe</div>
                   </div>
                   <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                    <div className="text-3xl font-bold gradient-text mb-1">Regional</div>
+                    <div className="text-2xl sm:text-3xl font-bold gradient-text mb-1 leading-tight break-words">Regional</div>
                     <div className="text-xs text-white/60">Schweinfurt & Würzburg</div>
                   </div>
                 </div>
