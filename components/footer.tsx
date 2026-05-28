@@ -1,16 +1,5 @@
 import Link from 'next/link'
-
-const footerLinks = [
-  { label: 'Leistungen', href: '#leistungen' },
-  { label: 'Demos', href: '#demos' },
-  { label: 'Ablauf', href: '#ablauf' },
-  { label: 'Kontakt', href: '#kontakt' },
-]
-
-const legalLinks = [
-  { label: 'Impressum', href: '/impressum' },
-  { label: 'Datenschutz', href: '/datenschutz' },
-]
+import { legalLinks, navItems } from '@/lib/navigation'
 
 export function Footer() {
   return (
@@ -35,14 +24,14 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Navigation</h4>
             <ul className="space-y-3">
-              {footerLinks.map((link) => (
+              {navItems.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

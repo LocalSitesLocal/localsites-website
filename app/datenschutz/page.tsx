@@ -1,19 +1,12 @@
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 
-const notice =
-  'Hinweis: Dieser Rechtstext ist ein Platzhalter und muss vor Veröffentlichung rechtlich geprüft werden.'
-
 export default function DatenschutzPage() {
   return (
     <>
       <Header />
       <main className="bg-[#EEF4F8] py-20 lg:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-amber-900 mb-8">
-            <p className="font-medium">{notice}</p>
-          </div>
-
           <article className="rounded-2xl bg-white border border-[#D7E2EE] shadow-lg shadow-blue-500/5 p-8 lg:p-10 space-y-8">
             <h1 className="text-3xl sm:text-4xl font-bold text-[#0B1220]">Datenschutzerklärung</h1>
 

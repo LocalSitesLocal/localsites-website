@@ -1,21 +1,19 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { navItems } from '@/lib/navigation'
 import { Menu, ArrowRight } from 'lucide-react'
 
-const navItems = [
-  { label: 'Leistungen', href: '#leistungen' },
-  { label: 'Demos', href: '#demos' },
-  { label: 'Ablauf', href: '#ablauf' },
-  { label: 'Warum LocalSites', href: '#warum' },
-  { label: 'Kontakt', href: '#kontakt' },
-]
-
 export function Header() {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const isHomePage = pathname === '/'
+  const showSolidHeader = isScrolled || !isHomePage
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +26,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        showSolidHeader
           ? 'bg-[#0B1220]/95 backdrop-blur-md shadow-lg shadow-black/10'
           : 'bg-transparent'
       }`}
@@ -36,25 +34,25 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] flex items-center justify-center">
               <span className="text-white font-bold text-sm">LS</span>
             </div>
             <span className="text-white font-semibold text-lg tracking-tight">
               LocalSites
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="text-sm text-white/70 hover:text-white transition-colors duration-200"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -64,10 +62,10 @@ export function Header() {
               asChild
               className="bg-gradient-to-r from-[#3B82F6] to-[#38BDF8] hover:from-[#2563EB] hover:to-[#0EA5E9] text-white border-0 shadow-lg shadow-blue-500/25 group"
             >
-              <a href="#kontakt">
+              <Link href="/#kontakt">
                 Erstgespräch vereinbaren
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -91,14 +89,14 @@ export function Header() {
                 </div>
                 <nav className="flex flex-col p-4 gap-2">
                   {navItems.map((item) => (
-                    <a
+                    <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                       className="text-lg text-white/80 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-colors"
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
                 <div className="mt-auto p-4 border-t border-white/10">
@@ -107,10 +105,10 @@ export function Header() {
                     className="w-full bg-gradient-to-r from-[#3B82F6] to-[#38BDF8] hover:from-[#2563EB] hover:to-[#0EA5E9] text-white group"
                     onClick={() => setIsOpen(false)}
                   >
-                    <a href="#kontakt">
+                    <Link href="/#kontakt">
                       Erstgespräch vereinbaren
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    </Link>
                   </Button>
                 </div>
               </div>
