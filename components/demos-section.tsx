@@ -10,7 +10,7 @@ const demos = [
     title: 'Restaurant Landing Page',
     category: 'Gastronomie / Restaurant',
     description: 'Moderne Landingpage-Vorschau für ein Restaurant mit appetitlicher Präsentation, klarer Struktur und direkter Kontaktmöglichkeit.',
-    href: '/demos/restaurant',
+    href: 'https://demo-restaurant-xi.vercel.app/',
     image: '/demo-previews/restaurant.png',
     imageClass: 'scale-125 translate-y-5 object-center group-hover:scale-[1.32]',
     gradient: 'from-orange-600 to-amber-500',
@@ -19,7 +19,7 @@ const demos = [
     title: 'Steuerberatung Landing Page',
     category: 'Steuerberatung / Kanzlei',
     description: 'Professionelle Landingpage-Vorschau für eine Steuerkanzlei mit Fokus auf Vertrauen, Leistungen und Terminvereinbarung.',
-    href: '/demos/steuerberatung',
+    href: 'https://demo-steuerberatung.vercel.app/',
     image: '/demo-previews/steuerberatung.png',
     imageClass: 'scale-[1.18] object-center group-hover:scale-125',
     gradient: 'from-slate-700 to-blue-500',
@@ -28,7 +28,7 @@ const demos = [
     title: 'Haustechnik Landing Page',
     category: 'Haustechnik / Sanitär / Heizung',
     description: 'Premium-Website-Vorschau für einen lokalen Haustechnikbetrieb mit Fokus auf Vertrauen, Leistungen und Kontakt.',
-    href: '/demos/haustechnik',
+    href: 'https://demo-haustechnik.vercel.app/',
     image: '/demo-previews/haustechnik.png',
     imageClass: 'scale-[1.22] translate-y-3 object-center group-hover:scale-[1.28]',
     gradient: 'from-emerald-600 to-teal-500',
@@ -60,6 +60,8 @@ export function DemosSection() {
               {/* Preview */}
               <a
                 href={demo.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`${demo.title} ansehen`}
                 className={`relative block h-64 overflow-hidden bg-gradient-to-br ${demo.gradient}`}
               >
@@ -101,7 +103,7 @@ export function DemosSection() {
                   variant="outline"
                   className="w-full border-[#D7E2EE] hover:bg-[#EEF4F8] hover:border-[#3B82F6] group/btn"
                 >
-                  <a href={demo.href}>
+                  <a href={demo.href} target="_blank" rel="noopener noreferrer">
                     Vorschau ansehen
                     <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </a>
