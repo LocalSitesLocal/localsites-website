@@ -61,7 +61,7 @@ export default function RootLayout({
     <html lang="de" className="bg-[#f8fbff]">
       <body className="font-sans antialiased">
         {children}
-        <ChatbaseWidget chatbotId={process.env.NEXT_PUBLIC_CHATBASE_BOT_ID} />
+        <ChatbaseWidget chatbotId={process.env.NEXT_PUBLIC_CHATBASE_BOT_ID || 'a-_SQBLEszgcO_S7su3pc'} />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
