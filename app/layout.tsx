@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { ChatbaseWidget } from '@/components/chatbase-widget'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({
     <html lang="de" className="bg-[#f8fbff]">
       <body className="font-sans antialiased">
         {children}
+        <ChatbaseWidget chatbotId={process.env.NEXT_PUBLIC_CHATBASE_BOT_ID} />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
