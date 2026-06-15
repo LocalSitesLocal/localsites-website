@@ -1,80 +1,96 @@
 'use client'
 
-import { X, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
+import { FlowButton } from '@/components/flow-button'
+import { Reveal } from '@/components/reveal'
 
-const oldItems = [
-  'Nicht mobil optimiert',
-  'Unklare Leistungen',
-  'Keine starken Kontaktwege',
-  'Wirkt veraltet',
-  'Kaum Vertrauen auf den ersten Blick',
+const packages = [
+  {
+    name: 'Anfrage-Website Starter',
+    price: 'ab 899 €',
+    note: 'Für kleine lokale Betriebe mit modernem ersten Auftritt.',
+    features: ['Onepage-Website', 'Mobile Optimierung', 'Kontaktformular', 'Klickbare Kontakte & Maps', 'SEO-Basis', 'Eine Korrekturrunde'],
+  },
+  {
+    name: 'Website Business',
+    price: 'ab 1.499 €',
+    note: 'Für Handwerker, Gutachter und regionale Dienstleister.',
+    featured: true,
+    features: ['Umfangreichere Firmenwebsite', 'Mehrere Leistungsbereiche', 'FAQ-Bereich', 'Stärkere Kontaktführung', 'Google-Maps-Verknüpfung', 'Zwei Korrekturrunden'],
+  },
+  {
+    name: 'Website + KI-Empfang',
+    price: 'ab 2.499 €',
+    note: 'Für Betriebe, die Anfragen besser aufnehmen wollen.',
+    features: ['Moderne Website', 'KI-Empfang für Standardfragen', 'Lead-Erfassung', 'Terminbuchung optional', 'SEO-Basis', 'Technische Einrichtung'],
+  },
 ]
 
-const newItems = [
-  'Modernes Design',
-  'Klare Leistungen',
-  'Anfrage- und Telefonfokus',
-  'Seriöse Außenwirkung',
-  'Für lokale Suche vorbereitet',
+const carePlans = [
+  ['Basic Care', 'ab 79 €/Monat', 'Kleine Änderungen, technische Kontrolle, Formular prüfen.'],
+  ['Standard Care', 'ab 129 €/Monat', 'Regelmäßige Änderungen, Google/Bewertungen, kleine Optimierungen.'],
+  ['Growth Care', 'ab 199 €/Monat', 'Website-Pflege, SEO-Basis und KI-/Automations-Support.'],
 ]
 
 export function ComparisonSection() {
   return (
-    <section className="py-20 lg:py-32 bg-[#EEF4F8]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1220] mb-6 text-balance">
-            Alte Website vs. moderner Auftritt
+    <section id="preise" className="border-y border-[#dfeaf5] bg-white py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <Reveal className="text-center">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
+            Leistungen & Preise
+          </p>
+          <h2 className="text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
+            Klare Einstiegspreise. Sauberer Umfang.
           </h2>
+        </Reveal>
+
+        <div className="mt-12 grid gap-7 lg:grid-cols-3">
+          {packages.map((pkg, index) => (
+            <Reveal key={pkg.name} delay={index * 80}>
+              <article className="relative h-full rounded-[10px] border border-[#d7e7f7] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-transform duration-300 hover:-translate-y-1">
+                {pkg.featured && (
+                  <div className="absolute inset-x-0 -top-px rounded-t-[10px] bg-[#0b63ce] py-2 text-center text-xs font-black uppercase tracking-[0.12em] text-white">
+                    Beliebt
+                  </div>
+                )}
+                <div className={pkg.featured ? 'pt-8' : ''}>
+                  <h3 className="text-xl font-black text-[#061637]">{pkg.name}</h3>
+                  <p className="mt-2 min-h-12 text-sm leading-6 text-[#52647d]">{pkg.note}</p>
+                  <div className="mt-5 text-4xl font-black tracking-[-0.04em] text-[#061637]">{pkg.price}</div>
+                  <ul className="mt-6 space-y-3">
+                    {pkg.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-[#263956]">
+                        <Check className="h-4 w-4 text-[#0b63ce]" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <FlowButton text="Anfragen" href="#kontakt-form" tone={pkg.featured ? 'blue' : 'dark'} className="mt-7 w-full bg-white" />
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Comparison Grid */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
-          {/* Old */}
-          <div className="bg-white rounded-2xl p-8 border border-[#D7E2EE] shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
-                <X className="h-5 w-5 text-red-500" />
-              </div>
-              <h3 className="text-xl font-semibold text-[#0B1220]">
-                Typischer alter Auftritt
-              </h3>
+        <Reveal delay={220} className="mt-10 rounded-[10px] bg-[#eef6ff] p-6">
+          <div className="grid gap-5 lg:grid-cols-[0.8fr_1fr_1fr_1fr] lg:items-start">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#0b63ce]">Zusatz</p>
+              <h3 className="mt-2 text-2xl font-black tracking-[-0.04em] text-[#061637]">Care & Sichtbarkeit</h3>
             </div>
-            <ul className="space-y-4">
-              {oldItems.map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
-                    <X className="h-3.5 w-3.5 text-red-500" />
-                  </div>
-                  <span className="text-[#5B6B7D]">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* New */}
-          <div className="bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] rounded-2xl p-8 shadow-lg shadow-blue-500/20">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                <Check className="h-5 w-5 text-white" />
+            {carePlans.map(([name, price, text]) => (
+              <div key={name} className="rounded-[10px] bg-white p-5 shadow-sm">
+                <h4 className="font-black text-[#061637]">{name}</h4>
+                <p className="mt-2 text-2xl font-black tracking-[-0.04em] text-[#061637]">{price}</p>
+                <p className="mt-3 text-sm leading-6 text-[#52647d]">{text}</p>
               </div>
-              <h3 className="text-xl font-semibold text-white">
-                LocalSites-Auftritt
-              </h3>
-            </div>
-            <ul className="space-y-4">
-              {newItems.map((item) => (
-                <li key={item} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Check className="h-3.5 w-3.5 text-white" />
-                  </div>
-                  <span className="text-white/90">{item}</span>
-                </li>
-              ))}
-            </ul>
+            ))}
           </div>
-        </div>
+          <p className="mt-6 text-xs leading-5 text-[#52647d]">
+            Der genaue Preis hängt vom Umfang, den gewünschten Funktionen und vorhandenen Inhalten ab.
+          </p>
+        </Reveal>
       </div>
     </section>
   )

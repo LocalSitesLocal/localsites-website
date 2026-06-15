@@ -1,8 +1,10 @@
 export const navItems = [
+  { label: 'Website-Check', href: '/#website-check' },
   { label: 'Leistungen', href: '/#leistungen' },
-  { label: 'Demos', href: '/#demos' },
+  { label: 'Preise', href: '/#preise' },
+  { label: 'Beispiele', href: '/#demos' },
   { label: 'Ablauf', href: '/#ablauf' },
-  { label: 'Warum LocalSites', href: '/#warum' },
+  { label: 'FAQ', href: '/#faq' },
   { label: 'Kontakt', href: '/#kontakt' },
 ] as const
 

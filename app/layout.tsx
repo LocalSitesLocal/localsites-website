@@ -1,28 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: '--font-sans',
-})
-
-const geistMono = Geist_Mono({ 
-  subsets: ["latin"],
-  variable: '--font-mono',
-})
-
 export const metadata: Metadata = {
-  title: 'LocalSites | Moderne Websites für lokale Betriebe in Schweinfurt & Würzburg',
-  description: 'LocalSites erstellt moderne Websites, Landingpages und Google-optimierte Online-Auftritte für lokale Betriebe in Schweinfurt, Würzburg und Franken.',
+  title: 'LocalSites | Websites & digitale Automationen für lokale Betriebe',
+  description:
+    'LocalSites erstellt moderne Websites, Wartung, Google-Bewertungs-Systeme und digitale Automationen für lokale Betriebe in Schweinfurt, Würzburg und Umgebung.',
   keywords: [
+    'Website erstellen Schweinfurt',
     'Webdesign Schweinfurt',
-    'Website erstellen lassen Würzburg',
-    'Landingpage für Handwerker',
+    'Webdesign Würzburg',
+    'Website für Handwerker',
     'Website für lokale Betriebe',
-    'Google Business Optimierung',
-    'Webdesign Franken',
+    'digitale Automationen',
+    'AI Agency Schweinfurt',
+    'Google Bewertungen',
+    'Website Wartung',
+    'Landingpage erstellen',
   ],
   generator: 'Next.js',
   icons: {
@@ -43,15 +37,16 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
   },
   openGraph: {
-    title: 'LocalSites | Moderne Websites für lokale Betriebe',
-    description: 'Professionelle Websites, Landingpages und Google-optimierte Online-Auftritte für lokale Unternehmen in Schweinfurt, Würzburg und Franken.',
+    title: 'LocalSites | Websites für lokale Betriebe',
+    description:
+      'Moderne Websites, Wartung und einfache Automationen für Unternehmen in Schweinfurt, Würzburg und Umgebung.',
     locale: 'de_DE',
     type: 'website',
   },
 }
 
 export const viewport = {
-  themeColor: '#0B1220',
+  themeColor: '#f8fbff',
   width: 'device-width',
   initialScale: 1,
 }
@@ -62,8 +57,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de" className="bg-[#EEF4F8]">
-      <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}>
+    <html lang="de" className="bg-[#f8fbff]">
+      <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

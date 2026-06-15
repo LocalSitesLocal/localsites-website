@@ -1,115 +1,87 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { FlowButton } from '@/components/flow-button'
 import { navItems } from '@/lib/navigation'
-import { Menu, ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const isHomePage = pathname === '/'
-  const showSolidHeader = isScrolled || !isHomePage
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 14)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showSolidHeader
-          ? 'bg-[#0B1220]/95 backdrop-blur-md shadow-lg shadow-black/10'
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]',
+        isScrolled || !isHomePage
+          ? 'bg-white/86 shadow-[0_18px_60px_rgba(19,45,84,0.08)] backdrop-blur-xl'
           : 'bg-transparent'
-      }`}
+      )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 sm:h-20 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">LS</span>
-            </div>
-            <span className="text-white font-semibold text-lg tracking-tight">
-              LocalSites
-            </span>
-          </Link>
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
+        <Link href="/" className="group flex items-center gap-1 text-[1.7rem] font-black tracking-[-0.04em] text-[#061637]">
+          LocalSites<span className="text-[#0b63ce] transition-transform duration-200 group-hover:scale-125">.</span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-white/70 hover:text-white transition-colors duration-200"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
-            <Button
-              asChild
-              className="bg-gradient-to-r from-[#3B82F6] to-[#38BDF8] hover:from-[#2563EB] hover:to-[#0EA5E9] text-white border-0 shadow-lg shadow-blue-500/25 group"
+        <nav className="hidden items-center gap-8 lg:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="relative text-sm font-medium text-[#061637]/78 transition-colors duration-200 after:absolute after:-bottom-2 after:left-0 after:h-px after:w-0 after:bg-[#0b63ce] after:transition-all after:duration-300 hover:text-[#061637] hover:after:w-full"
             >
-              <Link href="/#kontakt">
-                Erstgespräch vereinbaren
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-          {/* Mobile Menu */}
+        <div className="hidden lg:block">
+          <FlowButton text="Kostenlose Vorschau" href="/#kontakt-form" tone="orange" className="bg-white/85" />
+        </div>
+
+        <div className="fixed right-5 top-5 z-[80] lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+            <SheetTrigger asChild>
+              <button
+                type="button"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d7e7f7] bg-white/92 text-[#061637] shadow-[0_10px_30px_rgba(15,55,100,0.12)] backdrop-blur transition-colors hover:bg-[#eaf3ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40"
+              >
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Menü öffnen</span>
-              </Button>
+                <span className="sr-only">Menue oeffnen</span>
+              </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:w-[400px] bg-[#0B1220] border-[#1E3A5F] p-0">
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between p-4 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">LS</span>
-                    </div>
-                    <span className="text-white font-semibold text-lg">LocalSites</span>
-                  </div>
+            <SheetContent side="right" className="w-full border-[#d7e7f7] bg-white p-0 sm:w-[390px]">
+              <div className="flex h-full flex-col">
+                <div className="border-b border-[#d7e7f7] p-5 text-2xl font-black tracking-[-0.04em] text-[#061637]">
+                  LocalSites<span className="text-[#0b63ce]">.</span>
                 </div>
-                <nav className="flex flex-col p-4 gap-2">
+                <nav className="flex flex-col gap-1 p-4">
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-lg text-white/80 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-colors"
+                      className="rounded-xl px-4 py-4 text-lg font-semibold text-[#061637] transition-colors hover:bg-[#f0f7ff]"
                     >
                       {item.label}
                     </Link>
                   ))}
                 </nav>
-                <div className="mt-auto p-4 border-t border-white/10">
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-[#3B82F6] to-[#38BDF8] hover:from-[#2563EB] hover:to-[#0EA5E9] text-white group"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Link href="/#kontakt">
-                      Erstgespräch vereinbaren
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                <div className="mt-auto border-t border-[#d7e7f7] p-5">
+                  <FlowButton text="Kostenlose Vorschau" href="/#kontakt-form" tone="orange" className="w-full bg-white" />
                 </div>
               </div>
             </SheetContent>

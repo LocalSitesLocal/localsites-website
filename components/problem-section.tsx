@@ -1,58 +1,54 @@
 'use client'
 
-import { Globe, ShieldX, PhoneOff } from 'lucide-react'
+import { BarChart3, Clock3, HelpCircle } from 'lucide-react'
+import { Reveal } from '@/components/reveal'
 
 const problems = [
   {
-    icon: Globe,
-    title: 'Keine moderne Website',
-    text: 'Interessenten finden keine überzeugende digitale Visitenkarte.',
+    icon: Clock3,
+    title: 'Zeitfresser',
+    text: 'Manuelle Aufgaben kosten wertvolle Zeit.',
   },
   {
-    icon: ShieldX,
-    title: 'Zu wenig Vertrauen',
-    text: 'Leistungen, Bilder und Kontaktwege sind nicht klar genug dargestellt.',
+    icon: HelpCircle,
+    title: 'Unklare Anfragen',
+    text: 'Zu wenig oder unpassende Anfragen.',
   },
   {
-    icon: PhoneOff,
-    title: 'Zu wenig Anfragen',
-    text: 'Besucher wissen nicht sofort, warum sie anrufen oder schreiben sollten.',
+    icon: BarChart3,
+    title: 'Wenig Sichtbarkeit',
+    text: 'Website und Profil nutzen ihr Potenzial nicht.',
   },
 ]
 
 export function ProblemSection() {
   return (
-    <section className="py-20 lg:py-32 bg-[#EEF4F8]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1220] mb-6 text-balance">
-            Viele gute Betriebe wirken online schlechter, als sie wirklich sind.
-          </h2>
-          <p className="text-lg text-[#5B6B7D] text-pretty">
-            Wenn eine Website veraltet ist, fehlt oder auf dem Handy schlecht aussieht, 
-            verliert ein Unternehmen Vertrauen, bevor überhaupt ein Gespräch entsteht.
+    <section className="border-y border-[#dfeaf5] bg-white py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <Reveal className="text-center">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
+            Die Herausforderung
           </p>
-        </div>
+          <h2 className="mx-auto max-w-[21rem] text-3xl font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-none sm:text-4xl sm:tracking-[-0.04em]">
+            Zu viel Aufwand. Zu wenig Ergebnisse.
+          </h2>
+        </Reveal>
 
-        {/* Problem Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-12 grid gap-0 md:grid-cols-3">
           {problems.map((problem, index) => (
-            <div
+            <Reveal
               key={problem.title}
-              className="group bg-white rounded-2xl p-8 shadow-sm border border-[#D7E2EE] hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1 transition-all duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
+              delay={index * 80}
+              className="group flex gap-5 border-[#dfeaf5] py-7 md:border-r md:px-10 last:md:border-r-0"
             >
-              <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <problem.icon className="h-7 w-7 text-red-500" />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#0b63ce] text-[#0b63ce] transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-1">
+                <problem.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold text-[#0B1220] mb-3">
-                {problem.title}
-              </h3>
-              <p className="text-[#5B6B7D] leading-relaxed">
-                {problem.text}
-              </p>
-            </div>
+              <div>
+                <h3 className="font-bold text-[#061637]">{problem.title}</h3>
+                <p className="mt-1 max-w-[15rem] text-sm leading-6 text-[#52647d]">{problem.text}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

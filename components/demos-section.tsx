@@ -1,117 +1,74 @@
 'use client'
 
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink } from 'lucide-react'
+import { Reveal } from '@/components/reveal'
 
 const demos = [
   {
-    title: 'Restaurant Landing Page',
-    category: 'Gastronomie / Restaurant',
-    description: 'Moderne Landingpage-Vorschau für ein Restaurant mit appetitlicher Präsentation, klarer Struktur und direkter Kontaktmöglichkeit.',
-    href: 'https://demo-restaurant-xi.vercel.app/',
-    image: '/demo-previews/restaurant.png',
-    imageClass: 'scale-125 translate-y-5 object-center group-hover:scale-[1.32]',
-    gradient: 'from-orange-600 to-amber-500',
-  },
-  {
-    title: 'Steuerberatung Landing Page',
-    category: 'Steuerberatung / Kanzlei',
-    description: 'Professionelle Landingpage-Vorschau für eine Steuerkanzlei mit Fokus auf Vertrauen, Leistungen und Terminvereinbarung.',
-    href: 'https://demo-steuerberatung.vercel.app/',
-    image: '/demo-previews/steuerberatung.png',
-    imageClass: 'scale-[1.18] object-center group-hover:scale-125',
-    gradient: 'from-slate-700 to-blue-500',
-  },
-  {
-    title: 'Haustechnik Landing Page',
-    category: 'Haustechnik / Sanitär / Heizung',
-    description: 'Premium-Website-Vorschau für einen lokalen Haustechnikbetrieb mit Fokus auf Vertrauen, Leistungen und Kontakt.',
+    title: 'Sanitär & Heizung',
     href: 'https://demo-haustechnik.vercel.app/',
-    image: '/demo-previews/haustechnik.png',
-    imageClass: 'scale-[1.22] translate-y-3 object-center group-hover:scale-[1.28]',
-    gradient: 'from-emerald-600 to-teal-500',
+    image: '/demo-previews/haustechnik-mood.png',
+  },
+  {
+    title: 'Restaurant & Bar',
+    href: 'https://demo-restaurant-xi.vercel.app/',
+    image: '/demo-previews/restaurant-mood.png',
+  },
+  {
+    title: 'Kanzlei & Beratung',
+    href: 'https://demo-steuerberatung.vercel.app/',
+    image: '/demo-previews/steuerberatung-mood.png',
   },
 ]
 
 export function DemosSection() {
   return (
-    <section id="demos" className="py-20 lg:py-32 bg-[#EEF4F8]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1220] mb-6 text-balance">
-            Website-Vorschauen für lokale Betriebe
-          </h2>
-          <p className="text-lg text-[#5B6B7D] text-pretty">
-            Beispielhafte Demos, damit Unternehmen sofort sehen, wie ein moderner Auftritt aussehen könnte.
+    <section id="demos" className="border-y border-[#dfeaf5] bg-white py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <Reveal className="text-center">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
+            Demo-Vorschauen
           </p>
-        </div>
+          <h2 className="text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
+            Unverbindliche Beispiele.
+          </h2>
+        </Reveal>
 
-        {/* Demo Cards */}
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-12 grid gap-7 lg:grid-cols-3">
           {demos.map((demo, index) => (
-            <div
-              key={demo.title}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-[#D7E2EE] hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Preview */}
+            <Reveal key={demo.title} delay={index * 90}>
               <a
                 href={demo.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${demo.title} ansehen`}
-                className={`relative block h-64 overflow-hidden bg-gradient-to-br ${demo.gradient}`}
+                className="group block overflow-hidden rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_26px_75px_rgba(15,55,100,0.13)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2"
               >
-                <Image
-                  src={demo.image}
-                  alt={`Vorschau der ${demo.title}`}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  className={`h-full w-full object-cover transition-transform duration-500 ${demo.imageClass}`}
-                />
-                <div className="absolute inset-0 bg-[#0B1220]/0 transition-colors duration-300 group-hover:bg-[#0B1220]/10" />
-                <Badge
-                  variant="secondary"
-                  className="absolute top-4 left-4 bg-white/90 text-[#0B1220] border-0 shadow-sm backdrop-blur-sm"
-                >
-                  Demo-Projekt
-                </Badge>
-                <div className="absolute bottom-4 right-4 rounded-full bg-white/90 p-2 text-[#0B1220] opacity-0 shadow-sm transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-0.5">
-                  <ExternalLink className="h-4 w-4" />
+                <div className="relative h-60 overflow-hidden">
+                  <Image
+                    src={demo.image}
+                    alt={`Demo-Vorschau ${demo.title}`}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105"
+                  />
+                  <Badge className="absolute left-5 top-5 border-0 bg-white text-[#061637] shadow-sm">
+                    Demo-Vorschau
+                  </Badge>
+                </div>
+                <div className="flex items-center justify-between p-6">
+                  <h3 className="font-black text-[#061637]">{demo.title}</h3>
+                  <ArrowRight className="h-5 w-5 text-[#0b63ce] transition-transform duration-300 group-hover:translate-x-1" />
                 </div>
               </a>
-
-              {/* Content */}
-              <div className="p-6 text-center">
-                <p className="text-xs text-[#5B6B7D] uppercase tracking-wider font-medium mb-2">
-                  {demo.category}
-                </p>
-                <h3 className="text-xl font-semibold text-[#0B1220] mb-3">
-                  {demo.title}
-                </h3>
-                <p className="text-[#5B6B7D] text-sm leading-relaxed mb-4">
-                  {demo.description}
-                </p>
-                <p className="text-xs text-[#5B6B7D]/70 italic mb-4">
-                  Demo-Projekt / nicht offizielle Website
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full border-[#D7E2EE] hover:bg-[#EEF4F8] hover:border-[#3B82F6] group/btn"
-                >
-                  <a href={demo.href} target="_blank" rel="noopener noreferrer">
-                    Vorschau ansehen
-                    <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </a>
-                </Button>
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
+
+        <p className="mt-7 text-center text-sm text-[#52647d]">
+          Alle Vorschauen sind Demo-Websites und keine echten Kundenprojekte.
+        </p>
       </div>
     </section>
   )

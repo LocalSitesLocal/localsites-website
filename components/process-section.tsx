@@ -1,86 +1,48 @@
 'use client'
 
-import { Search, Eye, Palette, Rocket, HeartHandshake } from 'lucide-react'
+import { CheckCircle2, ClipboardList, Rocket, ScreenShare } from 'lucide-react'
+import { Reveal } from '@/components/reveal'
 
 const steps = [
-  {
-    number: '01',
-    icon: Search,
-    title: 'Kurzer Website-Check',
-    text: 'Wir prüfen, wie der aktuelle Online-Auftritt wirkt und wo Vertrauen verloren geht.',
-  },
-  {
-    number: '02',
-    icon: Eye,
-    title: 'Kostenlose Vorschau',
-    text: 'Sie sehen eine erste moderne Version, bevor Sie sich entscheiden.',
-  },
-  {
-    number: '03',
-    icon: Palette,
-    title: 'Anpassung',
-    text: 'Logo, Farben, Texte, Bilder und Leistungen werden auf Ihren Betrieb abgestimmt.',
-  },
-  {
-    number: '04',
-    icon: Rocket,
-    title: 'Livegang',
-    text: 'Die Website wird veröffentlicht, getestet und für Anfragen vorbereitet.',
-  },
-  {
-    number: '05',
-    icon: HeartHandshake,
-    title: 'Betreuung',
-    text: 'Auf Wunsch kümmern wir uns weiter um Änderungen, Inhalte und lokale Sichtbarkeit.',
-  },
+  { icon: ClipboardList, title: 'Verstehen', text: 'Ziele & Anforderungen klären.' },
+  { icon: ScreenShare, title: 'Vorschau erhalten', text: 'Unverbindliche Website in 48-72 Std.' },
+  { icon: CheckCircle2, title: 'Feinschliff', text: 'Gemeinsam anpassen.' },
+  { icon: Rocket, title: 'Betreuung', text: 'Wir bleiben an Ihrer Seite.' },
 ]
 
 export function ProcessSection() {
   return (
-    <section id="ablauf" className="py-20 lg:py-32 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1220] mb-6 text-balance">
-            So läuft die Zusammenarbeit ab
+    <section id="ablauf" className="bg-[#fbfdff] py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <Reveal className="text-center">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
+            So arbeiten wir
+          </p>
+          <h2 className="text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
+            In 4 einfachen Schritten.
           </h2>
-        </div>
+        </Reveal>
 
-        {/* Process Steps */}
-        <div className="relative">
-          {/* Connection Line - Desktop */}
-          <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#D7E2EE] to-transparent" />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
-            {steps.map((step, index) => (
-              <div
-                key={step.title}
-                className="relative group"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Step Card */}
-                <div className="text-center">
-                  {/* Number & Icon */}
-                  <div className="relative inline-flex flex-col items-center mb-6">
-                    <span className="text-xs font-semibold text-[#3B82F6] mb-2">
-                      {step.number}
-                    </span>
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300">
-                      <step.icon className="h-7 w-7 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="text-lg font-semibold text-[#0B1220] mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-[#5B6B7D] leading-relaxed">
-                    {step.text}
-                  </p>
+        <div className="mt-14 grid gap-7 lg:grid-cols-4">
+          {steps.map((step, index) => (
+            <Reveal key={step.title} delay={index * 80} className="relative text-center">
+              {index < steps.length - 1 && (
+                <div className="absolute left-[62%] top-10 hidden h-px w-[76%] bg-[#cfe0f2] lg:block">
+                  <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 rotate-45 border-r border-t border-[#7d96b4]" />
+                </div>
+              )}
+              <div className="relative mx-auto mb-5 flex h-20 w-20 items-center justify-center">
+                <span className="absolute -right-1 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-[#0b63ce] text-xs font-black text-white">
+                  {index + 1}
+                </span>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#b8d0ec] bg-white text-[#061637] shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                  <step.icon className="h-7 w-7 stroke-[1.6]" />
                 </div>
               </div>
-            ))}
-          </div>
+              <h3 className="font-black text-[#061637]">{step.title}</h3>
+              <p className="mx-auto mt-2 max-w-[12rem] text-sm leading-6 text-[#52647d]">{step.text}</p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

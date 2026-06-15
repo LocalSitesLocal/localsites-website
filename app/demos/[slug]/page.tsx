@@ -10,7 +10,7 @@ const demos = {
     headline: 'Ein moderner Auftritt, der Reservierungen einfacher macht.',
     description:
       'Eine klare Landingpage fuer Restaurants mit Speisekarten-Fokus, starker Bildsprache und direkter Kontaktmoeglichkeit.',
-    image: '/demo-previews/restaurant.png',
+    image: '/demo-previews/restaurant-mood.png',
     gradient: 'from-orange-600 to-amber-500',
     primary: 'Tisch reservieren',
     features: ['Speisekarte prominent sichtbar', 'Reservierung direkt im Blick', 'Vertrauen durch klare Infos'],
@@ -21,7 +21,7 @@ const demos = {
     headline: 'Serioes, klar und auf Erstgespraeche ausgerichtet.',
     description:
       'Eine professionelle Website-Vorschau fuer Kanzleien mit Leistungsuebersicht, Vertrauenselementen und einfachem Kontaktweg.',
-    image: '/demo-previews/steuerberatung.png',
+    image: '/demo-previews/steuerberatung-mood.png',
     gradient: 'from-slate-700 to-blue-500',
     primary: 'Termin anfragen',
     features: ['Leistungen schnell erfassbar', 'Ruhiges Kanzlei-Design', 'Kontakt ohne Umwege'],
@@ -32,7 +32,7 @@ const demos = {
     headline: 'Eine Website, die Kompetenz und schnelle Hilfe vermittelt.',
     description:
       'Eine Premium-Vorschau fuer lokale Handwerksbetriebe mit Fokus auf Leistungen, regionale Naehe und Kontaktanfragen.',
-    image: '/demo-previews/haustechnik.png',
+    image: '/demo-previews/haustechnik-mood.png',
     gradient: 'from-emerald-600 to-teal-500',
     primary: 'Anfrage senden',
     features: ['Notdienst und Leistungen klar', 'Regionaler Vertrauensaufbau', 'Mobil sauber nutzbar'],

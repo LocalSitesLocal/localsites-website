@@ -3,33 +3,25 @@ import { legalLinks, navItems } from '@/lib/navigation'
 
 export function Footer() {
   return (
-    <footer className="bg-[#0B1220] text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#38BDF8] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">LS</span>
-              </div>
-              <span className="text-white font-semibold text-lg">LocalSites</span>
+    <footer className="bg-[#061637] text-white">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+          <div>
+            <div className="text-2xl font-black tracking-[-0.04em]">
+              LocalSites<span className="text-[#4ea0ff]">.</span>
             </div>
-            <p className="text-white/60 max-w-sm leading-relaxed">
-              Websites für lokale Betriebe in Schweinfurt & Würzburg. 
-              Modern, klar und auf Anfragen ausgelegt.
+            <p className="mt-4 max-w-sm text-sm leading-6 text-white/58">
+              Websites, Wartung und einfache Automationen für lokale Betriebe in Schweinfurt,
+              Würzburg und Umgebung.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Navigation</h4>
+            <h4 className="mb-4 text-sm font-black">Navigation</h4>
             <ul className="space-y-3">
               {navItems.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="text-sm text-white/58 transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -37,16 +29,14 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Legal Links */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Rechtliches</h4>
-            <ul className="space-y-3">
+            <h4 className="mb-4 text-sm font-black">Kontakt & Rechtliches</h4>
+            <ul className="space-y-3 text-sm text-white/58">
+              <li>kontakt@localsites.de</li>
+              <li>Schweinfurt / Würzburg</li>
               {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                  <Link href={link.href} className="transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -55,16 +45,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} LocalSites. Alle Rechte vorbehalten.
-            </p>
-            <p className="text-white/40 text-xs italic">
-              Impressum und Datenschutz vor Veröffentlichung ergänzen.
-            </p>
-          </div>
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/42 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} LocalSites. Alle Rechte vorbehalten.</p>
+          <p>Demo-Projekte sind inoffizielle Website-Vorschauen.</p>
         </div>
       </div>
     </footer>
