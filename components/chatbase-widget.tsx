@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { MessageCircle, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { X } from 'lucide-react'
 
 type ChatbaseWidgetProps = {
   chatbotId?: string
@@ -9,6 +9,12 @@ type ChatbaseWidgetProps = {
 
 export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    const openChat = () => setIsOpen(true)
+    window.addEventListener('localsites:open-chat', openChat)
+    return () => window.removeEventListener('localsites:open-chat', openChat)
+  }, [])
 
   if (!chatbotId) return null
 
@@ -37,19 +43,6 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
           />
         </div>
       )}
-
-      <button
-        type="button"
-        onClick={() => setIsOpen((current) => !current)}
-        className="group flex h-13 items-center gap-3 rounded-full border border-[#ff9a4d]/55 bg-white px-4 text-[#061637] shadow-[0_18px_50px_rgba(255,106,0,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#ff6a00] hover:bg-[#fff7f0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff6a00]/35 sm:px-5"
-        aria-expanded={isOpen}
-        aria-label={isOpen ? 'Chat schliessen' : 'Chat oeffnen'}
-      >
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#ff6a00] text-white transition-transform duration-300 group-hover:scale-105">
-          {isOpen ? <X className="h-4 w-4" /> : <MessageCircle className="h-4 w-4" />}
-        </span>
-        <span className="hidden text-sm font-black sm:inline">{isOpen ? 'Schliessen' : 'KI-Chat'}</span>
-      </button>
     </div>
   )
 }

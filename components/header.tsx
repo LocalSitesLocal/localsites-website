@@ -15,6 +15,10 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const isHomePage = pathname === '/'
 
+  const openChat = () => {
+    window.dispatchEvent(new Event('localsites:open-chat'))
+  }
+
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 14)
     onScroll()
@@ -49,7 +53,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:block">
-          <FlowButton text="Kostenlose Vorschau" href="/#kontakt-form" tone="orange" className="bg-white/85" />
+          <FlowButton text="Kostenlos beraten lassen" onClick={openChat} tone="orange" className="bg-white/85" />
         </div>
 
         <div className="fixed right-5 top-5 z-[80] lg:hidden">
@@ -81,7 +85,15 @@ export function Header() {
                   ))}
                 </nav>
                 <div className="mt-auto border-t border-[#d7e7f7] p-5">
-                  <FlowButton text="Kostenlose Vorschau" href="/#kontakt-form" tone="orange" className="w-full bg-white" />
+                  <FlowButton
+                    text="Kostenlos beraten lassen"
+                    onClick={() => {
+                      setIsOpen(false)
+                      openChat()
+                    }}
+                    tone="orange"
+                    className="w-full bg-white"
+                  />
                 </div>
               </div>
             </SheetContent>

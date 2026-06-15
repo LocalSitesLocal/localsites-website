@@ -9,6 +9,7 @@ type FlowButtonProps = {
   href?: string
   className?: string
   tone?: 'dark' | 'orange' | 'blue'
+  onClick?: () => void
 }
 
 const toneClasses = {
@@ -34,6 +35,7 @@ export function FlowButton({
   href,
   className,
   tone = 'dark',
+  onClick,
 }: FlowButtonProps) {
   const styles = toneClasses[tone]
   const content = (
@@ -77,7 +79,7 @@ export function FlowButton({
   }
 
   return (
-    <button className={sharedClassName} type="button">
+    <button className={sharedClassName} type="button" onClick={onClick}>
       {content}
     </button>
   )
