@@ -72,7 +72,7 @@ export function FlowButton({
 
   if (href) {
     return (
-      <Link href={href} className={sharedClassName}>
+      <Link href={href} className={sharedClassName} onClick={onClick}>
         {content}
       </Link>
     )

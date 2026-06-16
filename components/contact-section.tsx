@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckCircle, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,6 +12,16 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    const savedSelection = window.sessionStorage.getItem('localsites:pricing-selection')
+
+    if (savedSelection) {
+      setMessage(savedSelection)
+      window.sessionStorage.removeItem('localsites:pricing-selection')
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -99,6 +109,8 @@ export function ContactSection() {
                     name="nachricht"
                     placeholder="Worum geht es?"
                     rows={4}
+                    value={message}
+                    onChange={(event) => setMessage(event.target.value)}
                     className="resize-none rounded-md border-[#d7e7f7]"
                   />
                 </div>

@@ -245,6 +245,26 @@ function SelectionSummary({
 }) {
   const setup = website.setupPrice + ai.setupPrice
   const monthly = care.monthlyPrice ?? 0
+  const saveSelectionForContact = () => {
+    try {
+      window.sessionStorage.setItem(
+        'localsites:pricing-selection',
+        [
+          'Ich interessiere mich für folgende Paketauswahl:',
+          '',
+          `Website-Paket: ${website.name}`,
+          `Betreuung: ${care.name}`,
+          `KI-Modul: ${ai.name}`,
+          `Geschätzter Startpreis: ab ${formatCurrency(setup)}`,
+          `Geschätzte monatliche Kosten: ${
+            monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`
+          }`,
+        ].join('\n')
+      )
+    } catch {
+      // The form still works if browser storage is unavailable.
+    }
+  }
 
   return (
     <div className="rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_24px_80px_rgba(15,55,100,0.12)]">
@@ -290,7 +310,13 @@ function SelectionSummary({
         </div>
       </div>
 
-      <FlowButton text="Angebot anfragen" href="/#kontakt" tone="orange" className="mt-7 w-full bg-white" />
+      <FlowButton
+        text="Angebot anfragen"
+        href="/#kontakt"
+        tone="orange"
+        onClick={saveSelectionForContact}
+        className="mt-7 w-full bg-white"
+      />
     </div>
   )
 }
