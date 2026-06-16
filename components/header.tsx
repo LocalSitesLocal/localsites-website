@@ -37,7 +37,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link href="/" className="group flex items-center gap-1 text-[1.7rem] font-black tracking-[-0.04em] text-[#061637]">
-          LocalSites<span className="text-[#0b63ce] transition-transform duration-200 group-hover:scale-125">.</span>
+          LocalSites<span aria-hidden="true" className="mt-4 h-1.5 w-1.5 rounded-full bg-[#0b63ce] transition-transform duration-200 group-hover:scale-125" />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -70,7 +70,7 @@ export function Header() {
             <SheetContent side="right" className="w-full border-[#d7e7f7] bg-white p-0 sm:w-[390px]">
               <div className="flex h-full flex-col">
                 <div className="border-b border-[#d7e7f7] p-5 text-2xl font-black tracking-[-0.04em] text-[#061637]">
-                  LocalSites<span className="text-[#0b63ce]">.</span>
+                  LocalSites<span aria-hidden="true" className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-[#0b63ce]" />
                 </div>
                 <nav className="flex flex-col gap-1 p-4">
                   {navItems.map((item) => (

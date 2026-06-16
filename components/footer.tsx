@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
             <div className="text-2xl font-black tracking-[-0.04em]">
-              LocalSites<span className="text-[#4ea0ff]">.</span>
+              LocalSites<span aria-hidden="true" className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-[#4ea0ff]" />
             </div>
             <p className="mt-4 max-w-sm text-sm leading-6 text-white/58">
               Websites, Wartung und einfache Automationen für lokale Betriebe in Schweinfurt,
