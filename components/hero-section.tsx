@@ -44,7 +44,7 @@ export function HeroSection() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <FlowButton text="Kostenlosen Website-Check" href="#kontakt" tone="orange" className="bg-white/85" />
-            <FlowButton text="Beispiele" href="#demos" tone="blue" className="bg-white/70" />
+            <FlowButton text="KI-Empfang" href="/ki-empfang" tone="blue" className="bg-white/70" />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">

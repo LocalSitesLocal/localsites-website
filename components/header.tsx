@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { FlowButton } from '@/components/flow-button'
 import { navItems } from '@/lib/navigation'
 import { cn } from '@/lib/utils'
 
@@ -14,10 +13,6 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const isHomePage = pathname === '/'
-
-  const openChat = () => {
-    window.dispatchEvent(new Event('localsites:open-chat'))
-  }
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 14)
@@ -52,10 +47,6 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <FlowButton text="Kostenlos beraten lassen" onClick={openChat} tone="orange" className="bg-white/85" />
-        </div>
-
         <div className="fixed right-5 top-5 z-[80] lg:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -84,17 +75,6 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
-                <div className="mt-auto border-t border-[#d7e7f7] p-5">
-                  <FlowButton
-                    text="Kostenlos beraten lassen"
-                    onClick={() => {
-                      setIsOpen(false)
-                      openChat()
-                    }}
-                    tone="orange"
-                    className="w-full bg-white"
-                  />
-                </div>
               </div>
             </SheetContent>
           </Sheet>
