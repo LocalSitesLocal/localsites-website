@@ -95,7 +95,7 @@ const careOptions: PackageOption[] = [
     setupPrice: 0,
     monthlyPrice: 129,
     recommended: true,
-    features: ['regelmäßige Änderungen', 'Google-/Bewertungsunterstützung', 'kleine Optimierungen'],
+    features: ['regelmäßige Änderungen', 'Google- und Bewertungsunterstützung', 'kleine Optimierungen'],
   },
   {
     id: 'growth',
@@ -103,7 +103,7 @@ const careOptions: PackageOption[] = [
     price: 'ab 199 €/Monat',
     setupPrice: 0,
     monthlyPrice: 199,
-    features: ['laufende Website-Pflege', 'SEO-Basis-Optimierung', 'KI-Empfang-/Automations-Support'],
+    features: ['laufende Website-Pflege', 'SEO-Basisoptimierung', 'KI-Empfang und Automations-Support'],
   },
 ]
 
@@ -188,9 +188,9 @@ function OptionCard({
       {option.features && (
         <ul className="mt-5 grid gap-2">
           {option.features.map((feature) => (
-            <li key={feature} className="flex gap-2 text-sm leading-6 text-[#263956]">
+            <li key={feature} className="flex min-w-0 gap-2 text-sm leading-6 text-[#263956]">
               <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
-              <span>{feature}</span>
+              <span className="min-w-0">{feature}</span>
             </li>
           ))}
         </ul>
@@ -220,7 +220,7 @@ function SelectionStep({
         </span>
         <h2 className="text-2xl font-black tracking-[-0.035em] text-[#061637]">{title}</h2>
       </div>
-      <div className={cn('grid gap-4', options.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
+      <div className={cn('grid gap-4', options.length === 4 ? 'md:grid-cols-2' : 'lg:grid-cols-3')}>
         {options.map((option) => (
           <OptionCard
             key={option.id}
@@ -312,21 +312,27 @@ export function PricingWizard() {
   }, [websiteId, careId, aiId])
 
   const selectWebsite = (id: string) => {
+    const isFirstWebsiteSelection = !websiteId
     setWebsiteId(id)
-    setCareId(null)
-    setAiId(null)
-    jumpTo(careRef)
+    if (isFirstWebsiteSelection) {
+      jumpTo(careRef)
+    }
   }
 
   const selectCare = (id: string) => {
+    const isFirstCareSelection = !careId
     setCareId(id)
-    setAiId(null)
-    jumpTo(aiRef)
+    if (isFirstCareSelection) {
+      jumpTo(aiRef)
+    }
   }
 
   const selectAi = (id: string) => {
+    const isFirstAiSelection = !aiId
     setAiId(id)
-    jumpTo(summaryRef)
+    if (isFirstAiSelection) {
+      jumpTo(summaryRef)
+    }
   }
 
   const isComplete = Boolean(selection.website && selection.care && selection.ai)

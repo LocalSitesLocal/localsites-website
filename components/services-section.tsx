@@ -1,7 +1,9 @@
 'use client'
 
 import { Bot, Check, Globe2, ShieldCheck } from 'lucide-react'
+import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
+import { cn } from '@/lib/utils'
 
 const services = [
   {
@@ -34,6 +36,8 @@ const services = [
     icon: Bot,
     title: 'KI-Empfang',
     text: 'Ein digitaler Empfang für Standardfragen, Leads und optional vorbereitete Termine.',
+    href: '/ki-empfang',
+    highlighted: true,
     items: [
       'Häufige Fragen beantworten',
       'Kontaktdaten sammeln',
@@ -61,12 +65,29 @@ export function ServicesSection() {
         <div className="mt-12 grid gap-7 lg:grid-cols-3">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 90}>
-              <article className="group h-full rounded-[10px] border border-[#d7e7f7] bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-transform duration-300 hover:-translate-y-1">
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce] transition-transform duration-300 group-hover:-translate-y-1">
+              <article
+                className={cn(
+                  'group relative h-full overflow-hidden rounded-[10px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-transform duration-300 hover:-translate-y-1',
+                  service.highlighted
+                    ? 'border-[#0b63ce]/45 bg-[linear-gradient(145deg,#ffffff_0%,#f0f7ff_54%,#fff3ea_100%)] shadow-[0_28px_90px_rgba(11,99,206,0.16)]'
+                    : 'border-[#d7e7f7]'
+                )}
+              >
+                {service.highlighted && (
+                  <span className="mb-5 inline-flex rounded-full bg-[#ffefe5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+                    Automatisierung
+                  </span>
+                )}
+                <div
+                  className={cn(
+                    'mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce] transition-transform duration-300 group-hover:-translate-y-1',
+                    service.highlighted && 'bg-[#0b63ce] text-white shadow-[0_16px_35px_rgba(11,99,206,0.28)]'
+                  )}
+                >
                   <service.icon className="h-7 w-7" />
                 </div>
                 <h3 className="text-2xl font-black tracking-[-0.035em] text-[#061637]">{service.title}</h3>
-                <p className="mt-3 min-h-20 leading-7 text-[#52647d]">{service.text}</p>
+                <p className="mt-3 leading-7 text-[#52647d]">{service.text}</p>
                 <ul className="mt-6 space-y-3">
                   {service.items.map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-[#263956]">
@@ -75,17 +96,18 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
+                {service.href && (
+                  <FlowButton
+                    text="Mehr zum KI-Empfang"
+                    href={service.href}
+                    tone="blue"
+                    className="mt-7 bg-white"
+                  />
+                )}
               </article>
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={220}>
-          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-6 text-[#52647d]">
-            Der KI-Empfang unterstützt bei Standardfragen und sammelt Anfragen. Individuelle
-            oder kritische Fälle werden an den Betrieb weitergeleitet.
-          </p>
-        </Reveal>
       </div>
     </section>
   )
