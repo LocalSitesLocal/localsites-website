@@ -8,6 +8,8 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Reveal } from '@/components/reveal'
 
+const CALENDLY_URL = 'https://calendly.com/ki-contentstudio/30min?hide_event_type_details=1&hide_gdpr_banner=1'
+
 export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -75,10 +77,21 @@ export function ContactSection() {
             className="rounded-[10px] border border-[#d7e7f7] bg-white/86 p-5 shadow-[0_24px_80px_rgba(15,55,100,0.1)] backdrop-blur"
           >
             {isSubmitted ? (
-              <div className="py-16 text-center">
-                <CheckCircle className="mx-auto mb-5 h-12 w-12 text-[#0b63ce]" />
-                <h3 className="text-2xl font-black text-[#061637]">Danke für Ihre Anfrage.</h3>
-                <p className="mt-2 text-[#52647d]">Ich melde mich zeitnah mit den nächsten Schritten.</p>
+              <div className="text-center">
+                <div className="mx-auto max-w-xl py-8">
+                  <CheckCircle className="mx-auto mb-5 h-12 w-12 text-[#0b63ce]" />
+                  <h3 className="text-2xl font-black text-[#061637]">Danke für Ihre Anfrage.</h3>
+                  <p className="mt-2 text-[#52647d]">
+                    Wählen Sie direkt einen passenden Termin für die kurze Besprechung aus.
+                  </p>
+                </div>
+                <div className="overflow-hidden rounded-md border border-[#d7e7f7] bg-white">
+                  <iframe
+                    src={CALENDLY_URL}
+                    title="Termin über Calendly auswählen"
+                    className="h-[720px] w-full border-0"
+                  />
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
