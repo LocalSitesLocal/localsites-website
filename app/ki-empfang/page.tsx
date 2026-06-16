@@ -63,7 +63,7 @@ export default function KiEmpfangPage() {
                 vorgeschaltete Hilfe für typische Erstkontakte.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <FlowButton text="KI-Empfang anfragen" href="/#kontakt-form" tone="orange" className="bg-white" />
+                <FlowButton text="KI-Empfang anfragen" href="/#kontakt" tone="orange" className="bg-white" />
                 <FlowButton text="Preise ansehen" href="/preise" tone="blue" className="bg-white" />
               </div>
             </div>
@@ -161,7 +161,7 @@ export default function KiEmpfangPage() {
             </p>
             <FlowButton
               text="Kostenlosen Website-Check anfragen"
-              href="/#kontakt-form"
+              href="/#kontakt"
               tone="orange"
               className="mt-8 bg-white"
             />

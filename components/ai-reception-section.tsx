@@ -25,7 +25,7 @@ export function AiReceptionSection() {
             Der KI-Empfang unterstützt bei Standardfragen und sammelt Anfragen. Individuelle
             oder kritische Fälle werden an den Betrieb weitergeleitet.
           </p>
-          <FlowButton text="KI-Empfang anfragen" href="#kontakt-form" tone="blue" className="mt-8 bg-white" />
+          <FlowButton text="KI-Empfang anfragen" href="#kontakt" tone="blue" className="mt-8 bg-white" />
         </Reveal>
 
         <div className="grid gap-4 sm:grid-cols-3 lg:items-stretch">

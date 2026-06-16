@@ -290,7 +290,7 @@ function SelectionSummary({
         </div>
       </div>
 
-      <FlowButton text="Angebot anfragen" href="/#kontakt-form" tone="orange" className="mt-7 w-full bg-white" />
+      <FlowButton text="Angebot anfragen" href="/#kontakt" tone="orange" className="mt-7 w-full bg-white" />
     </div>
   )
 }

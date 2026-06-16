@@ -124,6 +124,10 @@
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 7.5rem;
+  }
+  :where(section[id], form[id]) {
+    scroll-margin-top: 7.5rem;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
