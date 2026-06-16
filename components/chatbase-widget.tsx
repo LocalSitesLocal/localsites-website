@@ -20,7 +20,12 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
   if (!chatbotId) return null
 
   return (
-    <div className="fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
+    <div
+      className={cn(
+        'fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6',
+        isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+      )}
+    >
       <div
         aria-hidden={!isOpen}
         className={cn(
