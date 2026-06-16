@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Check, Circle, MousePointer2 } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { cn } from '@/lib/utils'
@@ -13,6 +13,7 @@ type PackageOption = {
   monthlyPrice?: number
   description?: string
   features?: string[]
+  recommended?: boolean
 }
 
 const websiteOptions: PackageOption[] = [
@@ -39,6 +40,7 @@ const websiteOptions: PackageOption[] = [
     name: 'Website Business',
     price: 'ab 1.499 €',
     setupPrice: 1499,
+    recommended: true,
     description: 'Für Handwerker, Gutachter, Dienstleister und Betriebe mit mehreren Leistungen.',
     features: [
       'umfangreichere Firmenwebsite',
@@ -92,6 +94,7 @@ const careOptions: PackageOption[] = [
     price: 'ab 129 €/Monat',
     setupPrice: 0,
     monthlyPrice: 129,
+    recommended: true,
     features: ['regelmäßige Änderungen', 'Google-/Bewertungsunterstützung', 'kleine Optimierungen'],
   },
   {
@@ -116,6 +119,7 @@ const aiOptions: PackageOption[] = [
     name: 'FAQ- & Lead-Assistent',
     price: 'ab 699 € Einrichtung',
     setupPrice: 699,
+    recommended: true,
     description: 'Der KI-Empfang beantwortet Standardfragen und sammelt Kontaktdaten.',
   },
   {
@@ -136,6 +140,12 @@ function formatCurrency(value: number) {
   }).format(value)
 }
 
+function jumpTo(ref: React.RefObject<HTMLDivElement | null>) {
+  window.setTimeout(() => {
+    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, 80)
+}
+
 function OptionCard({
   option,
   selected,
@@ -150,10 +160,16 @@ function OptionCard({
       type="button"
       onClick={onSelect}
       className={cn(
-        'group h-full w-full rounded-[10px] border bg-white p-5 text-left shadow-[0_18px_55px_rgba(15,55,100,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0b63ce]/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35',
-        selected ? 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15' : 'border-[#d7e7f7]'
+        'group relative h-full w-full rounded-[10px] border bg-white p-5 text-left shadow-[0_18px_55px_rgba(15,55,100,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0b63ce]/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35',
+        option.recommended && 'border-[#ff9a4d] shadow-[0_22px_70px_rgba(255,106,0,0.13)]',
+        selected && 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15'
       )}
     >
+      {option.recommended && (
+        <span className="mb-4 inline-flex rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+          Beliebt
+        </span>
+      )}
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-black text-[#061637]">{option.name}</h3>
@@ -193,7 +209,7 @@ function SelectionStep({
   number: string
   title: string
   options: PackageOption[]
-  selectedId: string
+  selectedId: string | null
   onSelect: (id: string) => void
 }) {
   return (
@@ -204,7 +220,7 @@ function SelectionStep({
         </span>
         <h2 className="text-2xl font-black tracking-[-0.035em] text-[#061637]">{title}</h2>
       </div>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className={cn('grid gap-4', options.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3')}>
         {options.map((option) => (
           <OptionCard
             key={option.id}
@@ -218,19 +234,102 @@ function SelectionStep({
   )
 }
 
+function SelectionSummary({
+  website,
+  care,
+  ai,
+}: {
+  website: PackageOption
+  care: PackageOption
+  ai: PackageOption
+}) {
+  const setup = website.setupPrice + ai.setupPrice
+  const monthly = care.monthlyPrice ?? 0
+
+  return (
+    <div className="rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_24px_80px_rgba(15,55,100,0.12)]">
+      <div className="mb-6 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
+          <MousePointer2 className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Ihre Auswahl</p>
+          <h2 className="text-xl font-black text-[#061637]">Paketübersicht</h2>
+        </div>
+      </div>
+
+      <dl className="grid gap-4 text-sm sm:grid-cols-3 lg:grid-cols-1">
+        <div>
+          <dt className="font-bold text-[#52647d]">Website-Paket</dt>
+          <dd className="mt-1 font-black text-[#061637]">{website.name}</dd>
+        </div>
+        <div>
+          <dt className="font-bold text-[#52647d]">Betreuung</dt>
+          <dd className="mt-1 font-black text-[#061637]">{care.name}</dd>
+        </div>
+        <div>
+          <dt className="font-bold text-[#52647d]">KI-Modul</dt>
+          <dd className="mt-1 font-black text-[#061637]">{ai.name}</dd>
+        </div>
+      </dl>
+
+      <div className="my-6 h-px bg-[#d7e7f7]" />
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">geschätzter Startpreis</p>
+          <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">ab {formatCurrency(setup)}</p>
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">
+            geschätzte monatliche Kosten
+          </p>
+          <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">
+            {monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`}
+          </p>
+        </div>
+      </div>
+
+      <FlowButton text="Angebot anfragen" href="/#kontakt-form" tone="orange" className="mt-7 w-full bg-white" />
+    </div>
+  )
+}
+
 export function PricingWizard() {
-  const [websiteId, setWebsiteId] = useState('business')
-  const [careId, setCareId] = useState('standard')
-  const [aiId, setAiId] = useState('no-ai')
+  const careRef = useRef<HTMLDivElement | null>(null)
+  const aiRef = useRef<HTMLDivElement | null>(null)
+  const summaryRef = useRef<HTMLDivElement | null>(null)
+
+  const [websiteId, setWebsiteId] = useState<string | null>(null)
+  const [careId, setCareId] = useState<string | null>(null)
+  const [aiId, setAiId] = useState<string | null>(null)
 
   const selection = useMemo(() => {
-    const website = websiteOptions.find((option) => option.id === websiteId) ?? websiteOptions[0]
-    const care = careOptions.find((option) => option.id === careId) ?? careOptions[0]
-    const ai = aiOptions.find((option) => option.id === aiId) ?? aiOptions[0]
-    const setup = website.setupPrice + ai.setupPrice
-    const monthly = care.monthlyPrice ?? 0
-    return { website, care, ai, setup, monthly }
+    const website = websiteOptions.find((option) => option.id === websiteId)
+    const care = careOptions.find((option) => option.id === careId)
+    const ai = aiOptions.find((option) => option.id === aiId)
+    return { website, care, ai }
   }, [websiteId, careId, aiId])
+
+  const selectWebsite = (id: string) => {
+    setWebsiteId(id)
+    setCareId(null)
+    setAiId(null)
+    jumpTo(careRef)
+  }
+
+  const selectCare = (id: string) => {
+    setCareId(id)
+    setAiId(null)
+    jumpTo(aiRef)
+  }
+
+  const selectAi = (id: string) => {
+    setAiId(id)
+    jumpTo(summaryRef)
+  }
+
+  const isComplete = Boolean(selection.website && selection.care && selection.ai)
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
@@ -240,83 +339,42 @@ export function PricingWizard() {
           title="Website-Basis wählen"
           options={websiteOptions}
           selectedId={websiteId}
-          onSelect={setWebsiteId}
+          onSelect={selectWebsite}
         />
-        <SelectionStep
-          number="2"
-          title="Monatliche Betreuung wählen"
-          options={careOptions}
-          selectedId={careId}
-          onSelect={setCareId}
-        />
-        <SelectionStep
-          number="3"
-          title="KI-Empfang optional hinzufügen"
-          options={aiOptions}
-          selectedId={aiId}
-          onSelect={setAiId}
-        />
+
+        {websiteId && (
+          <div ref={careRef}>
+            <SelectionStep
+              number="2"
+              title="Monatliche Betreuung wählen"
+              options={careOptions}
+              selectedId={careId}
+              onSelect={selectCare}
+            />
+          </div>
+        )}
+
+        {websiteId && careId && (
+          <div ref={aiRef}>
+            <SelectionStep
+              number="3"
+              title="KI-Empfang optional hinzufügen"
+              options={aiOptions}
+              selectedId={aiId}
+              onSelect={selectAi}
+            />
+          </div>
+        )}
       </div>
 
-      <aside className="lg:sticky lg:top-28">
-        <div className="rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_24px_80px_rgba(15,55,100,0.12)]">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
-              <MousePointer2 className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Ihre Auswahl</p>
-              <h2 className="text-xl font-black text-[#061637]">Paketübersicht</h2>
-            </div>
+      <aside ref={summaryRef} className="lg:sticky lg:top-28">
+        {isComplete && selection.website && selection.care && selection.ai ? (
+          <SelectionSummary website={selection.website} care={selection.care} ai={selection.ai} />
+        ) : (
+          <div className="rounded-[12px] border border-dashed border-[#c6d9ec] bg-white/72 p-6 text-sm leading-6 text-[#52647d]">
+            Treffen Sie links Ihre Auswahl. Die Zusammenfassung erscheint automatisch nach Schritt 3.
           </div>
-
-          <dl className="space-y-4 text-sm">
-            <div>
-              <dt className="font-bold text-[#52647d]">Website-Paket</dt>
-              <dd className="mt-1 font-black text-[#061637]">{selection.website.name}</dd>
-            </div>
-            <div>
-              <dt className="font-bold text-[#52647d]">Betreuung</dt>
-              <dd className="mt-1 font-black text-[#061637]">{selection.care.name}</dd>
-            </div>
-            <div>
-              <dt className="font-bold text-[#52647d]">KI-Modul</dt>
-              <dd className="mt-1 font-black text-[#061637]">{selection.ai.name}</dd>
-            </div>
-          </dl>
-
-          <div className="my-6 h-px bg-[#d7e7f7]" />
-
-          <div className="grid gap-4">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">
-                geschätzter Startpreis
-              </p>
-              <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">
-                ab {formatCurrency(selection.setup)}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">
-                geschätzte monatliche Kosten
-              </p>
-              <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">
-                {selection.monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(selection.monthly)}/Monat`}
-              </p>
-            </div>
-          </div>
-
-          <FlowButton
-            text="Angebot anfragen"
-            href="/#kontakt-form"
-            tone="orange"
-            className="mt-7 w-full bg-white"
-          />
-
-          <p className="mt-5 text-xs leading-5 text-[#52647d]">
-            Der genaue Preis hängt vom Umfang, den gewünschten Funktionen und vorhandenen Inhalten ab.
-          </p>
-        </div>
+        )}
       </aside>
     </div>
   )
