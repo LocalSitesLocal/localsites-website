@@ -40,11 +40,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Name und E-Mail sind erforderlich.' }, { status: 400 })
   }
 
-  if (!process.env.RESEND_API_KEY || !process.env.CONTACT_TO_EMAIL) {
+  if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY === 're_xxxxxxxxx') {
     return NextResponse.json({ error: 'E-Mail Versand ist noch nicht konfiguriert.' }, { status: 500 })
   }
 
   const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <onboarding@resend.dev>'
+  const to = process.env.CONTACT_TO_EMAIL || 'ki.contentstudio@gmail.com'
   const subject = `Neue Website-Check Anfrage von ${name}`
   const rows = [
     ['Name', name],
@@ -81,7 +82,7 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       from,
-      to: process.env.CONTACT_TO_EMAIL,
+      to,
       reply_to: email,
       subject,
       html,
