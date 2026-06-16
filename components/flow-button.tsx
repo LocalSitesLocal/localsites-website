@@ -38,6 +38,27 @@ export function FlowButton({
   onClick,
 }: FlowButtonProps) {
   const styles = toneClasses[tone]
+  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    onClick?.()
+
+    if (!href) return
+
+    const isLocalHash = href.startsWith('#')
+    const isHomeHash = href.startsWith('/#') && window.location.pathname === '/'
+
+    if (!isLocalHash && !isHomeHash) return
+
+    const hash = isLocalHash ? href : href.slice(1)
+    const targetId = hash.replace(/^#/, '')
+    const target = document.getElementById(targetId)
+
+    if (!target) return
+
+    event.preventDefault()
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${targetId}`)
+  }
+
   const content = (
     <>
       <ArrowRight
@@ -72,7 +93,7 @@ export function FlowButton({
 
   if (href) {
     return (
-      <Link href={href} className={sharedClassName} onClick={onClick}>
+      <Link href={href} className={sharedClassName} onClick={handleLinkClick}>
         {content}
       </Link>
     )
