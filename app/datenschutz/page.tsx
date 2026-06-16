@@ -13,10 +13,10 @@ export default function DatenschutzPage() {
             <section className="space-y-2">
               <h2 className="text-xl font-semibold text-[#0B1220]">Verantwortlicher</h2>
               <p className="text-[#5B6B7D]">LocalSites</p>
-              <p className="text-[#5B6B7D]">[Dein vollständiger Name]</p>
-              <p className="text-[#5B6B7D]">[Deine Straße und Hausnummer]</p>
+              <p className="text-[#5B6B7D]">[Ihr vollständiger Name]</p>
+              <p className="text-[#5B6B7D]">[Ihre Straße und Hausnummer]</p>
               <p className="text-[#5B6B7D]">[PLZ Ort]</p>
-              <p className="text-[#5B6B7D]">E-Mail: kontakt@localsites.de</p>
+              <p className="text-[#5B6B7D]">E-Mail: ki.contentstudio@gmail.com</p>
               <p className="text-[#5B6B7D]">Telefon: [Telefonnummer einfügen]</p>
             </section>
 
@@ -45,9 +45,9 @@ export default function DatenschutzPage() {
             </section>
 
             <section className="space-y-2">
-              <h2 className="text-xl font-semibold text-[#0B1220]">Formspree als Form-Provider</h2>
+              <h2 className="text-xl font-semibold text-[#0B1220]">Resend als E-Mail-Dienstleister</h2>
               <p className="text-[#5B6B7D]">
-                Für den Versand von Formularanfragen wird ein externer Dienstleister eingesetzt: Formspree. Die konkreten
+                Für den Versand von Formularanfragen wird ein externer Dienstleister eingesetzt: Resend. Die konkreten
                 datenschutzrechtlichen Angaben (inklusive Rechtsgrundlage, Auftragsverarbeitung und Drittlandbezug) sind als
                 Platzhalter vor Veröffentlichung rechtlich zu prüfen und zu ergänzen.
               </p>

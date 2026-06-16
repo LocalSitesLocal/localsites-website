@@ -16,10 +16,10 @@ export function ComparisonSection() {
             Preise & Pakete
           </p>
           <h2 className="text-3xl font-black leading-tight tracking-[-0.035em] text-[#061637] sm:text-4xl">
-            Finden Sie das passende Paket Schritt fuer Schritt.
+            Finden Sie das passende Paket Schritt für Schritt.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#52647d]">
-            Die ausfuehrliche Auswahl liegt auf einer eigenen Seite. Dort kombinieren Sie
+            Die ausführliche Auswahl liegt auf einer eigenen Seite. Dort kombinieren Sie
             Website-Basis, Betreuung und optionalen KI-Empfang.
           </p>
           <div className="mt-8 flex justify-center">

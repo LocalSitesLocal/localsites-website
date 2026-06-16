@@ -9,7 +9,7 @@ const demos = {
     title: 'Restaurant Demo',
     headline: 'Ein moderner Auftritt, der Reservierungen einfacher macht.',
     description:
-      'Eine klare Landingpage fuer Restaurants mit Speisekarten-Fokus, starker Bildsprache und direkter Kontaktmoeglichkeit.',
+      'Eine klare Landingpage für Restaurants mit Speisekarten-Fokus, starker Bildsprache und direkter Kontaktmöglichkeit.',
     image: '/demo-previews/restaurant-mood.png',
     gradient: 'from-orange-600 to-amber-500',
     primary: 'Tisch reservieren',
@@ -18,9 +18,9 @@ const demos = {
   steuerberatung: {
     label: 'Steuerberatung',
     title: 'Steuerberatung Demo',
-    headline: 'Serioes, klar und auf Erstgespraeche ausgerichtet.',
+    headline: 'Seriös, klar und auf Erstgespräche ausgerichtet.',
     description:
-      'Eine professionelle Website-Vorschau fuer Kanzleien mit Leistungsuebersicht, Vertrauenselementen und einfachem Kontaktweg.',
+      'Eine professionelle Website-Vorschau für Kanzleien mit Leistungsübersicht, Vertrauenselementen und einfachem Kontaktweg.',
     image: '/demo-previews/steuerberatung-mood.png',
     gradient: 'from-slate-700 to-blue-500',
     primary: 'Termin anfragen',
@@ -31,7 +31,7 @@ const demos = {
     title: 'Haustechnik Demo',
     headline: 'Eine Website, die Kompetenz und schnelle Hilfe vermittelt.',
     description:
-      'Eine Premium-Vorschau fuer lokale Handwerksbetriebe mit Fokus auf Leistungen, regionale Naehe und Kontaktanfragen.',
+      'Eine Premium-Vorschau für lokale Handwerksbetriebe mit Fokus auf Leistungen, regionale Nähe und Kontaktanfragen.',
     image: '/demo-previews/haustechnik-mood.png',
     gradient: 'from-emerald-600 to-teal-500',
     primary: 'Anfrage senden',
@@ -68,7 +68,7 @@ export default async function DemoPage({
               className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
             >
               <ArrowLeft className="h-4 w-4" />
-              Zurueck zu den Demos
+              Zurück zu den Demos
             </Link>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/80">{demo.label}</p>
             <h1 className="mb-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
@@ -117,7 +117,7 @@ export default async function DemoPage({
           <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#38BDF8]">Demo-Projekt</p>
-              <h2 className="mb-4 text-3xl font-bold sm:text-4xl">So koennte eine fertige Website wirken.</h2>
+              <h2 className="mb-4 text-3xl font-bold sm:text-4xl">So könnte eine fertige Website wirken.</h2>
               <p className="max-w-2xl text-white/70">
                 Diese Seite ist eine stabile Demo-Vorschau. Sie ersetzt die bisherigen externen Preview-Links und bleibt innerhalb der LocalSites-Website erreichbar.
               </p>
@@ -126,11 +126,11 @@ export default async function DemoPage({
               <div className="space-y-4 text-sm text-white/80">
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-[#38BDF8]" />
-                  Region Schweinfurt & Wuerzburg
+                  Region Schweinfurt & Würzburg
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-[#38BDF8]" />
-                  Direkte Kontaktmoeglichkeit
+                  Direkte Kontaktmöglichkeit
                 </div>
                 <div className="flex items-center gap-3">
                   <CalendarCheck className="h-5 w-5 text-[#38BDF8]" />

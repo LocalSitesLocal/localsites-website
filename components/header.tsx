@@ -64,7 +64,7 @@ export function Header() {
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-[#d7e7f7] bg-white/92 text-[#061637] shadow-[0_10px_30px_rgba(15,55,100,0.12)] backdrop-blur transition-colors hover:bg-[#eaf3ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40"
               >
                 <Menu className="h-6 w-6" />
-                <span className="sr-only">Menue oeffnen</span>
+                <span className="sr-only">Menü öffnen</span>
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full border-[#d7e7f7] bg-white p-0 sm:w-[390px]">

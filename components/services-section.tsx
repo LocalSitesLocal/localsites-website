@@ -21,7 +21,7 @@ const services = [
   },
   {
     icon: ShieldCheck,
-    title: 'Care & lokale Sichtbarkeit',
+    title: 'Website-Pflege & lokale Sichtbarkeit',
     text: 'Monatliche Pflege, Google-Basis und kleine Optimierungen für einen aktuellen Auftritt.',
     items: [
       'Texte, Bilder, Öffnungszeiten',
@@ -35,7 +35,7 @@ const services = [
   {
     icon: Bot,
     title: 'KI-Empfang',
-    text: 'Ein digitaler Empfang für Standardfragen, Leads und optional vorbereitete Termine.',
+    text: 'Ein digitaler Assistent, der häufige Fragen beantwortet, Kontaktdaten sammelt und bei Bedarf einen Terminlink ausgibt.',
     href: '/ki-empfang',
     highlighted: true,
     items: [

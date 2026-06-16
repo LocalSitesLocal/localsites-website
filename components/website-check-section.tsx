@@ -19,7 +19,7 @@ export function WebsiteCheckSection() {
           </p>
           <div className="mt-8 flex justify-center">
             <FlowButton
-              text="Lass deine Website kostenlos prüfen."
+              text="Lassen Sie Ihre Website kostenlos prüfen."
               href="#kontakt"
               tone="orange"
               className="bg-white"

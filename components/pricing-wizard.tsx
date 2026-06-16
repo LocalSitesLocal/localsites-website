@@ -404,7 +404,7 @@ export function PricingWizard() {
           <SelectionSummary website={selection.website} care={selection.care} ai={selection.ai} />
         ) : (
           <div className="rounded-[12px] border border-dashed border-[#c6d9ec] bg-white/72 p-6 text-sm leading-6 text-[#52647d]">
-            Treffen Sie links Ihre Auswahl. Die Zusammenfassung erscheint automatisch nach Schritt 3.
+            Wählen Sie Schritt für Schritt Ihr Paket aus. Die Zusammenfassung erscheint automatisch nach der Auswahl.
           </div>
         )}
       </aside>

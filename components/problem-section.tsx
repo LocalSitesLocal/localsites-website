@@ -6,18 +6,18 @@ import { Reveal } from '@/components/reveal'
 const problems = [
   {
     icon: Clock3,
-    title: 'Zeitfresser',
-    text: 'Manuelle Aufgaben kosten wertvolle Zeit.',
+    title: 'Veralteter Online-Auftritt',
+    text: 'Die Website wirkt nicht mehr so professionell wie der Betrieb dahinter.',
   },
   {
     icon: HelpCircle,
-    title: 'Unklare Anfragen',
-    text: 'Zu wenig oder unpassende Anfragen.',
+    title: 'Kontakt schwer zu finden',
+    text: 'Telefon, E-Mail, Formular oder Standort sind nicht klar genug erreichbar.',
   },
   {
     icon: BarChart3,
-    title: 'Wenig Sichtbarkeit',
-    text: 'Website und Profil nutzen ihr Potenzial nicht.',
+    title: 'Anfragen kommen unklar an',
+    text: 'Interessenten melden sich unstrukturiert oder brechen vorher ab.',
   },
 ]
 
@@ -30,7 +30,7 @@ export function ProblemSection() {
             Die Herausforderung
           </p>
           <h2 className="mx-auto max-w-[21rem] text-3xl font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-none sm:text-4xl sm:tracking-[-0.04em]">
-            Zu viel Aufwand. Zu wenig Ergebnisse.
+            Wenn Website und Kontaktweg nicht klar genug sind.
           </h2>
         </Reveal>
 
