@@ -30,7 +30,7 @@ export default function ImpressumPage() {
 
             <section className="space-y-2">
               <h2 className="text-xl font-semibold text-[#0B1220]">Kontakt</h2>
-              <p className="text-[#5B6B7D]">E-Mail: ki.contentstudio@gmail.com</p>
+              <p className="text-[#5B6B7D]">E-Mail: kontakt@localsites-mainfranken.de</p>
               <p className="text-[#5B6B7D]">Telefon: [Telefonnummer einfügen]</p>
             </section>
 

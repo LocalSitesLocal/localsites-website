@@ -17,8 +17,8 @@ export async function POST() {
     const resend = new Resend(apiKey)
 
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'ki.contentstudio@gmail.com',
+      from: 'LocalSites <kontakt@send.localsites-mainfranken.de>',
+      to: 'kontakt@localsites-mainfranken.de',
       subject: 'Hello World',
       html: '<p>Congrats on sending your <strong>first email</strong>!</p>',
     })

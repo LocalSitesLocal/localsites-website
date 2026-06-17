@@ -44,8 +44,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'E-Mail Versand ist noch nicht konfiguriert.' }, { status: 500 })
   }
 
-  const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <onboarding@resend.dev>'
-  const to = process.env.CONTACT_TO_EMAIL || 'ki.contentstudio@gmail.com'
+  const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <kontakt@send.localsites-mainfranken.de>'
+  const to = process.env.CONTACT_TO_EMAIL || 'kontakt@localsites-mainfranken.de'
   const subject = `Neue Website-Check Anfrage von ${name}`
   const rows = [
     ['Name', name],

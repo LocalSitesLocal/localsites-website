@@ -16,7 +16,7 @@ export default function DatenschutzPage() {
               <p className="text-[#5B6B7D]">[Ihr vollständiger Name]</p>
               <p className="text-[#5B6B7D]">[Ihre Straße und Hausnummer]</p>
               <p className="text-[#5B6B7D]">[PLZ Ort]</p>
-              <p className="text-[#5B6B7D]">E-Mail: ki.contentstudio@gmail.com</p>
+              <p className="text-[#5B6B7D]">E-Mail: kontakt@localsites-mainfranken.de</p>
               <p className="text-[#5B6B7D]">Telefon: [Telefonnummer einfügen]</p>
             </section>
 

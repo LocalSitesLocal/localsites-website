@@ -32,7 +32,7 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-sm font-black">Kontakt & Rechtliches</h4>
             <ul className="space-y-3 text-sm text-white/58">
-              <li>ki.contentstudio@gmail.com</li>
+              <li>kontakt@localsites-mainfranken.de</li>
               <li>Schweinfurt / Würzburg</li>
               {legalLinks.map((link) => (
                 <li key={link.href}>
