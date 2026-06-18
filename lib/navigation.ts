@@ -1,9 +1,9 @@
 export const navItems = [
-  { label: 'Website-Check', href: '/#website-check' },
   { label: 'Leistungen', href: '/#leistungen' },
-  { label: 'Preise', href: '/preise' },
+  { label: 'Website-Check', href: '/#website-check' },
   { label: 'Beispiele', href: '/#demos' },
   { label: 'Ablauf', href: '/#ablauf' },
+  { label: 'Preise', href: '/preise' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Kontakt', href: '/#kontakt' },
 ] as const
