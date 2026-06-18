@@ -68,9 +68,9 @@ export default function KiEmpfangPage() {
               </div>
             </div>
 
-            <div className="rounded-[14px] border border-[#cfe2f5] bg-[linear-gradient(145deg,#ffffff_0%,#f1f8ff_58%,#fff2e8_100%)] p-5 shadow-[0_30px_90px_rgba(11,99,206,0.14)]">
+            <div className="motion-card group rounded-[14px] border border-[#cfe2f5] bg-[linear-gradient(145deg,#ffffff_0%,#f1f8ff_58%,#fff2e8_100%)] p-5 shadow-[0_30px_90px_rgba(11,99,206,0.14)]">
               <div className="mb-5 flex items-center gap-3 border-b border-[#d7e7f7] pb-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0b63ce] text-white">
+                <div className="motion-icon motion-icon-spin flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0b63ce] text-white">
                   <Bot className="h-6 w-6" />
                 </div>
                 <div>
@@ -100,9 +100,9 @@ export default function KiEmpfangPage() {
               {reasons.map((reason) => (
                 <article
                   key={reason.title}
-                  className="rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.07)]"
+                  className="motion-card group rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.07)]"
                 >
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]">
+                  <div className="motion-icon motion-icon-spin mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]">
                     <reason.icon className="h-6 w-6" />
                   </div>
                   <h2 className="text-xl font-black text-[#061637]">{reason.title}</h2>

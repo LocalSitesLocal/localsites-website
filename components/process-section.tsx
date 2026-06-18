@@ -25,7 +25,7 @@ export function ProcessSection() {
 
         <div className="mt-14 grid gap-7 lg:grid-cols-4">
           {steps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 80} className="relative text-center">
+            <Reveal key={step.title} delay={index * 80} className="group relative text-center">
               {index < steps.length - 1 && (
                 <div className="absolute left-[62%] top-10 hidden h-px w-[76%] bg-[#cfe0f2] lg:block">
                   <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 rotate-45 border-r border-t border-[#7d96b4]" />
@@ -35,7 +35,7 @@ export function ProcessSection() {
                 <span className="absolute -right-1 top-0 flex h-6 w-6 items-center justify-center rounded-full bg-[#0b63ce] text-xs font-black text-white">
                   {index + 1}
                 </span>
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#b8d0ec] bg-white text-[#061637] shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                <div className="motion-icon motion-icon-spin flex h-14 w-14 items-center justify-center rounded-2xl border border-[#b8d0ec] bg-white text-[#061637] shadow-sm">
                   <step.icon className="h-7 w-7 stroke-[1.6]" />
                 </div>
               </div>

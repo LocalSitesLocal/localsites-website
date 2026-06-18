@@ -31,8 +31,8 @@ export function AiReceptionSection() {
         <div className="grid gap-4 sm:grid-cols-3 lg:items-stretch">
           {points.map((point, index) => (
             <Reveal key={point.title} delay={index * 80}>
-              <article className="h-full rounded-[10px] border border-[#d7e7f7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]">
+              <article className="motion-card group h-full rounded-[10px] border border-[#d7e7f7] bg-[#fbfdff] p-5 shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
+                <div className="motion-icon motion-icon-spin mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]">
                   <point.icon className="h-6 w-6" />
                 </div>
                 <h3 className="font-black text-[#061637]">{point.title}</h3>

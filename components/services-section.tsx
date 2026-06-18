@@ -67,7 +67,7 @@ export function ServicesSection() {
             <Reveal key={service.title} delay={index * 90}>
               <article
                 className={cn(
-                  'group relative h-full overflow-hidden rounded-[10px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-transform duration-300 hover:-translate-y-1',
+                  'motion-card group relative h-full overflow-hidden rounded-[10px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)]',
                   service.highlighted
                     ? 'border-[#0b63ce]/45 bg-[linear-gradient(145deg,#ffffff_0%,#f0f7ff_54%,#fff3ea_100%)] shadow-[0_28px_90px_rgba(11,99,206,0.16)]'
                     : 'border-[#d7e7f7]'
@@ -80,7 +80,7 @@ export function ServicesSection() {
                 )}
                 <div
                   className={cn(
-                    'mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce] transition-transform duration-300 group-hover:-translate-y-1',
+                    'motion-icon motion-icon-spin mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]',
                     service.highlighted && 'bg-[#0b63ce] text-white shadow-[0_16px_35px_rgba(11,99,206,0.28)]'
                   )}
                 >

@@ -160,7 +160,7 @@ function OptionCard({
       type="button"
       onClick={onSelect}
       className={cn(
-        'group relative h-full w-full rounded-[10px] border bg-white p-5 text-left shadow-[0_18px_55px_rgba(15,55,100,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#0b63ce]/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35',
+        'motion-card motion-press group relative h-full w-full rounded-[10px] border bg-white p-5 text-left shadow-[0_18px_55px_rgba(15,55,100,0.06)] hover:border-[#0b63ce]/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35',
         option.recommended && 'border-[#ff9a4d] shadow-[0_22px_70px_rgba(255,106,0,0.13)]',
         selected && 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15'
       )}
@@ -177,7 +177,7 @@ function OptionCard({
         </div>
         <span
           className={cn(
-            'mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors',
+            'motion-icon mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors',
             selected ? 'border-[#0b63ce] bg-[#0b63ce] text-white' : 'border-[#d7e7f7] text-[#9aa9bd]'
           )}
         >
@@ -267,9 +267,9 @@ function SelectionSummary({
   }
 
   return (
-    <div className="rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_24px_80px_rgba(15,55,100,0.12)]">
+    <div className="motion-card rounded-[12px] border border-[#d7e7f7] bg-white p-6 shadow-[0_24px_80px_rgba(15,55,100,0.12)]">
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
+        <div className="motion-icon motion-icon-spin flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
           <MousePointer2 className="h-5 w-5" />
         </div>
         <div>

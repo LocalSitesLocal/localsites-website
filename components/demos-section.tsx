@@ -43,7 +43,7 @@ export function DemosSection() {
                 href={demo.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block overflow-hidden rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.08)] transition-all duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_26px_75px_rgba(15,55,100,0.13)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2"
+                className="motion-card group block overflow-hidden rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2"
               >
                 <div className="relative h-60 overflow-hidden">
                   <Image
@@ -59,7 +59,7 @@ export function DemosSection() {
                 </div>
                 <div className="flex items-center justify-between p-6">
                   <h3 className="font-black text-[#061637]">{demo.title}</h3>
-                  <ArrowRight className="h-5 w-5 text-[#0b63ce] transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="motion-arrow h-5 w-5 text-[#0b63ce]" />
                 </div>
               </a>
             </Reveal>

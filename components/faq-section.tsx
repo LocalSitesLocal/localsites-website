@@ -42,7 +42,7 @@ export function FaqSection() {
               <AccordionItem
                 key={question}
                 value={`item-${index}`}
-                className="rounded-[10px] border border-[#d7e7f7] bg-white px-5 shadow-sm transition-shadow data-[state=open]:shadow-[0_18px_55px_rgba(15,55,100,0.08)]"
+                className="motion-card rounded-[10px] border border-[#d7e7f7] bg-white px-5 shadow-sm data-[state=open]:shadow-[0_18px_55px_rgba(15,55,100,0.08)]"
               >
                 <AccordionTrigger className="text-left font-black text-[#061637] hover:no-underline">
                   {question}

@@ -41,7 +41,7 @@ export function ProblemSection() {
               delay={index * 80}
               className="group flex gap-5 border-[#dfeaf5] py-7 md:border-r md:px-10 last:md:border-r-0"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#0b63ce] text-[#0b63ce] transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-1">
+              <div className="motion-icon motion-icon-spin flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#0b63ce] text-[#0b63ce]">
                 <problem.icon className="h-6 w-6" />
               </div>
               <div>

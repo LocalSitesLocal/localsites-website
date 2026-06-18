@@ -49,8 +49,8 @@ export function HeroSection() {
 
           <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
             {trustItems.map((item) => (
-              <div key={item.label} className="flex items-center gap-2 text-sm font-medium text-[#415574]">
-                <item.icon className="h-4 w-4 text-[#0b63ce]" />
+              <div key={item.label} className="group flex items-center gap-2 text-sm font-medium text-[#415574]">
+                <item.icon className="motion-icon motion-icon-spin h-4 w-4 text-[#0b63ce]" />
                 {item.label}
               </div>
             ))}
