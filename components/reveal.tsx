@@ -24,7 +24,7 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
           observer.unobserve(entry.target)
         }
       },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.12 }
+      { rootMargin: '0px 0px -14% 0px', threshold: 0.08 }
     )
 
     observer.observe(node)
@@ -35,8 +35,10 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
     <div
       ref={ref}
       className={cn(
-        'transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:translate-y-0 motion-reduce:opacity-100',
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
+        'transform-gpu transition-[opacity,transform,filter] duration-[850ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:blur-0 motion-reduce:opacity-100',
+        isVisible
+          ? 'translate-y-0 scale-100 blur-0 opacity-100'
+          : 'translate-y-10 scale-[0.975] blur-[3px] opacity-0',
         className
       )}
       style={{ transitionDelay: `${delay}ms` }}
