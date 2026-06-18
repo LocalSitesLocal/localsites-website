@@ -201,7 +201,7 @@
 
   .motion-icon {
     transition:
-      transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
       color 220ms ease,
       background-color 220ms ease,
       box-shadow 260ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -227,8 +227,8 @@
 
   @media (hover: hover) and (pointer: fine) {
     .motion-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 85px rgba(15, 55, 100, 0.14);
+      transform: translateY(-5px);
+      box-shadow: 0 24px 70px rgba(15, 55, 100, 0.13);
     }
 
     .motion-card:hover::after {
@@ -236,21 +236,21 @@
     }
 
     .motion-card:hover .motion-icon {
-      transform: translateY(-3px) rotate(-8deg) scale(1.06);
-      box-shadow: 0 16px 38px rgba(11, 99, 206, 0.16);
+      transform: translateY(-3px) rotate(-6deg) scale(1.05);
+      box-shadow: 0 16px 38px rgba(11, 99, 206, 0.14);
     }
 
     .motion-card:hover .motion-icon-spin {
-      transform: translateY(-3px) rotate(10deg) scale(1.08);
+      transform: translateY(-3px) rotate(-6deg) scale(1.05);
     }
 
     .group:hover .motion-icon {
-      transform: translateY(-3px) rotate(-8deg) scale(1.06);
-      box-shadow: 0 16px 38px rgba(11, 99, 206, 0.16);
+      transform: translateY(-3px) rotate(-6deg) scale(1.05);
+      box-shadow: 0 16px 38px rgba(11, 99, 206, 0.14);
     }
 
     .group:hover .motion-icon-spin {
-      transform: translateY(-3px) rotate(10deg) scale(1.08);
+      transform: translateY(-3px) rotate(-6deg) scale(1.05);
     }
 
     .motion-card:hover .motion-arrow {

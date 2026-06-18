@@ -1,49 +1,27 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { cn } from '@/lib/utils'
+import { motion, useReducedMotion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 type RevealProps = {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
   delay?: number
 }
 
-export function Reveal({ children, className, delay = 0 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.unobserve(entry.target)
-        }
-      },
-      { rootMargin: '0px 0px -14% 0px', threshold: 0.08 }
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
+export function Reveal({ children, className = '', delay = 0 }: RevealProps) {
+  const reduceMotion = useReducedMotion()
+  const delayInSeconds = delay > 10 ? delay / 1000 : delay
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        'transform-gpu transition-[opacity,transform,filter] duration-[850ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:translate-y-0 motion-reduce:scale-100 motion-reduce:blur-0 motion-reduce:opacity-100',
-        isVisible
-          ? 'translate-y-0 scale-100 blur-0 opacity-100'
-          : 'translate-y-10 scale-[0.975] blur-[3px] opacity-0',
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: 28, filter: 'blur(8px)', scale: 0.985 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
+      viewport={{ once: true, amount: 0.18, margin: '0px 0px -80px 0px' }}
+      transition={{ duration: 0.72, ease: [0.23, 1, 0.32, 1], delay: delayInSeconds }}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
