@@ -1,5 +1,3 @@
-'use client'
-
 import { BarChart3, Clock3, HelpCircle } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 

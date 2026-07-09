@@ -1,5 +1,3 @@
-'use client'
-
 import { CheckCircle2, ClipboardList, Rocket, ScreenShare } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 

@@ -1,5 +1,3 @@
-'use client'
-
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
 
@@ -12,14 +10,15 @@ export function WebsiteCheckSection() {
             Kostenloser Website-Check
           </p>
           <h2 className="mx-auto max-w-[21rem] text-[2rem] font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-3xl sm:text-5xl sm:tracking-[-0.05em]">
-            Lassen Sie Ihre Website kurz prüfen.
+            Unsicher, welches Paket passt?
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#52647d]">
-            Kostenlos, verständlich und unverbindlich.
+            Wir prüfen kurz Ihre aktuelle Website und geben eine ehrliche Einschätzung, ob eine
+            einfache Anfrage-Website, ein Business-Paket oder ein digitaler Empfang sinnvoll ist.
           </p>
           <div className="mt-8 flex justify-center">
             <FlowButton
-              text="Lassen Sie Ihre Website kostenlos prüfen."
+              text="Kostenlosen Website-Check anfragen"
               href="#kontakt"
               tone="orange"
               className="bg-white"

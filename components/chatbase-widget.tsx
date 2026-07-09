@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { X } from 'lucide-react'
+import { MessageCircle, X } from 'lucide-react'
+import { OPEN_CHAT_EVENT } from '@/lib/chat'
 import { cn } from '@/lib/utils'
 
 type ChatbaseWidgetProps = {
@@ -13,9 +14,16 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
 
   useEffect(() => {
     const openChat = () => setIsOpen(true)
-    window.addEventListener('localsites:open-chat', openChat)
-    return () => window.removeEventListener('localsites:open-chat', openChat)
-  }, [])
+    window.__localsitesChatReady = Boolean(chatbotId)
+    window.__localsitesOpenChat = openChat
+    window.addEventListener(OPEN_CHAT_EVENT, openChat)
+
+    return () => {
+      window.removeEventListener(OPEN_CHAT_EVENT, openChat)
+      delete window.__localsitesChatReady
+      delete window.__localsitesOpenChat
+    }
+  }, [chatbotId])
 
   if (!chatbotId) return null
 
@@ -26,6 +34,18 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
         isOpen ? 'pointer-events-auto' : 'pointer-events-none'
       )}
     >
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className={cn(
+          'pointer-events-auto inline-flex items-center gap-2 rounded-full border border-[#d7e7f7] bg-white/92 px-4 py-3 text-sm font-black text-[#061637] shadow-[0_18px_50px_rgba(15,55,100,0.16)] backdrop-blur transition-[opacity,transform,background-color] duration-250 hover:-translate-y-0.5 hover:bg-[#eef6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40',
+          isOpen ? 'pointer-events-none translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
+        )}
+        aria-label="KI-Empfang live testen"
+      >
+        <MessageCircle className="h-4 w-4 text-[#0b63ce]" />
+        KI-Empfang
+      </button>
       <div
         aria-hidden={!isOpen}
         className={cn(
@@ -47,12 +67,14 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
             <X className="h-4 w-4" />
           </button>
         </div>
-        <iframe
-          title="LocalSites KI-Chat"
-          src={`https://www.chatbase.co/chatbot-iframe/${chatbotId}`}
-          loading="eager"
-          className="h-[calc(100%-3.5rem)] w-full border-0"
-        />
+        {isOpen && (
+          <iframe
+            title="LocalSites KI-Chat"
+            src={`https://www.chatbase.co/chatbot-iframe/${chatbotId}`}
+            loading="lazy"
+            className="h-[calc(100%-3.5rem)] w-full border-0"
+          />
+        )}
       </div>
     </div>
   )

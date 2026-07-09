@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { navItems } from '@/lib/navigation'
+import { jumpToPageTop } from '@/lib/scroll'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -14,8 +15,20 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const isHomePage = pathname === '/'
 
+  const handleLogoClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isHomePage) return
+
+    event.preventDefault()
+    jumpToPageTop('smooth')
+    window.history.replaceState(null, '', '/')
+    setIsOpen(false)
+  }
+
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 14)
+    const onScroll = () => {
+      const nextIsScrolled = window.scrollY > 14
+      setIsScrolled((current) => (current === nextIsScrolled ? current : nextIsScrolled))
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -31,7 +44,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
-        <Link href="/" className="group flex items-center gap-1 text-[1.7rem] font-black tracking-[-0.04em] text-[#061637]">
+        <Link href="/" onClick={handleLogoClick} scroll className="group flex items-center gap-1 text-[1.7rem] font-black tracking-[-0.04em] text-[#061637]">
           LocalSites<span aria-hidden="true" className="mt-4 h-1.5 w-1.5 rounded-full bg-[#0b63ce] transition-transform duration-200 group-hover:scale-125" />
         </Link>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { ChatbaseWidget } from '@/components/chatbase-widget'
+import { RouteScrollReset } from '@/components/route-scroll-reset'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -60,6 +61,7 @@ export default function RootLayout({
   return (
     <html lang="de" className="bg-[#f8fbff]">
       <body className="font-sans antialiased">
+        <RouteScrollReset />
         {children}
         <ChatbaseWidget chatbotId={process.env.NEXT_PUBLIC_CHATBASE_BOT_ID || 'a-_SQBLEszgcO_S7su3pc'} />
         {process.env.NODE_ENV === 'production' && <Analytics />}

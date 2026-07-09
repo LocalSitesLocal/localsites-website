@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { Clock3, MapPin, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Clock3, MapPin, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
+import { openLocalSitesChat } from '@/lib/chat'
 
 const trustItems = [
   { icon: MapPin, label: 'Regional & persönlich' },
@@ -43,9 +44,17 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <FlowButton text="Kostenlosen Website-Check" href="#website-check" tone="orange" className="bg-white/85" />
-            <FlowButton text="KI-Empfang" href="/ki-empfang" tone="blue" className="bg-white/70" />
+            <FlowButton text="Pakete & Preise ansehen" href="/preise" tone="orange" className="bg-white/85" />
+            <FlowButton text="Kostenlosen Website-Check anfragen" href="#kontakt" tone="blue" className="bg-white/70" />
           </div>
+          <button
+            type="button"
+            onClick={() => openLocalSitesChat()}
+            className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
+          >
+            KI-Empfang live testen
+            <ArrowRight className="h-4 w-4" />
+          </button>
 
           <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
             {trustItems.map((item) => (

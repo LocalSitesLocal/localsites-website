@@ -3,6 +3,7 @@
 import { Bot, Check, Globe2, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
+import { openLocalSitesChat } from '@/lib/chat'
 import { cn } from '@/lib/utils'
 
 const services = [
@@ -36,7 +37,6 @@ const services = [
     icon: Bot,
     title: 'KI-Empfang',
     text: 'Ein digitaler Assistent, der häufige Fragen beantwortet, Kontaktdaten sammelt und bei Bedarf einen Terminlink ausgibt.',
-    href: '/ki-empfang',
     highlighted: true,
     items: [
       'Häufige Fragen beantworten',
@@ -96,10 +96,10 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
-                {service.href && (
+                {service.highlighted && (
                   <FlowButton
-                    text="Mehr zum KI-Empfang"
-                    href={service.href}
+                    text="Live testen"
+                    onClick={() => openLocalSitesChat()}
                     tone="blue"
                     className="mt-7 bg-white"
                   />

@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Accordion,
   AccordionContent,
@@ -9,18 +7,26 @@ import {
 import { Reveal } from '@/components/reveal'
 
 const faqs = [
-  ['Was ist der kostenlose Website-Check?', 'Eine kurze, verständliche Einschätzung Ihrer aktuellen Website: Eindruck, mobile Ansicht, Kontaktwege, CTAs, Standort, Technik und mögliche Verbesserungen.'],
-  ['Muss ich danach eine Website kaufen?', 'Nein. Der Check ist kostenlos und unverbindlich. Danach entscheiden Sie in Ruhe, ob Sie weitermachen möchten.'],
-  ['Was kostet eine Website?', 'Der Einstieg liegt bei ab 899 € für eine moderne Onepage-Website. Umfangreichere Websites starten bei ab 1.499 €.'],
-  ['Was bedeutet „ab“-Preis?', 'Der finale Preis hängt von Seitenumfang, Funktionen, vorhandenen Inhalten, Bildern und gewünschten Zusatzleistungen ab.'],
-  ['Was ist im Website-Preis enthalten?', 'Struktur, Design, mobile Optimierung, Kontaktführung, SEO-Basis, technische Umsetzung und Veröffentlichung auf Ihrer Domain.'],
-  ['Was ist Website-Pflege & lokale Sichtbarkeit?', 'Monatliche Pflege für kleine Änderungen, technische Kontrolle, Google- und Bewertungsunterstützung sowie laufende Optimierung.'],
-  ['Gibt es eine monatliche Betreuung?', 'Ja. Die Betreuung startet bei ab 79 € pro Monat und kann kleine Änderungen, technische Kontrolle und Optimierung abdecken.'],
-  ['Was ist ein KI-Empfang?', 'Ein digitaler Assistent, der Standardfragen beantwortet, Kontaktdaten sammelt und Anfragen strukturiert an den Betrieb weitergibt.'],
-  ['Ersetzt der KI-Empfang Mitarbeiter?', 'Nein. Er unterstützt bei Standardfragen, sammelt Anfragen und leitet wichtige oder individuelle Fälle an den Betrieb weiter.'],
-  ['Kann der KI-Empfang Termine buchen?', 'Ja, optional über Dienste wie Calendly oder Cal.com. Kritische oder individuelle Fälle werden an den Betrieb weitergeleitet.'],
-  ['Wird mehr Umsatz oder Platz 1 bei Google garantiert?', 'Nein. LocalSites schafft saubere Grundlagen und bessere Kontaktführung, aber keine unseriösen Ranking-, Umsatz- oder Anfragegarantien.'],
-  ['Wer liefert Texte, Bilder, Impressum und Datenschutz?', 'Texte und Struktur können vorbereitet werden. Bilder, rechtliche Angaben, Impressum und Datenschutz müssen vom Betrieb geliefert oder rechtlich geprüft werden.'],
+  [
+    'Was ist der kostenlose Website-Check?',
+    'Eine kurze, verständliche Einschätzung Ihrer aktuellen Website: Eindruck, mobile Ansicht, Kontaktwege, CTAs, Standort, Technik und mögliche Verbesserungen.',
+  ],
+  [
+    'Was kostet eine Website?',
+    'Der Einstieg liegt bei ab 899 € für eine moderne Onepage-Website. Umfangreichere Websites starten bei ab 1.499 €.',
+  ],
+  [
+    'Was ist im Website-Preis enthalten?',
+    'Struktur, Design, mobile Optimierung, Kontaktführung, SEO-Basis, technische Umsetzung und Veröffentlichung auf Ihrer Domain.',
+  ],
+  [
+    'Gibt es eine monatliche Betreuung?',
+    'Ja. Die Betreuung startet bei ab 79 € pro Monat und kann kleine Änderungen, technische Kontrolle und Optimierung abdecken.',
+  ],
+  [
+    'Was ist ein KI-Empfang?',
+    'Ein digitaler Assistent, der Standardfragen beantwortet, Kontaktdaten sammelt und Anfragen strukturiert an den Betrieb weitergibt.',
+  ],
 ]
 
 export function FaqSection() {

@@ -3,6 +3,7 @@ import { Bot, Check, Clock3, MailCheck, MessageCircle, ShieldCheck, UserCheck } 
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FlowButton } from '@/components/flow-button'
+import { ChatTestButton } from '@/components/chat-test-button'
 
 export const metadata: Metadata = {
   title: 'KI-Empfang für lokale Betriebe | LocalSites',
@@ -63,7 +64,7 @@ export default function KiEmpfangPage() {
                 vorgeschaltete Hilfe für typische Erstkontakte.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <FlowButton text="KI-Empfang anfragen" href="/#kontakt" tone="orange" className="bg-white" />
+                <ChatTestButton text="KI-Empfang live testen" tone="orange" className="bg-white" />
                 <FlowButton text="Preise ansehen" href="/preise" tone="blue" className="bg-white" />
               </div>
             </div>
