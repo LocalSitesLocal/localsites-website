@@ -22,7 +22,7 @@ const websiteOptions: PackageOption[] = [
     name: 'Anfrage-Website Starter',
     price: 'ab 899 €',
     setupPrice: 899,
-    description: 'Für kleine lokale Betriebe, die einen modernen ersten Online-Auftritt brauchen.',
+    description: 'Für kleine lokale Betriebe, die eine moderne Website-Basis brauchen.',
     features: [
       'moderne Onepage-Website',
       'mobile Optimierung',
@@ -54,19 +54,18 @@ const websiteOptions: PackageOption[] = [
     ],
   },
   {
-    id: 'website-ai',
-    name: 'Website + KI-Empfang',
-    price: 'ab 2.499 €',
-    setupPrice: 2499,
-    description: 'Für Betriebe, die Standardfragen beantworten und Anfragen automatisch aufnehmen lassen wollen.',
+    id: 'request-system',
+    name: 'Website + Anfrage-System',
+    price: 'ab 2.199 €',
+    setupPrice: 2199,
+    description: 'Für Betriebe, die bessere Anfragen statt nur eine einfache Website-Basis brauchen.',
     features: [
-      'moderne Website',
-      'KI-Empfang',
-      'Lead-Erfassung',
-      'optional Terminlink oder Terminbuchung über Calendly/Cal.com',
-      'Bot-Einbau auf Website',
-      'Test & Optimierung',
-      'Veröffentlichung auf Domain',
+      'Website Business',
+      'branchenspezifisches Anfrageformular',
+      'strukturierte Anfragen per E-Mail',
+      'stärkere Kontaktführung',
+      'optional Terminlink',
+      'Veröffentlichung',
     ],
   },
 ]
@@ -103,32 +102,38 @@ const careOptions: PackageOption[] = [
     price: 'ab 199 €/Monat',
     setupPrice: 0,
     monthlyPrice: 199,
-    features: ['laufende Website-Pflege', 'SEO-Basisoptimierung', 'KI-Empfang und Automations-Support'],
+    features: ['laufende Website-Pflege', 'SEO-Basisoptimierung', 'Anfrage-System- und Automations-Support'],
   },
 ]
 
-const aiOptions: PackageOption[] = [
+const extensionOptions: PackageOption[] = [
   {
-    id: 'no-ai',
-    name: 'Kein KI-Empfang',
+    id: 'none',
+    name: 'Keine Erweiterung',
     price: '0 €',
     setupPrice: 0,
   },
   {
-    id: 'faq-lead',
-    name: 'FAQ- & Lead-Assistent',
-    price: 'ab 699 € Einrichtung',
-    setupPrice: 699,
-    recommended: true,
-    description: 'Der KI-Empfang beantwortet Standardfragen und sammelt Kontaktdaten.',
+    id: 'calendly',
+    name: 'Calendly / Terminlink',
+    price: 'ab 149 €',
+    setupPrice: 149,
+    description: 'Ein einfacher Terminlink für Anfragen, Rückrufe oder Erstgespräche.',
   },
   {
-    id: 'appointment',
-    name: 'Termin-Assistent',
-    price: 'ab 1.499 € Einrichtung',
-    setupPrice: 1499,
-    description:
-      'Der KI-Empfang sammelt Leads und kann zusätzlich Termine über Calendly oder Cal.com vorbereiten.',
+    id: 'lead-list',
+    name: 'Lead-Liste',
+    price: 'ab 399 €',
+    setupPrice: 399,
+    description: 'Eine übersichtliche Liste, damit eingehende Anfragen besser gesammelt werden.',
+  },
+  {
+    id: 'ki-basic',
+    name: 'KI-Empfang Basic',
+    price: 'ab 699 €',
+    setupPrice: 699,
+    recommended: true,
+    description: 'Premium-Upgrade: beantwortet Standardfragen und sammelt Leads. Externe Chatbase-Kosten kommen extra hinzu.',
   },
 ]
 
@@ -237,13 +242,13 @@ function SelectionStep({
 function SelectionSummary({
   website,
   care,
-  ai,
+  extension,
 }: {
   website: PackageOption
   care: PackageOption
-  ai: PackageOption
+  extension: PackageOption
 }) {
-  const setup = website.setupPrice + ai.setupPrice
+  const setup = website.setupPrice + extension.setupPrice
   const monthly = care.monthlyPrice ?? 0
   const saveSelectionForContact = () => {
     try {
@@ -252,9 +257,9 @@ function SelectionSummary({
         [
           'Ich interessiere mich für folgende Paketauswahl:',
           '',
-          `Website-Paket: ${website.name}`,
+          `Website-Basis: ${website.name}`,
           `Betreuung: ${care.name}`,
-          `KI-Modul: ${ai.name}`,
+          `Optionale Erweiterung: ${extension.name}`,
           `Geschätzter Startpreis: ab ${formatCurrency(setup)}`,
           `Geschätzte monatliche Kosten: ${
             monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`
@@ -280,7 +285,7 @@ function SelectionSummary({
 
       <dl className="grid gap-4 text-sm sm:grid-cols-3 lg:grid-cols-1">
         <div>
-          <dt className="font-bold text-[#52647d]">Website-Paket</dt>
+          <dt className="font-bold text-[#52647d]">Website-Basis</dt>
           <dd className="mt-1 font-black text-[#061637]">{website.name}</dd>
         </div>
         <div>
@@ -288,8 +293,8 @@ function SelectionSummary({
           <dd className="mt-1 font-black text-[#061637]">{care.name}</dd>
         </div>
         <div>
-          <dt className="font-bold text-[#52647d]">KI-Modul</dt>
-          <dd className="mt-1 font-black text-[#061637]">{ai.name}</dd>
+          <dt className="font-bold text-[#52647d]">Erweiterung</dt>
+          <dd className="mt-1 font-black text-[#061637]">{extension.name}</dd>
         </div>
       </dl>
 
@@ -323,19 +328,19 @@ function SelectionSummary({
 
 export function PricingWizard() {
   const careRef = useRef<HTMLDivElement | null>(null)
-  const aiRef = useRef<HTMLDivElement | null>(null)
+  const extensionRef = useRef<HTMLDivElement | null>(null)
   const summaryRef = useRef<HTMLDivElement | null>(null)
 
   const [websiteId, setWebsiteId] = useState<string | null>(null)
   const [careId, setCareId] = useState<string | null>(null)
-  const [aiId, setAiId] = useState<string | null>(null)
+  const [extensionId, setExtensionId] = useState<string | null>(null)
 
   const selection = useMemo(() => {
     const website = websiteOptions.find((option) => option.id === websiteId)
     const care = careOptions.find((option) => option.id === careId)
-    const ai = aiOptions.find((option) => option.id === aiId)
-    return { website, care, ai }
-  }, [websiteId, careId, aiId])
+    const extension = extensionOptions.find((option) => option.id === extensionId)
+    return { website, care, extension }
+  }, [websiteId, careId, extensionId])
 
   const selectWebsite = (id: string) => {
     const isFirstWebsiteSelection = !websiteId
@@ -349,19 +354,19 @@ export function PricingWizard() {
     const isFirstCareSelection = !careId
     setCareId(id)
     if (isFirstCareSelection) {
-      jumpTo(aiRef)
+      jumpTo(extensionRef)
     }
   }
 
-  const selectAi = (id: string) => {
-    const isFirstAiSelection = !aiId
-    setAiId(id)
-    if (isFirstAiSelection) {
+  const selectExtension = (id: string) => {
+    const isFirstExtensionSelection = !extensionId
+    setExtensionId(id)
+    if (isFirstExtensionSelection) {
       jumpTo(summaryRef)
     }
   }
 
-  const isComplete = Boolean(selection.website && selection.care && selection.ai)
+  const isComplete = Boolean(selection.website && selection.care && selection.extension)
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
@@ -387,21 +392,21 @@ export function PricingWizard() {
         )}
 
         {websiteId && careId && (
-          <div ref={aiRef}>
+          <div ref={extensionRef}>
             <SelectionStep
               number="3"
-              title="KI-Empfang optional hinzufügen"
-              options={aiOptions}
-              selectedId={aiId}
-              onSelect={selectAi}
+              title="Optionale Erweiterungen"
+              options={extensionOptions}
+              selectedId={extensionId}
+              onSelect={selectExtension}
             />
           </div>
         )}
       </div>
 
       <aside ref={summaryRef} className="lg:sticky lg:top-28">
-        {isComplete && selection.website && selection.care && selection.ai ? (
-          <SelectionSummary website={selection.website} care={selection.care} ai={selection.ai} />
+        {isComplete && selection.website && selection.care && selection.extension ? (
+          <SelectionSummary website={selection.website} care={selection.care} extension={selection.extension} />
         ) : (
           <div className="rounded-[12px] border border-dashed border-[#c6d9ec] bg-white/72 p-6 text-sm leading-6 text-[#52647d]">
             Wählen Sie Schritt für Schritt Ihr Paket aus. Die Zusammenfassung erscheint automatisch nach der Auswahl.

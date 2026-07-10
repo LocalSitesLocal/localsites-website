@@ -7,7 +7,7 @@ import { FlowButton } from '@/components/flow-button'
 export const metadata: Metadata = {
   title: 'Preise & Pakete | LocalSites',
   description:
-    'Wählen Sie Website-Basis, monatliche Betreuung und optionalen KI-Empfang für Ihr LocalSites-Projekt.',
+    'Wählen Sie Website-Basis, monatliche Betreuung und optionale Erweiterungen für Ihr LocalSites-Projekt.',
 }
 
 export default function PreisePage() {
@@ -24,8 +24,8 @@ export default function PreisePage() {
               Preise & Pakete
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-[#52647d]">
-              Wählen Sie zuerst die passende Website-Basis. Danach können Betreuung und KI-Empfang
-              optional ergänzt werden.
+              Wählen Sie zuerst die passende Website-Basis. Danach können Betreuung und optionale
+              Erweiterungen ergänzt werden.
             </p>
           </div>
         </section>
@@ -44,7 +44,7 @@ export default function PreisePage() {
               </h2>
               <p className="mx-auto mt-3 max-w-2xl leading-7 text-[#52647d]">
                 Fragen Sie eine kostenlose Einschätzung an. Danach wissen Sie klarer, welche Website-Basis,
-                Betreuung oder KI-Ergänzung sinnvoll ist.
+                Betreuung oder Erweiterung sinnvoll ist.
               </p>
               <FlowButton
                 text="Kostenlosen Website-Check anfragen"

@@ -12,8 +12,8 @@ const packages = [
     price: 'ab 1.499 €',
   },
   {
-    name: 'Website + KI-Empfang',
-    price: 'ab 2.499 €',
+    name: 'Website + Anfrage-System',
+    price: 'ab 2.199 €',
   },
 ]
 
