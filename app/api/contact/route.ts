@@ -9,8 +9,10 @@ type ContactPayload = {
   nachricht?: string
 }
 
+const MAX_FIELD_LENGTH = 5_000
+
 function clean(value: unknown) {
-  return String(value ?? '').trim()
+  return String(value ?? '').trim().slice(0, MAX_FIELD_LENGTH)
 }
 
 function escapeHtml(value: string) {
@@ -25,7 +27,7 @@ function escapeHtml(value: string) {
 export async function POST(request: Request) {
   const payload = (await request.json().catch(() => null)) as ContactPayload | null
 
-  if (!payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
     return NextResponse.json({ error: 'Ungueltige Anfrage.' }, { status: 400 })
   }
 
@@ -36,7 +38,7 @@ export async function POST(request: Request) {
   const website = clean(payload.website)
   const nachricht = clean(payload.nachricht)
 
-  if (!name || !email || !email.includes('@')) {
+  if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Name und E-Mail sind erforderlich.' }, { status: 400 })
   }
 
@@ -65,7 +67,7 @@ export async function POST(request: Request) {
             ([label, value]) => `
               <tr>
                 <td style="font-weight:bold;border-bottom:1px solid #e5edf7">${escapeHtml(label)}</td>
-                <td style="border-bottom:1px solid #e5edf7">${escapeHtml(value)}</td>
+                <td style="border-bottom:1px solid #e5edf7">${escapeHtml(value).replaceAll('\n', '<br />')}</td>
               </tr>
             `
           )
@@ -74,20 +76,27 @@ export async function POST(request: Request) {
     </div>
   `
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      reply_to: email,
-      subject,
-      html,
-    }),
-  })
+  let response: Response
+
+  try {
+    response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to,
+        reply_to: email,
+        subject,
+        html,
+      }),
+      signal: AbortSignal.timeout(10_000),
+    })
+  } catch {
+    return NextResponse.json({ error: 'E-Mail konnte nicht gesendet werden.' }, { status: 502 })
+  }
 
   if (!response.ok) {
     return NextResponse.json({ error: 'E-Mail konnte nicht gesendet werden.' }, { status: 502 })

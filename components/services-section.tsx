@@ -3,7 +3,6 @@
 import { Bot, Check, Globe2, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { openLocalSitesChat } from '@/lib/chat'
 import { cn } from '@/lib/utils'
 
 const services = [
@@ -98,8 +97,8 @@ export function ServicesSection() {
                 </ul>
                 {service.highlighted && (
                   <FlowButton
-                    text="Live testen"
-                    onClick={() => openLocalSitesChat()}
+                    text="Mehr erfahren"
+                    href="/ki-empfang"
                     tone="blue"
                     className="mt-7 bg-white"
                   />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CheckCircle, Lock, MousePointer2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -91,24 +91,32 @@ export function ContactSection() {
   const [submitError, setSubmitError] = useState('')
   const [message, setMessage] = useState('')
   const [pricingSummary, setPricingSummary] = useState<PricingSummary | null>(null)
+  const isSubmittingRef = useRef(false)
 
   useEffect(() => {
-    const savedSelection = window.sessionStorage.getItem('localsites:pricing-selection')
-    const savedSummary = window.sessionStorage.getItem('localsites:pricing-summary')
+    const frame = window.requestAnimationFrame(() => {
+      const savedSelection = window.sessionStorage.getItem('localsites:pricing-selection')
+      const savedSummary = window.sessionStorage.getItem('localsites:pricing-summary')
 
-    if (savedSelection) {
-      setMessage(savedSelection)
-      window.sessionStorage.removeItem('localsites:pricing-selection')
-    }
+      if (savedSelection) {
+        setMessage(savedSelection)
+        window.sessionStorage.removeItem('localsites:pricing-selection')
+      }
 
-    if (savedSummary) {
-      setPricingSummary(parsePricingSummary(savedSummary))
-      window.sessionStorage.removeItem('localsites:pricing-summary')
-    }
+      if (savedSummary) {
+        setPricingSummary(parsePricingSummary(savedSummary))
+        window.sessionStorage.removeItem('localsites:pricing-summary')
+      }
+    })
+
+    return () => window.cancelAnimationFrame(frame)
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (isSubmittingRef.current) return
+
+    isSubmittingRef.current = true
     setIsLoading(true)
     setSubmitError('')
 
@@ -123,12 +131,16 @@ export function ContactSection() {
         body: JSON.stringify(payload),
       })
 
-      if (!response.ok) throw new Error('Contact request failed')
+      if (!response.ok) {
+        const result = await response.json().catch(() => null)
+        throw new Error(result?.error || 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.')
+      }
       form.reset()
       setIsSubmitted(true)
-    } catch {
-      setSubmitError('Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.')
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.')
     } finally {
+      isSubmittingRef.current = false
       setIsLoading(false)
     }
   }
@@ -220,7 +232,9 @@ export function ContactSection() {
                 </div>
                 <div className="sm:col-span-2">
                   <Button
+                    type="submit"
                     disabled={isLoading}
+                    aria-busy={isLoading}
                     className="h-12 w-full rounded-md bg-[#ff6a00] font-black text-white shadow-[0_16px_40px_rgba(255,106,0,0.22)] transition-transform active:scale-[0.98]"
                   >
                     {isLoading ? 'Wird gesendet...' : 'Kostenlosen Website-Check anfragen'}
