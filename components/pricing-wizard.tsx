@@ -266,6 +266,16 @@ function SelectionSummary({
           }`,
         ].join('\n')
       )
+      window.sessionStorage.setItem(
+        'localsites:pricing-summary',
+        JSON.stringify({
+          website: website.name,
+          care: care.name,
+          extension: extension.name,
+          setup: `ab ${formatCurrency(setup)}`,
+          monthly: monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`,
+        })
+      )
     } catch {
       // The form still works if browser storage is unavailable.
     }

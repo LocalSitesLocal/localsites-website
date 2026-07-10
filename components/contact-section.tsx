@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { CheckCircle, Lock } from 'lucide-react'
+import { CheckCircle, Lock, MousePointer2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,18 +10,100 @@ import { Reveal } from '@/components/reveal'
 
 const CALENDLY_URL = 'https://calendly.com/ki-contentstudio/30min?hide_event_type_details=1&hide_gdpr_banner=1'
 
+type PricingSummary = {
+  website: string
+  care: string
+  extension: string
+  setup: string
+  monthly: string
+}
+
+function parsePricingSummary(value: string | null): PricingSummary | null {
+  if (!value) return null
+
+  try {
+    const parsed = JSON.parse(value) as Partial<PricingSummary>
+    if (!parsed.website || !parsed.care || !parsed.extension || !parsed.setup || !parsed.monthly) {
+      return null
+    }
+
+    return {
+      website: parsed.website,
+      care: parsed.care,
+      extension: parsed.extension,
+      setup: parsed.setup,
+      monthly: parsed.monthly,
+    }
+  } catch {
+    return null
+  }
+}
+
+function PricingSelectionCard({ summary }: { summary: PricingSummary }) {
+  return (
+    <div className="rounded-[12px] border border-[#0b63ce]/30 bg-[linear-gradient(145deg,#ffffff_0%,#eef6ff_58%,#f8fbff_100%)] p-5 shadow-[0_18px_55px_rgba(11,99,206,0.12)]">
+      <div className="mb-5 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
+          <MousePointer2 className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Ihre Auswahl</p>
+          <h3 className="text-xl font-black text-[#061637]">Paketübersicht</h3>
+        </div>
+      </div>
+
+      <dl className="grid gap-4 text-sm sm:grid-cols-3">
+        <div>
+          <dt className="font-bold text-[#52647d]">Website-Basis</dt>
+          <dd className="mt-1 font-black text-[#061637]">{summary.website}</dd>
+        </div>
+        <div>
+          <dt className="font-bold text-[#52647d]">Betreuung</dt>
+          <dd className="mt-1 font-black text-[#061637]">{summary.care}</dd>
+        </div>
+        <div>
+          <dt className="font-bold text-[#52647d]">Erweiterung</dt>
+          <dd className="mt-1 font-black text-[#061637]">{summary.extension}</dd>
+        </div>
+      </dl>
+
+      <div className="my-5 h-px bg-[#cfe2f5]" />
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">geschätzter Startpreis</p>
+          <p className="mt-1 text-2xl font-black tracking-[-0.04em] text-[#061637]">{summary.setup}</p>
+        </div>
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">
+            geschätzte monatliche Kosten
+          </p>
+          <p className="mt-1 text-2xl font-black tracking-[-0.04em] text-[#061637]">{summary.monthly}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [message, setMessage] = useState('')
+  const [pricingSummary, setPricingSummary] = useState<PricingSummary | null>(null)
 
   useEffect(() => {
     const savedSelection = window.sessionStorage.getItem('localsites:pricing-selection')
+    const savedSummary = window.sessionStorage.getItem('localsites:pricing-summary')
 
     if (savedSelection) {
       setMessage(savedSelection)
       window.sessionStorage.removeItem('localsites:pricing-selection')
+    }
+
+    if (savedSummary) {
+      setPricingSummary(parsePricingSummary(savedSummary))
+      window.sessionStorage.removeItem('localsites:pricing-summary')
     }
   }, [])
 
@@ -115,16 +197,21 @@ export function ContactSection() {
                   <Label htmlFor="website" className="sr-only">Aktuelle Website</Label>
                   <Input id="website" name="website" type="url" placeholder="Aktuelle Website, falls vorhanden" className="h-12 rounded-md border-[#d7e7f7]" />
                 </div>
+                {pricingSummary && (
+                  <div className="sm:col-span-2">
+                    <PricingSelectionCard summary={pricingSummary} />
+                  </div>
+                )}
                 <div className="sm:col-span-2">
                   <Label htmlFor="nachricht" className="sr-only">Nachricht</Label>
                   <Textarea
                     id="nachricht"
                     name="nachricht"
                     placeholder="Worum geht es?"
-                    rows={4}
+                    rows={pricingSummary ? 3 : 4}
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
-                    className="resize-none rounded-md border-[#d7e7f7]"
+                    className={pricingSummary ? 'sr-only' : 'resize-none rounded-md border-[#d7e7f7]'}
                   />
                 </div>
                 <div className="flex items-center gap-2 text-xs text-[#52647d] sm:col-span-2">
