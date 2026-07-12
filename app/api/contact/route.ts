@@ -15,6 +15,10 @@ function clean(value: unknown) {
   return String(value ?? '').trim().slice(0, MAX_FIELD_LENGTH)
 }
 
+function cleanSingleLine(value: unknown) {
+  return clean(value).replace(/[\r\n]+/g, ' ')
+}
+
 function escapeHtml(value: string) {
   return value
     .replaceAll('&', '&amp;')
@@ -31,11 +35,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Ungueltige Anfrage.' }, { status: 400 })
   }
 
-  const name = clean(payload.name)
-  const email = clean(payload.email)
-  const unternehmen = clean(payload.unternehmen)
-  const telefon = clean(payload.telefon)
-  const website = clean(payload.website)
+  const name = cleanSingleLine(payload.name)
+  const email = cleanSingleLine(payload.email)
+  const unternehmen = cleanSingleLine(payload.unternehmen)
+  const telefon = cleanSingleLine(payload.telefon)
+  const website = cleanSingleLine(payload.website)
   const nachricht = clean(payload.nachricht)
 
   if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {

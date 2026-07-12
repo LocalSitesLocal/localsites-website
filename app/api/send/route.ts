@@ -4,6 +4,10 @@ import { Resend } from 'resend'
 export const runtime = 'nodejs'
 
 export async function POST() {
+  if (process.env.NODE_ENV === 'production') {
+    return new NextResponse(null, { status: 404 })
+  }
+
   const apiKey = process.env.RESEND_API_KEY
 
   if (!apiKey || apiKey === 're_xxxxxxxxx') {

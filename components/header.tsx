@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { navItems } from '@/lib/navigation'
 import { jumpToPageTop } from '@/lib/scroll'
 import { cn } from '@/lib/utils'
@@ -72,6 +72,8 @@ export function Header() {
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full border-[#d7e7f7] bg-white p-0 sm:w-[390px]">
+              <SheetTitle className="sr-only">Navigation</SheetTitle>
+              <SheetDescription className="sr-only">Hauptnavigation der LocalSites-Website</SheetDescription>
               <div className="flex h-full flex-col">
                 <div className="border-b border-[#d7e7f7] p-5 text-2xl font-black tracking-[-0.04em] text-[#061637]">
                   LocalSites<span aria-hidden="true" className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-[#0b63ce]" />

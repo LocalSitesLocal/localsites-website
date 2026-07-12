@@ -59,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="de" className="bg-[#f8fbff]">
+    <html lang="de" className="bg-[#f8fbff]" data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
         <RouteScrollReset />
         {children}

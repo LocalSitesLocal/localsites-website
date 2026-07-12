@@ -34,7 +34,7 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
   return (
     <div
       className={cn(
-        'fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6',
+        'fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6',
         isOpen ? 'pointer-events-auto' : 'pointer-events-none'
       )}
     >

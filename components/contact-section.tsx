@@ -123,12 +123,15 @@ export function ContactSection() {
     const form = e.currentTarget
     const formData = new FormData(form)
     const payload = Object.fromEntries(formData.entries())
+    const controller = new AbortController()
+    const timeout = window.setTimeout(() => controller.abort(), 15_000)
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
       if (!response.ok) {
@@ -136,10 +139,18 @@ export function ContactSection() {
         throw new Error(result?.error || 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.')
       }
       form.reset()
+      setMessage('')
       setIsSubmitted(true)
     } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.')
+      setSubmitError(
+        error instanceof DOMException && error.name === 'AbortError'
+          ? 'Die Anfrage dauert zu lange. Bitte versuchen Sie es erneut oder schreiben Sie direkt per E-Mail.'
+          : error instanceof Error
+            ? error.message
+            : 'Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail.'
+      )
     } finally {
+      window.clearTimeout(timeout)
       isSubmittingRef.current = false
       setIsLoading(false)
     }
