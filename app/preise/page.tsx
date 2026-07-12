@@ -3,6 +3,7 @@ import { Header } from '@/components/header'
 import { PricingWizard } from '@/components/pricing-wizard'
 import { Footer } from '@/components/footer'
 import { FlowButton } from '@/components/flow-button'
+import { getWebsitePackageById } from '@/lib/website-packages'
 
 export const metadata: Metadata = {
   title: 'Preise & Pakete | LocalSites',
@@ -10,7 +11,14 @@ export const metadata: Metadata = {
     'Wählen Sie Website-Basis, monatliche Betreuung und optionale Erweiterungen für Ihr LocalSites-Projekt.',
 }
 
-export default function PreisePage() {
+export default async function PreisePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ paket?: string }>
+}) {
+  const { paket } = await searchParams
+  const initialPackage = getWebsitePackageById(paket)
+
   return (
     <>
       <Header />
@@ -30,9 +38,9 @@ export default function PreisePage() {
           </div>
         </section>
 
-        <section className="py-10 lg:py-14">
+        <section id="konfigurator" className="py-10 lg:py-14">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <PricingWizard />
+            <PricingWizard initialWebsiteId={initialPackage?.id} />
             <p className="mt-8 rounded-[10px] border border-[#d7e7f7] bg-white p-5 text-sm leading-7 text-[#52647d]">
               Der genaue Preis hängt vom Umfang, den gewünschten Funktionen und vorhandenen Inhalten
               ab. Externe Toolkosten wie Chatbase, Calendly, Cal.com, Domain, Hosting oder

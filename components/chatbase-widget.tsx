@@ -42,7 +42,7 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
         type="button"
         onClick={openChat}
         className={cn(
-          'pointer-events-auto inline-flex h-12 w-12 items-center justify-center gap-0 rounded-full border border-[#061637] bg-[#061637] p-0 text-sm font-black text-white shadow-[0_18px_50px_rgba(15,55,100,0.2)] transition-[opacity,transform,background-color] duration-250 hover:-translate-y-0.5 hover:bg-[#0b63ce] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40 sm:h-auto sm:w-auto sm:gap-2 sm:px-4 sm:py-3',
+          'pointer-events-auto hidden items-center justify-center rounded-full border border-[#061637] bg-[#061637] text-sm font-black text-white shadow-[0_18px_50px_rgba(15,55,100,0.2)] transition-[opacity,transform,background-color] duration-250 hover:-translate-y-0.5 hover:bg-[#0b63ce] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40 sm:inline-flex sm:gap-2 sm:px-4 sm:py-3',
           isOpen ? 'pointer-events-none translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
         )}
         aria-label="KI-Empfang live testen"

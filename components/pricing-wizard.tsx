@@ -1,7 +1,8 @@
 'use client'
 
 import { useMemo, useRef, useState } from 'react'
-import { Check, Circle, MousePointer2 } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Check, Circle, MousePointer2 } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { cn } from '@/lib/utils'
 
@@ -14,6 +15,8 @@ type PackageOption = {
   description?: string
   features?: string[]
   recommended?: boolean
+  summaryFeatures?: string[]
+  detailsHref?: string
 }
 
 const websiteOptions: PackageOption[] = [
@@ -23,6 +26,8 @@ const websiteOptions: PackageOption[] = [
     price: 'ab 899 €',
     setupPrice: 899,
     description: 'Für kleine lokale Betriebe, die eine moderne Website-Basis brauchen.',
+    summaryFeatures: ['Onepage-Website', 'mobil optimiert', 'Kontakt & SEO-Basis'],
+    detailsHref: '/preise/starter',
     features: [
       'moderne Onepage-Website',
       'mobile Optimierung',
@@ -42,6 +47,8 @@ const websiteOptions: PackageOption[] = [
     setupPrice: 1499,
     recommended: true,
     description: 'Für Handwerker, Gutachter, Dienstleister und Betriebe mit mehreren Leistungen.',
+    summaryFeatures: ['mehrere Leistungsbereiche', 'FAQ & Google-Maps', 'starke Kontaktf\u00fchrung'],
+    detailsHref: '/preise/business',
     features: [
       'umfangreichere Firmenwebsite',
       'mehrere Leistungsbereiche',
@@ -59,6 +66,8 @@ const websiteOptions: PackageOption[] = [
     price: 'ab 2.199 €',
     setupPrice: 2199,
     description: 'Für Betriebe, die bessere Anfragen statt nur eine einfache Website-Basis brauchen.',
+    summaryFeatures: ['Website Business inklusive', 'Anfrageformular', 'strukturierte Anfragen'],
+    detailsHref: '/preise/anfrage-system',
     features: [
       'Website Business',
       'branchenspezifisches Anfrageformular',
@@ -160,16 +169,21 @@ function OptionCard({
   selected: boolean
   onSelect: () => void
 }) {
+  const displayFeatures = option.summaryFeatures ?? option.features
   return (
-    <button
-      type="button"
-      onClick={onSelect}
+    <article
       className={cn(
-        'motion-card motion-press group relative h-full w-full rounded-[10px] border bg-white p-5 text-left shadow-[0_18px_55px_rgba(15,55,100,0.06)] hover:border-[#0b63ce]/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35',
+        'motion-card group relative flex h-full w-full flex-col overflow-hidden rounded-[10px] border bg-white shadow-[0_18px_55px_rgba(15,55,100,0.06)] hover:border-[#0b63ce]/45',
         option.recommended && 'border-[#ff9a4d] shadow-[0_22px_70px_rgba(255,106,0,0.13)]',
         selected && 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15'
       )}
     >
+      <button
+        type="button"
+        onClick={onSelect}
+        aria-pressed={selected}
+        className="motion-press flex-1 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/35"
+      >
       {option.recommended && (
         <span className="mb-4 inline-flex rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
           Beliebt
@@ -190,9 +204,9 @@ function OptionCard({
         </span>
       </div>
       {option.description && <p className="mt-4 text-sm leading-6 text-[#52647d]">{option.description}</p>}
-      {option.features && (
+      {displayFeatures && (
         <ul className="mt-5 grid gap-2">
-          {option.features.map((feature) => (
+          {displayFeatures.map((feature) => (
             <li key={feature} className="flex min-w-0 gap-2 text-sm leading-6 text-[#263956]">
               <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
               <span className="min-w-0">{feature}</span>
@@ -200,7 +214,17 @@ function OptionCard({
           ))}
         </ul>
       )}
-    </button>
+      </button>
+      {option.detailsHref && (
+        <Link
+          href={option.detailsHref}
+          className="flex min-h-12 items-center justify-between border-t border-[#d7e7f7] px-5 text-sm font-black text-[#0b63ce] transition-colors hover:bg-[#eef6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/35"
+        >
+          Mehr erfahren
+          <ArrowRight className="h-4 w-4" />
+        </Link>
+      )}
+    </article>
   )
 }
 
@@ -336,12 +360,12 @@ function SelectionSummary({
   )
 }
 
-export function PricingWizard() {
+export function PricingWizard({ initialWebsiteId = null }: { initialWebsiteId?: string | null }) {
   const careRef = useRef<HTMLDivElement | null>(null)
   const extensionRef = useRef<HTMLDivElement | null>(null)
   const summaryRef = useRef<HTMLDivElement | null>(null)
 
-  const [websiteId, setWebsiteId] = useState<string | null>(null)
+  const [websiteId, setWebsiteId] = useState<string | null>(initialWebsiteId)
   const [careId, setCareId] = useState<string | null>(null)
   const [extensionId, setExtensionId] = useState<string | null>(null)
 
