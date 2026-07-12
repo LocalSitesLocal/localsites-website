@@ -50,7 +50,7 @@ export function HeroSection() {
           <button
             type="button"
             onClick={() => openLocalSitesChat()}
-            className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
+            className="mt-5 hidden items-center gap-2 text-sm font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35 sm:inline-flex"
           >
             KI-Empfang live testen
             <ArrowRight className="h-4 w-4" />
