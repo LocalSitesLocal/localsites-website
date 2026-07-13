@@ -29,11 +29,28 @@ const AIRTABLE_FIELDS = {
   monatlicherWert: 'Monatlicher Wert',
 } as const
 
-const AIRTABLE_EXTENSIONS = new Set([
-  'Calendly / Terminlink',
-  'Digitales Anfrage-Board',
-  'KI-Empfang Basic',
-])
+const AIRTABLE_PACKAGE_ALIASES: Record<string, string> = {
+  'Anfrage-Website Starter': 'Anfrage-Website Starter',
+  Starter: 'Anfrage-Website Starter',
+  'Website Business': 'Website Business',
+  Business: 'Website Business',
+  'Website + Anfrage-System': 'Website + Anfrage-System',
+  'Anfrage-System': 'Website + Anfrage-System',
+}
+
+const AIRTABLE_CARE_ALIASES: Record<string, string> = {
+  'Keine Betreuung': 'Keine Betreuung',
+  'Care Basis': 'Care Basis',
+  'Care Plus': 'Care Plus',
+  'Care System': 'Care System',
+}
+
+const AIRTABLE_EXTENSION_ALIASES: Record<string, string> = {
+  'Calendly / Terminlink': 'Calendly / Terminlink',
+  'Calendly-Einrichtung': 'Calendly / Terminlink',
+  'Digitales Anfrage-Board': 'Digitales Anfrage-Board',
+  'KI-Empfang Basic': 'KI-Empfang Basic',
+}
 
 function clean(value: unknown) {
   return String(value ?? '').trim().slice(0, MAX_FIELD_LENGTH)
@@ -68,17 +85,18 @@ function parseEuroAmount(value: string) {
 }
 
 function parsePricingSelection(message: string) {
-  const paket = getSelectionValue(message, 'Website-Paket')
-  const betreuung = getSelectionValue(message, 'Betreuung')
+  const rawPackage = getSelectionValue(message, 'Website-Paket')
+  const rawCare = getSelectionValue(message, 'Betreuung')
   const rawExtensions = getSelectionValue(message, 'Erweiterungen')
   const erweiterungen = rawExtensions
     .split(',')
     .map((item) => item.replace(/\s*\(enthalten\)\s*$/i, '').trim())
-    .filter((item) => AIRTABLE_EXTENSIONS.has(item))
+    .map((item) => AIRTABLE_EXTENSION_ALIASES[item])
+    .filter((item): item is string => Boolean(item))
 
   return {
-    paket,
-    betreuung,
+    paket: AIRTABLE_PACKAGE_ALIASES[rawPackage] || 'Noch offen',
+    betreuung: AIRTABLE_CARE_ALIASES[rawCare] || 'Noch offen',
     erweiterungen,
     angebotssumme: parseEuroAmount(getSelectionValue(message, 'Gesch\u00e4tzter Startpreis')),
     monatlicherWert: parseEuroAmount(getSelectionValue(message, 'Gesch\u00e4tzte monatliche Kosten')),
