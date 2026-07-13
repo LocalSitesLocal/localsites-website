@@ -2,9 +2,10 @@
 
 import { useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Circle, MousePointer2 } from 'lucide-react'
+import { ArrowRight, Check, Circle, MousePointer2, Square } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { cn } from '@/lib/utils'
+import { websitePackages } from '@/lib/website-packages'
 
 type PackageOption = {
   id: string
@@ -19,132 +20,87 @@ type PackageOption = {
   detailsHref?: string
 }
 
-const websiteOptions: PackageOption[] = [
-  {
-    id: 'starter',
-    name: 'Anfrage-Website Starter',
-    price: 'ab 899 €',
-    setupPrice: 899,
-    description: 'Für kleine lokale Betriebe, die eine moderne Website-Basis brauchen.',
-    summaryFeatures: ['Onepage-Website', 'mobil optimiert', 'Kontakt & SEO-Basis'],
-    detailsHref: '/preise/starter',
-    features: [
-      'moderne Onepage-Website',
-      'mobile Optimierung',
-      'Kontaktformular',
-      'klickbare Telefonnummer',
-      'klickbare E-Mail',
-      'klickbare Google-Maps-Adresse',
-      'SEO-Basis',
-      'eine Korrekturrunde',
-      'Veröffentlichung auf Domain',
-    ],
-  },
-  {
-    id: 'business',
-    name: 'Website Business',
-    price: 'ab 1.499 €',
-    setupPrice: 1499,
-    recommended: true,
-    description: 'Für Handwerker, Gutachter, Dienstleister und Betriebe mit mehreren Leistungen.',
-    summaryFeatures: ['mehrere Leistungsbereiche', 'FAQ & Google-Maps', 'starke Kontaktf\u00fchrung'],
-    detailsHref: '/preise/business',
-    features: [
-      'umfangreichere Firmenwebsite',
-      'mehrere Leistungsbereiche',
-      'FAQ-Bereich',
-      'stärkere Kontaktführung',
-      'Google-Maps-Verknüpfung',
-      'SEO-Basis',
-      'zwei Korrekturrunden',
-      'Veröffentlichung auf Domain',
-    ],
-  },
-  {
-    id: 'request-system',
-    name: 'Website + Anfrage-System',
-    price: 'ab 2.199 €',
-    setupPrice: 2199,
-    description: 'Für Betriebe, die bessere Anfragen statt nur eine einfache Website-Basis brauchen.',
-    summaryFeatures: ['Website Business inklusive', 'Anfrageformular', 'strukturierte Anfragen'],
-    detailsHref: '/preise/anfrage-system',
-    features: [
-      'Website Business',
-      'branchenspezifisches Anfrageformular',
-      'strukturierte Anfragen per E-Mail',
-      'stärkere Kontaktführung',
-      'optional Terminlink',
-      'Veröffentlichung',
-    ],
-  },
-]
+const websiteOptions: PackageOption[] = websitePackages.map((item) => ({
+  id: item.id,
+  name: item.name,
+  price: item.price,
+  setupPrice: item.setupPrice,
+  description: item.description,
+  summaryFeatures: item.highlights,
+  recommended: item.recommended,
+  detailsHref: `/preise/${item.slug}`,
+}))
 
 const careOptions: PackageOption[] = [
   {
     id: 'none',
     name: 'Keine Betreuung',
-    price: '0 €/Monat',
+    price: '0 \u20ac/Monat',
     setupPrice: 0,
     monthlyPrice: 0,
-    description: 'Geeignet, wenn Sie spätere Änderungen einzeln beauftragen möchten.',
+    description: 'Geeignet, wenn Sie sp\u00e4tere Arbeiten einzeln beauftragen m\u00f6chten.',
   },
   {
     id: 'basic',
-    name: 'Basic Care',
-    price: 'ab 79 €/Monat',
+    name: 'Care Basis',
+    price: '79 \u20ac/Monat',
     setupPrice: 0,
     monthlyPrice: 79,
-    features: ['kleine Änderungen', 'technische Kontrolle', 'Kontaktformular prüfen'],
+    features: ['monatlicher Funktionstest', 'bis zu 20 Minuten \u00c4nderungen'],
   },
   {
-    id: 'standard',
-    name: 'Standard Care',
-    price: 'ab 129 €/Monat',
+    id: 'plus',
+    name: 'Care Plus',
+    price: '149 \u20ac/Monat',
     setupPrice: 0,
-    monthlyPrice: 129,
+    monthlyPrice: 149,
     recommended: true,
-    features: ['regelmäßige Änderungen', 'Google- und Bewertungsunterstützung', 'kleine Optimierungen'],
+    features: ['bis zu 60 Minuten \u00c4nderungen', 'kleine Optimierungen'],
   },
   {
-    id: 'growth',
-    name: 'Growth Care',
-    price: 'ab 199 €/Monat',
+    id: 'system',
+    name: 'Care System',
+    price: '249 \u20ac/Monat',
     setupPrice: 0,
-    monthlyPrice: 199,
-    features: ['laufende Website-Pflege', 'SEO-Basisoptimierung', 'Anfrage-System- und Automations-Support'],
+    monthlyPrice: 249,
+    features: ['bis zu 120 Minuten Betreuung', 'Airtable- und Automationspflege'],
   },
 ]
 
 const extensionOptions: PackageOption[] = [
   {
     id: 'none',
-    name: 'Keine Erweiterung',
-    price: '0 €',
+    name: 'Keine weitere Erweiterung',
+    price: '0 \u20ac',
     setupPrice: 0,
+    description: 'Sie k\u00f6nnen Erweiterungen auch sp\u00e4ter erg\u00e4nzen.',
   },
   {
     id: 'calendly',
-    name: 'Calendly / Terminlink',
-    price: 'ab 149 €',
+    name: 'Calendly-Einrichtung',
+    price: 'ab 149 \u20ac',
     setupPrice: 149,
-    description: 'Ein einfacher Terminlink für Anfragen, Rückrufe oder Erstgespräche.',
+    description: 'Terminlink f\u00fcr Anfragen, R\u00fcckrufe oder Erstgespr\u00e4che.',
   },
   {
-    id: 'lead-list',
-    name: 'Lead-Liste',
-    price: 'ab 399 €',
-    setupPrice: 399,
-    description: 'Eine übersichtliche Liste, damit eingehende Anfragen besser gesammelt werden.',
+    id: 'board',
+    name: 'Digitales Anfrage-Board',
+    price: 'ab 499 \u20ac',
+    setupPrice: 499,
+    description: 'Anfragen automatisch speichern und nach Status, Leistung und n\u00e4chstem Schritt verwalten.',
   },
   {
     id: 'ki-basic',
     name: 'KI-Empfang Basic',
-    price: 'ab 699 €',
+    price: 'ab 699 \u20ac',
     setupPrice: 699,
     recommended: true,
-    description: 'Premium-Upgrade: beantwortet Standardfragen und sammelt Leads. Externe Chatbase-Kosten kommen extra hinzu.',
+    description: 'Beantwortet Standardfragen und sammelt Leads. Externe Chatbase-Kosten kommen hinzu.',
   },
 ]
+
+const NO_INCLUDED_EXTENSIONS: string[] = []
+const REQUEST_SYSTEM_EXTENSIONS = ['board']
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('de-DE', {
@@ -164,56 +120,74 @@ function OptionCard({
   option,
   selected,
   onSelect,
+  mode = 'radio',
+  included = false,
 }: {
   option: PackageOption
   selected: boolean
   onSelect: () => void
+  mode?: 'radio' | 'checkbox'
+  included?: boolean
 }) {
   const displayFeatures = option.summaryFeatures ?? option.features
+
   return (
     <article
       className={cn(
         'motion-card group relative flex h-full w-full flex-col overflow-hidden rounded-[10px] border bg-white shadow-[0_18px_55px_rgba(15,55,100,0.06)] hover:border-[#0b63ce]/45',
         option.recommended && 'border-[#ff9a4d] shadow-[0_22px_70px_rgba(255,106,0,0.13)]',
-        selected && 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15'
+        selected && 'border-[#0b63ce] ring-2 ring-[#0b63ce]/15',
+        included && 'bg-[#eef6ff]'
       )}
     >
       <button
         type="button"
         onClick={onSelect}
+        disabled={included}
         aria-pressed={selected}
-        className="motion-press flex-1 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/35"
+        className="motion-press flex-1 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/35 disabled:cursor-default"
       >
-      {option.recommended && (
-        <span className="mb-4 inline-flex rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
-          Beliebt
-        </span>
-      )}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-black text-[#061637]">{option.name}</h3>
-          <p className="mt-2 text-2xl font-black tracking-[-0.035em] text-[#061637]">{option.price}</p>
+        {(option.recommended || included) && (
+          <div className="mb-4 flex min-h-7 flex-wrap gap-2">
+            {option.recommended && (
+              <span className="inline-flex rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+                Beliebt
+              </span>
+            )}
+            {included && (
+              <span className="inline-flex rounded-full bg-[#0b63ce] px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-white">
+                Im Paket enthalten
+              </span>
+            )}
+          </div>
+        )}
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-black text-[#061637]">{option.name}</h3>
+            <p className="mt-2 text-2xl font-black tracking-[-0.035em] text-[#061637]">
+              {included ? 'inklusive' : option.price}
+            </p>
+          </div>
+          <span
+            className={cn(
+              'motion-icon mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors',
+              selected ? 'border-[#0b63ce] bg-[#0b63ce] text-white' : 'border-[#d7e7f7] text-[#9aa9bd]'
+            )}
+          >
+            {selected ? <Check className="h-4 w-4" /> : mode === 'checkbox' ? <Square className="h-3.5 w-3.5" /> : <Circle className="h-3 w-3" />}
+          </span>
         </div>
-        <span
-          className={cn(
-            'motion-icon mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors',
-            selected ? 'border-[#0b63ce] bg-[#0b63ce] text-white' : 'border-[#d7e7f7] text-[#9aa9bd]'
-          )}
-        >
-          {selected ? <Check className="h-4 w-4" /> : <Circle className="h-3 w-3" />}
-        </span>
-      </div>
-      {option.description && <p className="mt-4 text-sm leading-6 text-[#52647d]">{option.description}</p>}
-      {displayFeatures && (
-        <ul className="mt-5 grid gap-2">
-          {displayFeatures.map((feature) => (
-            <li key={feature} className="flex min-w-0 gap-2 text-sm leading-6 text-[#263956]">
-              <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
-              <span className="min-w-0">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+        {option.description && <p className="mt-4 text-sm leading-6 text-[#52647d]">{option.description}</p>}
+        {displayFeatures && (
+          <ul className="mt-5 grid gap-2">
+            {displayFeatures.map((feature) => (
+              <li key={feature} className="flex min-w-0 gap-2 text-sm leading-6 text-[#263956]">
+                <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
+                <span className="min-w-0">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </button>
       {option.detailsHref && (
         <Link
@@ -232,14 +206,18 @@ function SelectionStep({
   number,
   title,
   options,
-  selectedId,
+  selectedIds,
   onSelect,
+  mode = 'radio',
+  includedIds = [],
 }: {
   number: string
   title: string
   options: PackageOption[]
-  selectedId: string | null
+  selectedIds: string[] | null
   onSelect: (id: string) => void
+  mode?: 'radio' | 'checkbox'
+  includedIds?: string[]
 }) {
   return (
     <section className="rounded-[12px] border border-[#d7e7f7] bg-[#fbfdff] p-5 shadow-[0_18px_60px_rgba(15,55,100,0.05)]">
@@ -250,15 +228,29 @@ function SelectionStep({
         <h2 className="text-2xl font-black tracking-[-0.035em] text-[#061637]">{title}</h2>
       </div>
       <div className={cn('grid gap-4', options.length === 4 ? 'md:grid-cols-2' : 'lg:grid-cols-3')}>
-        {options.map((option) => (
-          <OptionCard
-            key={option.id}
-            option={option}
-            selected={selectedId === option.id}
-            onSelect={() => onSelect(option.id)}
-          />
-        ))}
+        {options.map((option) => {
+          const included = includedIds.includes(option.id)
+          const selected = included || (option.id === 'none'
+            ? selectedIds !== null && selectedIds.length === 0
+            : Boolean(selectedIds?.includes(option.id)))
+
+          return (
+            <OptionCard
+              key={option.id}
+              option={option}
+              selected={selected}
+              included={included}
+              mode={mode}
+              onSelect={() => onSelect(option.id)}
+            />
+          )
+        })}
       </div>
+      {mode === 'checkbox' && (
+        <p className="mt-4 text-sm leading-6 text-[#52647d]">
+          Mehrere Erweiterungen können gleichzeitig ausgewählt werden.
+        </p>
+      )}
     </section>
   )
 }
@@ -266,28 +258,34 @@ function SelectionStep({
 function SelectionSummary({
   website,
   care,
-  extension,
+  extensions,
+  includedExtensions,
 }: {
   website: PackageOption
   care: PackageOption
-  extension: PackageOption
+  extensions: PackageOption[]
+  includedExtensions: PackageOption[]
 }) {
-  const setup = website.setupPrice + extension.setupPrice
+  const setup = website.setupPrice + extensions.reduce((sum, option) => sum + option.setupPrice, 0)
   const monthly = care.monthlyPrice ?? 0
+  const extensionNames = [
+    ...includedExtensions.map((option) => `${option.name} (enthalten)`),
+    ...extensions.map((option) => option.name),
+  ]
+  const extensionLabel = extensionNames.length > 0 ? extensionNames.join(', ') : 'Keine Erweiterung'
+
   const saveSelectionForContact = () => {
     try {
       window.sessionStorage.setItem(
         'localsites:pricing-selection',
         [
-          'Ich interessiere mich für folgende Paketauswahl:',
+          'Ich interessiere mich f\u00fcr folgende Paketauswahl:',
           '',
-          `Website-Basis: ${website.name}`,
+          `Website-Paket: ${website.name}`,
           `Betreuung: ${care.name}`,
-          `Optionale Erweiterung: ${extension.name}`,
-          `Geschätzter Startpreis: ab ${formatCurrency(setup)}`,
-          `Geschätzte monatliche Kosten: ${
-            monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`
-          }`,
+          `Erweiterungen: ${extensionLabel}`,
+          `Gesch\u00e4tzter Startpreis: ab ${formatCurrency(setup)}`,
+          `Gesch\u00e4tzte monatliche Kosten: ${monthly === 0 ? '0 \u20ac/Monat' : `${formatCurrency(monthly)}/Monat`}`,
         ].join('\n')
       )
       window.sessionStorage.setItem(
@@ -295,13 +293,13 @@ function SelectionSummary({
         JSON.stringify({
           website: website.name,
           care: care.name,
-          extension: extension.name,
+          extensions: extensionNames.length > 0 ? extensionNames : ['Keine Erweiterung'],
           setup: `ab ${formatCurrency(setup)}`,
-          monthly: monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`,
+          monthly: monthly === 0 ? '0 \u20ac/Monat' : `${formatCurrency(monthly)}/Monat`,
         })
       )
     } catch {
-      // The form still works if browser storage is unavailable.
+      // The form remains usable when browser storage is unavailable.
     }
   }
 
@@ -319,7 +317,7 @@ function SelectionSummary({
 
       <dl className="grid gap-4 text-sm sm:grid-cols-3 lg:grid-cols-1">
         <div>
-          <dt className="font-bold text-[#52647d]">Website-Basis</dt>
+          <dt className="font-bold text-[#52647d]">Website-Paket</dt>
           <dd className="mt-1 font-black text-[#061637]">{website.name}</dd>
         </div>
         <div>
@@ -327,8 +325,8 @@ function SelectionSummary({
           <dd className="mt-1 font-black text-[#061637]">{care.name}</dd>
         </div>
         <div>
-          <dt className="font-bold text-[#52647d]">Erweiterung</dt>
-          <dd className="mt-1 font-black text-[#061637]">{extension.name}</dd>
+          <dt className="font-bold text-[#52647d]">Erweiterungen</dt>
+          <dd className="mt-1 font-black leading-6 text-[#061637]">{extensionLabel}</dd>
         </div>
       </dl>
 
@@ -340,11 +338,9 @@ function SelectionSummary({
           <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">ab {formatCurrency(setup)}</p>
         </div>
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">
-            geschätzte monatliche Kosten
-          </p>
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">geschätzte monatliche Kosten</p>
           <p className="mt-1 text-3xl font-black tracking-[-0.04em] text-[#061637]">
-            {monthly === 0 ? '0 €/Monat' : `ab ${formatCurrency(monthly)}/Monat`}
+            {monthly === 0 ? '0 \u20ac/Monat' : `${formatCurrency(monthly)}/Monat`}
           </p>
         </div>
       </div>
@@ -367,49 +363,55 @@ export function PricingWizard({ initialWebsiteId = null }: { initialWebsiteId?: 
 
   const [websiteId, setWebsiteId] = useState<string | null>(initialWebsiteId)
   const [careId, setCareId] = useState<string | null>(null)
-  const [extensionId, setExtensionId] = useState<string | null>(null)
+  const [extensionIds, setExtensionIds] = useState<string[] | null>(null)
+
+  const includedExtensionIds = websiteId === 'request-system' ? REQUEST_SYSTEM_EXTENSIONS : NO_INCLUDED_EXTENSIONS
 
   const selection = useMemo(() => {
     const website = websiteOptions.find((option) => option.id === websiteId)
     const care = careOptions.find((option) => option.id === careId)
-    const extension = extensionOptions.find((option) => option.id === extensionId)
-    return { website, care, extension }
-  }, [websiteId, careId, extensionId])
+    const extensions = extensionOptions.filter((option) => extensionIds?.includes(option.id))
+    const includedExtensions = extensionOptions.filter((option) => includedExtensionIds.includes(option.id))
+    return { website, care, extensions, includedExtensions }
+  }, [websiteId, careId, extensionIds, includedExtensionIds])
 
   const selectWebsite = (id: string) => {
     const isFirstWebsiteSelection = !websiteId
     setWebsiteId(id)
-    if (isFirstWebsiteSelection) {
-      jumpTo(careRef)
+    if (id === 'request-system') {
+      setExtensionIds((current) => current?.filter((extensionId) => extensionId !== 'board') ?? current)
     }
+    if (isFirstWebsiteSelection) jumpTo(careRef)
   }
 
   const selectCare = (id: string) => {
     const isFirstCareSelection = !careId
     setCareId(id)
-    if (isFirstCareSelection) {
-      jumpTo(extensionRef)
-    }
+    if (isFirstCareSelection) jumpTo(extensionRef)
   }
 
   const selectExtension = (id: string) => {
-    const isFirstExtensionSelection = !extensionId
-    setExtensionId(id)
-    if (isFirstExtensionSelection) {
-      jumpTo(summaryRef)
-    }
+    const isFirstExtensionSelection = extensionIds === null
+
+    setExtensionIds((current) => {
+      if (id === 'none') return []
+      const selected = current ?? []
+      return selected.includes(id) ? selected.filter((item) => item !== id) : [...selected, id]
+    })
+
+    if (isFirstExtensionSelection) jumpTo(summaryRef)
   }
 
-  const isComplete = Boolean(selection.website && selection.care && selection.extension)
+  const isComplete = Boolean(selection.website && selection.care && extensionIds !== null)
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:items-start">
       <div className="space-y-6">
         <SelectionStep
           number="1"
-          title="Website-Basis wählen"
+          title="Website-Paket wählen"
           options={websiteOptions}
-          selectedId={websiteId}
+          selectedIds={websiteId ? [websiteId] : null}
           onSelect={selectWebsite}
         />
 
@@ -419,7 +421,7 @@ export function PricingWizard({ initialWebsiteId = null }: { initialWebsiteId?: 
               number="2"
               title="Monatliche Betreuung wählen"
               options={careOptions}
-              selectedId={careId}
+              selectedIds={careId ? [careId] : null}
               onSelect={selectCare}
             />
           </div>
@@ -431,16 +433,23 @@ export function PricingWizard({ initialWebsiteId = null }: { initialWebsiteId?: 
               number="3"
               title="Optionale Erweiterungen"
               options={extensionOptions}
-              selectedId={extensionId}
+              selectedIds={extensionIds}
+              includedIds={includedExtensionIds}
               onSelect={selectExtension}
+              mode="checkbox"
             />
           </div>
         )}
       </div>
 
       <aside ref={summaryRef} className="lg:sticky lg:top-28">
-        {isComplete && selection.website && selection.care && selection.extension ? (
-          <SelectionSummary website={selection.website} care={selection.care} extension={selection.extension} />
+        {isComplete && selection.website && selection.care ? (
+          <SelectionSummary
+            website={selection.website}
+            care={selection.care}
+            extensions={selection.extensions}
+            includedExtensions={selection.includedExtensions}
+          />
         ) : (
           <div className="rounded-[12px] border border-dashed border-[#c6d9ec] bg-white/72 p-6 text-sm leading-6 text-[#52647d]">
             Wählen Sie Schritt für Schritt Ihr Paket aus. Die Zusammenfassung erscheint automatisch nach der Auswahl.

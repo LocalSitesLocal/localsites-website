@@ -1,21 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Check, CircleCheck, Target } from 'lucide-react'
+import { ArrowLeft, Check, CircleCheck, Clock3, FileText, Handshake, PackageOpen, ShieldCheck, Target } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { FlowButton } from '@/components/flow-button'
-import { cn } from '@/lib/utils'
+import { PackageComparisonTable } from '@/components/package-comparison-table'
 import { getWebsitePackageBySlug, websitePackages } from '@/lib/website-packages'
-
-const comparisonRows = [
-  { label: 'Aufbau', values: ['Onepage', 'mehrere Bereiche', 'Business + Anfrageweg'] },
-  { label: 'Ideal f\u00fcr', values: ['kleine Betriebe', 'mehrere Leistungen', 'bessere Vorqualifizierung'] },
-  { label: 'Kontakt', values: ['Standardformular', 'starke Kontaktf\u00fchrung', 'branchenspezifisches Formular'] },
-  { label: 'FAQ', values: ['optional', 'enthalten', 'enthalten'] },
-  { label: 'Korrekturen', values: ['eine Runde', 'zwei Runden', 'zwei Runden'] },
-  { label: 'Startpreis', values: websitePackages.map((item) => item.price) },
-]
 
 export function generateStaticParams() {
   return websitePackages.map((item) => ({ paket: item.slug }))
@@ -75,8 +66,8 @@ export default async function PackageDetailPage({
               <p className="mt-5 text-3xl font-black tracking-[-0.035em] text-[#0b63ce]">{item.price}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">{item.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <FlowButton text={'Paket ausw\u00e4hlen'} href={`/preise?paket=${item.id}#konfigurator`} tone="orange" className="bg-white" />
-                <FlowButton text="Website-Check anfragen" href="/#kontakt" tone="blue" className="bg-white" />
+                <FlowButton text="Dieses Paket anfragen" href={`/preise?paket=${item.id}#konfigurator`} tone="orange" className="bg-white" />
+                <FlowButton text="Kostenlose Ersteinschätzung" href="/#kontakt" tone="blue" className="bg-white" />
               </div>
             </div>
 
@@ -130,37 +121,97 @@ export default async function PackageDetailPage({
 
         <section className="py-14 lg:py-18">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div className="border-l-4 border-[#0b63ce] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)] sm:p-8">
+                <FileText className="h-6 w-6 text-[#0b63ce]" />
+                <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Seitenumfang und Korrekturen</h2>
+                <p className="mt-4 leading-7 text-[#52647d]">{item.pageScope}</p>
+                <p className="mt-3 leading-7 text-[#52647d]">{item.correctionRounds}</p>
+              </div>
+              <div className="border-l-4 border-[#ff6a00] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)] sm:p-8">
+                <Clock3 className="h-6 w-6 text-[#ff6a00]" />
+                <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Dauer der Umsetzung</h2>
+                <p className="mt-4 leading-7 text-[#52647d]">{item.timeline}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#dfeaf5] bg-white py-14 lg:py-18">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="grid gap-12 lg:grid-cols-2">
+              <div>
+                <Handshake className="h-7 w-7 text-[#0b63ce]" />
+                <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Zusammenarbeit</p>
+                <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">So läuft das Projekt ab</h2>
+                <ol className="mt-7 grid gap-4">
+                  {item.collaboration.map((step, index) => (
+                    <li key={step} className="flex gap-4 leading-7 text-[#263956]">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#eef6ff] text-sm font-black text-[#0b63ce]">{index + 1}</span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <div>
+                <PackageOpen className="h-7 w-7 text-[#0b63ce]" />
+                <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Ihre Vorbereitung</p>
+                <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Was Sie bereitstellen</h2>
+                <ul className="mt-7 grid gap-4">
+                  {item.clientProvides.map((entry) => (
+                    <li key={entry} className="flex gap-3 leading-7 text-[#263956]">
+                      <Check className="mt-1 h-5 w-5 shrink-0 text-[#0b63ce]" />
+                      <span>{entry}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-14 lg:py-18">
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
+            <div>
+              <ShieldCheck className="h-7 w-7 text-[#52647d]" />
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#52647d]">Klare Abgrenzung</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Nicht automatisch enthalten</h2>
+              <ul className="mt-7 grid gap-4">
+                {item.exclusions.map((entry) => (
+                  <li key={entry} className="flex gap-3 leading-7 text-[#52647d]">
+                    <span aria-hidden="true" className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8da0b8]" />
+                    <span>{entry}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <Target className="h-7 w-7 text-[#ff6a00]" />
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#ff6a00]">Optional</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Sinnvolle Zusatzleistungen</h2>
+              <ul className="mt-7 grid gap-4">
+                {item.additions.map((entry) => (
+                  <li key={entry} className="flex gap-3 leading-7 text-[#263956]">
+                    <Check className="mt-1 h-5 w-5 shrink-0 text-[#ff6a00]" />
+                    <span>{entry}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[#dfeaf5] bg-white py-14 lg:py-18">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Direkter Vergleich</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637] sm:text-4xl">Welches Website-Paket passt?</h2>
-              <p className="mt-4 leading-7 text-[#52647d]">Vergleichen Sie die wichtigsten Unterschiede. Betreuung und Erweiterungen w&auml;hlen Sie anschlie&szlig;end separat.</p>
+              <p className="mt-4 leading-7 text-[#52647d]">Vergleichen Sie Umfang, Anfrageweg und enthaltene Systeme. Betreuung und Erweiterungen w&auml;hlen Sie anschlie&szlig;end separat.</p>
             </div>
-            <div className="mt-8 overflow-x-auto rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
-              <table className="min-w-[820px] w-full border-collapse text-left text-sm">
-                <thead>
-                  <tr>
-                    <th className="w-44 border-b border-[#d7e7f7] p-5 text-[#52647d]">Vergleich</th>
-                    {websitePackages.map((candidate) => (
-                      <th key={candidate.id} className={cn('border-b border-[#d7e7f7] p-5 align-top', candidate.id === item.id && 'bg-[#eef6ff]')}>
-                        <Link href={`/preise/${candidate.slug}`} className="font-black text-[#061637] hover:text-[#0b63ce]">{candidate.name}</Link>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparisonRows.map((row) => (
-                    <tr key={row.label}>
-                      <th className="border-b border-[#e5eef7] p-5 font-bold text-[#52647d]">{row.label}</th>
-                      {row.values.map((value, index) => (
-                        <td key={websitePackages[index].id} className={cn('border-b border-[#e5eef7] p-5 text-[#263956]', websitePackages[index].id === item.id && 'bg-[#f4f9ff] font-bold text-[#061637]')}>
-                          {value}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <div className="mt-8"><PackageComparisonTable activePackageId={item.id} /></div>
+            <Link href="/preise/vergleich" className="mt-6 inline-flex min-h-11 items-center font-black text-[#0b63ce] hover:text-[#061637]">
+              Vollständigen Paketvergleich öffnen
+            </Link>
           </div>
         </section>
 
@@ -171,7 +222,7 @@ export default async function PackageDetailPage({
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em]">{item.name} konfigurieren</h2>
               <p className="mt-3 max-w-2xl leading-7 text-white/70">W&auml;hlen Sie danach Betreuung und optionale Erweiterungen. Die Zusammenfassung wird automatisch berechnet.</p>
             </div>
-            <FlowButton text={'Paket ausw\u00e4hlen'} href={`/preise?paket=${item.id}#konfigurator`} tone="orange" className="shrink-0 bg-white" />
+            <FlowButton text="Dieses Paket anfragen" href={`/preise?paket=${item.id}#konfigurator`} tone="orange" className="shrink-0 bg-white" />
           </div>
         </section>
       </main>

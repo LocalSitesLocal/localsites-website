@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { CheckCircle, Lock, MousePointer2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,7 +14,7 @@ const CALENDLY_URL = 'https://calendly.com/ki-contentstudio/30min?hide_event_typ
 type PricingSummary = {
   website: string
   care: string
-  extension: string
+  extensions: string[]
   setup: string
   monthly: string
 }
@@ -23,14 +24,21 @@ function parsePricingSummary(value: string | null): PricingSummary | null {
 
   try {
     const parsed = JSON.parse(value) as Partial<PricingSummary>
-    if (!parsed.website || !parsed.care || !parsed.extension || !parsed.setup || !parsed.monthly) {
+    const legacyExtension = (parsed as Partial<PricingSummary> & { extension?: string }).extension
+    const extensions = Array.isArray(parsed.extensions)
+      ? parsed.extensions.filter((item): item is string => typeof item === 'string')
+      : legacyExtension
+        ? [legacyExtension]
+        : []
+
+    if (!parsed.website || !parsed.care || extensions.length === 0 || !parsed.setup || !parsed.monthly) {
       return null
     }
 
     return {
       website: parsed.website,
       care: parsed.care,
-      extension: parsed.extension,
+      extensions,
       setup: parsed.setup,
       monthly: parsed.monthly,
     }
@@ -62,8 +70,8 @@ function PricingSelectionCard({ summary }: { summary: PricingSummary }) {
           <dd className="mt-1 font-black text-[#061637]">{summary.care}</dd>
         </div>
         <div>
-          <dt className="font-bold text-[#52647d]">Erweiterung</dt>
-          <dd className="mt-1 font-black text-[#061637]">{summary.extension}</dd>
+          <dt className="font-bold text-[#52647d]">Erweiterungen</dt>
+          <dd className="mt-1 font-black leading-6 text-[#061637]">{summary.extensions.join(', ')}</dd>
         </div>
       </dl>
 
@@ -89,6 +97,7 @@ export function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [showCalendly, setShowCalendly] = useState(false)
   const [message, setMessage] = useState('')
   const [pricingSummary, setPricingSummary] = useState<PricingSummary | null>(null)
   const isSubmittingRef = useRef(false)
@@ -161,7 +170,7 @@ export function ContactSection() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:px-8">
         <Reveal>
           <p className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
-            Bereit für Ihre kostenlose Analyse?
+            Bereit für Ihre kostenlose Ersteinschätzung?
           </p>
           <h2 className="max-w-[21rem] text-3xl font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-xl sm:text-5xl sm:tracking-[-0.05em]">
             Lassen Sie uns Ihr Projekt starten.
@@ -187,16 +196,34 @@ export function ContactSection() {
                   <CheckCircle className="mx-auto mb-5 h-12 w-12 text-[#0b63ce]" />
                   <h3 className="text-2xl font-black text-[#061637]">Danke für Ihre Anfrage.</h3>
                   <p className="mt-2 text-[#52647d]">
-                    Wählen Sie direkt einen passenden Termin für die kurze Besprechung aus.
+                    Ihre Anfrage wurde gesendet. Optional können Sie jetzt einen passenden Termin auswählen.
                   </p>
                 </div>
-                <div className="overflow-hidden rounded-md border border-[#d7e7f7] bg-white">
-                  <iframe
-                    src={CALENDLY_URL}
-                    title="Termin über Calendly auswählen"
-                    className="h-[720px] w-full border-0"
-                  />
-                </div>
+                {showCalendly ? (
+                  <div className="overflow-hidden rounded-md border border-[#d7e7f7] bg-white">
+                    <iframe
+                      src={CALENDLY_URL}
+                      title="Termin über Calendly auswählen"
+                      className="h-[720px] w-full border-0"
+                    />
+                  </div>
+                ) : (
+                  <div className="mx-auto max-w-xl pb-8">
+                    <Button
+                      type="button"
+                      onClick={() => setShowCalendly(true)}
+                      className="h-12 bg-[#0b63ce] px-6 font-black text-white hover:bg-[#061637]"
+                    >
+                      Terminplanung öffnen
+                    </Button>
+                    <p className="mt-3 text-xs leading-5 text-[#52647d]">
+                      Erst mit dem Öffnen wird Calendly geladen. Es gelten unsere{' '}
+                      <Link href="/datenschutz" className="font-bold text-[#0b63ce] underline-offset-4 hover:underline">
+                        Datenschutzhinweise
+                      </Link>.
+                    </p>
+                  </div>
+                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
@@ -237,9 +264,12 @@ export function ContactSection() {
                     className={pricingSummary ? 'sr-only' : 'resize-none rounded-md border-[#d7e7f7]'}
                   />
                 </div>
-                <div className="flex items-center gap-2 text-xs text-[#52647d] sm:col-span-2">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[#52647d] sm:col-span-2">
                   <Lock className="h-3.5 w-3.5" />
-                  Ihre Daten werden vertraulich behandelt.
+                  <span>Ihre Daten werden vertraulich behandelt.</span>
+                  <Link href="/datenschutz" className="font-bold text-[#0b63ce] underline-offset-4 hover:underline">
+                    Hinweise zum Datenschutz
+                  </Link>
                 </div>
                 <div className="sm:col-span-2">
                   <Button
@@ -248,7 +278,7 @@ export function ContactSection() {
                     aria-busy={isLoading}
                     className="h-12 w-full rounded-md bg-[#ff6a00] font-black text-white shadow-[0_16px_40px_rgba(255,106,0,0.22)] transition-transform active:scale-[0.98]"
                   >
-                    {isLoading ? 'Wird gesendet...' : 'Kostenlosen Website-Check anfragen'}
+                    {isLoading ? 'Wird gesendet...' : 'Kostenlose Ersteinschätzung anfragen'}
                   </Button>
                 </div>
                 {submitError && <p className="text-sm text-red-600 sm:col-span-2">{submitError}</p>}

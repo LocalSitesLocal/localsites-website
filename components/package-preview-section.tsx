@@ -4,16 +4,16 @@ import { Reveal } from '@/components/reveal'
 
 const packages = [
   {
-    name: 'Anfrage-Website Starter',
+    name: 'Starter',
     price: 'ab 899 €',
   },
   {
-    name: 'Website Business',
+    name: 'Business',
     price: 'ab 1.499 €',
   },
   {
-    name: 'Website + Anfrage-System',
-    price: 'ab 2.199 €',
+    name: 'Anfrage-System',
+    price: 'ab 2.499 €',
   },
 ]
 
@@ -32,7 +32,7 @@ export function PackagePreviewSection() {
             <p className="mt-4 max-w-xl leading-7 text-[#52647d]">
               Eine kurze Orientierung. Die ausführliche Auswahl bleibt auf der Preise-Seite.
             </p>
-            <FlowButton text="Alle Pakete ansehen" href="/preise" tone="orange" className="mt-7 bg-white" />
+            <FlowButton text="Pakete vergleichen" href="/preise" tone="orange" className="mt-7 bg-white" />
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">

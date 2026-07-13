@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/reveal'
@@ -6,18 +7,24 @@ import { Reveal } from '@/components/reveal'
 const demos = [
   {
     title: 'Sanitär & Heizung',
-    href: 'https://demo-haustechnik.vercel.app/',
+    href: '/demos/haustechnik',
     image: '/demo-previews/haustechnik-mood.png',
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
   {
     title: 'Restaurant & Bar',
-    href: 'https://demo-restaurant-xi.vercel.app/',
+    href: '/demos/restaurant',
     image: '/demo-previews/restaurant-mood.png',
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
   {
     title: 'Kanzlei & Beratung',
-    href: 'https://demo-steuerberatung.vercel.app/',
+    href: '/demos/steuerberatung',
     image: '/demo-previews/steuerberatung-mood.png',
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
 ]
 
@@ -37,10 +44,8 @@ export function DemosSection() {
         <div className="mt-12 grid gap-7 lg:grid-cols-3">
           {demos.map((demo, index) => (
             <Reveal key={demo.title} delay={index * 90}>
-              <a
+              <Link
                 href={demo.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="motion-card group block overflow-hidden rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2"
               >
                 <div className="relative h-60 overflow-hidden">
@@ -55,11 +60,14 @@ export function DemosSection() {
                     Demo-Vorschau
                   </Badge>
                 </div>
-                <div className="flex items-center justify-between p-6">
-                  <h3 className="font-black text-[#061637]">{demo.title}</h3>
+                <div className="flex items-center justify-between gap-4 p-6">
+                  <div>
+                    <h3 className="font-black text-[#061637]">{demo.title}</h3>
+                    <p className="mt-1 text-sm text-[#52647d]">Geeignet: {demo.package} · {demo.price}</p>
+                  </div>
                   <ArrowRight className="motion-arrow h-5 w-5 text-[#0b63ce]" />
                 </div>
-              </a>
+              </Link>
             </Reveal>
           ))}
         </div>

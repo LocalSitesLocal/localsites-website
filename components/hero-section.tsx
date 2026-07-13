@@ -8,7 +8,7 @@ import { openLocalSitesChat } from '@/lib/chat'
 const trustItems = [
   { icon: MapPin, label: 'Regional & persönlich' },
   { icon: ShieldCheck, label: 'Unverbindlich' },
-  { icon: Clock3, label: 'Check in 48-72 Std.' },
+  { icon: Clock3, label: 'Ersteinschätzung in 48-72 Std.' },
 ]
 
 export function HeroSection() {
@@ -44,8 +44,8 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <FlowButton text="Pakete & Preise ansehen" href="/preise" tone="orange" className="bg-white/85" />
-            <FlowButton text="Kostenlosen Website-Check anfragen" href="#kontakt" tone="blue" className="bg-white/70" />
+            <FlowButton text="Pakete vergleichen" href="/preise" tone="orange" className="bg-white/85" />
+            <FlowButton text="Kostenlose Ersteinschätzung" href="#kontakt" tone="blue" className="bg-white/70" />
           </div>
           <button
             type="button"

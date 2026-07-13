@@ -1,6 +1,4 @@
-'use client'
-
-import { Bot, Check, Globe2, ShieldCheck } from 'lucide-react'
+import { Bot, Check, ClipboardList, Globe2, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
 import { cn } from '@/lib/utils'
@@ -8,43 +6,30 @@ import { cn } from '@/lib/utils'
 const services = [
   {
     icon: Globe2,
-    title: 'Anfrage-Websites',
-    text: 'Moderne Websites und Redesigns, die Vertrauen schaffen und zur Kontaktaufnahme führen.',
-    items: [
-      'Firmenwebsite oder Landingpage',
-      'Mobile Optimierung',
-      'Kontaktformular & klickbare Kontakte',
-      'Google-Maps-Adresse',
-      'FAQ & SEO-Basis',
-      'Veröffentlichung auf Domain',
-    ],
+    title: 'Websites',
+    text: 'Professionelle Onepage- oder Firmenwebsites, die Leistungen verst\u00e4ndlich erkl\u00e4ren und zur Kontaktaufnahme f\u00fchren.',
+    items: ['mobile Optimierung', 'klare Kontaktwege', 'lokale SEO-Grundlage', 'Ver\u00f6ffentlichung auf Domain'],
+  },
+  {
+    icon: ClipboardList,
+    title: 'Anfrage-System',
+    text: 'Website, branchenspezifisches Formular und Airtable-Board f\u00fcr vollst\u00e4ndigere und besser organisierte Anfragen.',
+    highlighted: true,
+    items: ['strukturierte Formulare', 'automatische Best\u00e4tigung', 'Airtable-Anfrage-Board', 'Status, Filter & Aufgaben'],
+    button: { text: 'Anfrage-System ansehen', href: '/preise/anfrage-system' },
   },
   {
     icon: ShieldCheck,
-    title: 'Website-Pflege & lokale Sichtbarkeit',
-    text: 'Monatliche Pflege, Google-Basis und kleine Optimierungen für einen aktuellen Auftritt.',
-    items: [
-      'Texte, Bilder, Öffnungszeiten',
-      'Kontaktformular prüfen',
-      'Technische Kontrolle',
-      'Google-Unternehmensprofil-Basis',
-      'Bewertungslink / QR-Code',
-      'Monatliche Vorschläge',
-    ],
+    title: 'Betreuung',
+    text: 'Definierte monatliche Pflegepakete f\u00fcr Funktionstests, inhaltliche \u00c4nderungen und laufende Systempflege.',
+    items: ['Care Basis ab 79 \u20ac', 'klare Zeitkontingente', 'technische Kontrolle', 'Systempflege nach Paket'],
   },
   {
     icon: Bot,
     title: 'KI-Empfang',
-    text: 'Ein digitaler Assistent, der häufige Fragen beantwortet, Kontaktdaten sammelt und bei Bedarf einen Terminlink ausgibt.',
-    highlighted: true,
-    items: [
-      'Häufige Fragen beantworten',
-      'Kontaktdaten sammeln',
-      'Anfragen nach Feierabend',
-      'Mehrsprachige Antworten',
-      'Calendly / Cal.com optional',
-      'Übergabe per E-Mail',
-    ],
+    text: 'Optionales Premium-Upgrade, das Standardfragen beantwortet und Kontaktdaten f\u00fcr den Betrieb aufnimmt.',
+    items: ['h\u00e4ufige Fragen', 'Kontaktdaten sammeln', 'mehrsprachige Antworten', 'Weitergabe an den Betrieb'],
+    button: { text: 'KI-Empfang ansehen', href: '/ki-empfang' },
   },
 ]
 
@@ -53,28 +38,26 @@ export function ServicesSection() {
     <section id="leistungen" className="bg-[#fbfdff] py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal className="text-center">
-          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
-            Leistungen
-          </p>
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Leistungen</p>
           <h2 className="text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
-            Drei Bausteine für bessere Anfragen.
+            Von der Website bis zum klaren Anfrageprozess.
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-7 lg:grid-cols-3">
+        <div className="mt-12 grid gap-7 lg:grid-cols-2">
           {services.map((service, index) => (
-            <Reveal key={service.title} delay={index * 90}>
+            <Reveal key={service.title} delay={index * 80}>
               <article
                 className={cn(
                   'motion-card group relative h-full overflow-hidden rounded-[10px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)]',
                   service.highlighted
-                    ? 'border-[#0b63ce]/45 bg-[linear-gradient(145deg,#ffffff_0%,#f0f7ff_54%,#fff3ea_100%)] shadow-[0_28px_90px_rgba(11,99,206,0.16)]'
+                    ? 'border-[#0b63ce]/45 bg-[linear-gradient(145deg,#ffffff_0%,#f0f7ff_65%,#fff7f0_100%)] shadow-[0_28px_90px_rgba(11,99,206,0.14)]'
                     : 'border-[#d7e7f7]'
                 )}
               >
                 {service.highlighted && (
                   <span className="mb-5 inline-flex rounded-full bg-[#ffefe5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
-                    Automatisierung
+                    Website + bessere Anfragen
                   </span>
                 )}
                 <div
@@ -86,8 +69,8 @@ export function ServicesSection() {
                   <service.icon className="h-7 w-7" />
                 </div>
                 <h3 className="text-2xl font-black tracking-[-0.035em] text-[#061637]">{service.title}</h3>
-                <p className="mt-3 leading-7 text-[#52647d]">{service.text}</p>
-                <ul className="mt-6 space-y-3">
+                <p className="mt-3 max-w-xl leading-7 text-[#52647d]">{service.text}</p>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {service.items.map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-[#263956]">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#0b63ce]" />
@@ -95,13 +78,8 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
-                {service.highlighted && (
-                  <FlowButton
-                    text="Mehr erfahren"
-                    href="/ki-empfang"
-                    tone="blue"
-                    className="mt-7 bg-white"
-                  />
+                {service.button && (
+                  <FlowButton text={service.button.text} href={service.button.href} tone="blue" className="mt-7 bg-white" />
                 )}
               </article>
             </Reveal>

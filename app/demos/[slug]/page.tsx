@@ -1,41 +1,47 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, CalendarCheck, CheckCircle, MapPin, Phone } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { FlowButton } from '@/components/flow-button'
 
 const demos = {
   restaurant: {
     label: 'Gastronomie',
-    title: 'Restaurant Demo',
+    title: 'Restaurant & Bar',
     headline: 'Ein moderner Auftritt, der Reservierungen einfacher macht.',
-    description:
-      'Eine klare Landingpage für Restaurants mit Speisekarten-Fokus, starker Bildsprache und direkter Kontaktmöglichkeit.',
     image: '/demo-previews/restaurant-mood.png',
-    gradient: 'from-orange-600 to-amber-500',
-    primary: 'Tisch reservieren',
-    features: ['Speisekarte prominent sichtbar', 'Reservierung direkt im Blick', 'Vertrauen durch klare Infos'],
+    demoUrl: 'https://demo-restaurant-xi.vercel.app/',
+    situation: 'Speisekarte, Atmosphäre, Öffnungszeiten und Reservierung sind auf vielen Restaurantseiten schwer zu erfassen.',
+    solution: 'Eine bildstarke Website bündelt die wichtigsten Informationen und führt ohne Umwege zur Reservierung.',
+    features: ['Speisekarte prominent sichtbar', 'Reservierung direkt im Blick', 'Öffnungszeiten und Kontakt klar'],
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
   steuerberatung: {
-    label: 'Steuerberatung',
-    title: 'Steuerberatung Demo',
+    label: 'Kanzlei & Beratung',
+    title: 'Kanzlei & Beratung',
     headline: 'Seriös, klar und auf Erstgespräche ausgerichtet.',
-    description:
-      'Eine professionelle Website-Vorschau für Kanzleien mit Leistungsübersicht, Vertrauenselementen und einfachem Kontaktweg.',
     image: '/demo-previews/steuerberatung-mood.png',
-    gradient: 'from-slate-700 to-blue-500',
-    primary: 'Termin anfragen',
-    features: ['Leistungen schnell erfassbar', 'Ruhiges Kanzlei-Design', 'Kontakt ohne Umwege'],
+    demoUrl: 'https://demo-steuerberatung.vercel.app/',
+    situation: 'Leistungsbereiche und Kontaktwege wirken häufig komplex, obwohl Interessenten vor allem schnelle Orientierung suchen.',
+    solution: 'Eine ruhige, klar gegliederte Website schafft Vertrauen und führt gezielt zum passenden Erstkontakt.',
+    features: ['Leistungen schnell erfassbar', 'ruhiges Kanzlei-Design', 'Kontakt ohne Umwege'],
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
   haustechnik: {
-    label: 'Haustechnik',
-    title: 'Haustechnik Demo',
+    label: 'Sanitär & Heizung',
+    title: 'Sanitär & Heizung',
     headline: 'Eine Website, die Kompetenz und schnelle Hilfe vermittelt.',
-    description:
-      'Eine Premium-Vorschau für lokale Handwerksbetriebe mit Fokus auf Leistungen, regionale Nähe und Kontaktanfragen.',
     image: '/demo-previews/haustechnik-mood.png',
-    gradient: 'from-emerald-600 to-teal-500',
-    primary: 'Anfrage senden',
-    features: ['Notdienst und Leistungen klar', 'Regionaler Vertrauensaufbau', 'Mobil sauber nutzbar'],
+    demoUrl: 'https://demo-haustechnik.vercel.app/',
+    situation: 'Kunden müssen Leistungen, Einsatzgebiet und Kontaktmöglichkeit auch unterwegs sofort verstehen.',
+    solution: 'Die Vorschau verbindet klare Leistungsbereiche, regionale Nähe und einen gut sichtbaren Anfrageweg.',
+    features: ['Leistungen klar gegliedert', 'regionaler Vertrauensaufbau', 'mobil sauber nutzbar'],
+    package: 'Business',
+    price: 'ab 1.499 €',
   },
 }
 
@@ -45,102 +51,79 @@ export function generateStaticParams() {
   return Object.keys(demos).map((slug) => ({ slug }))
 }
 
-export default async function DemoPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function DemoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const demo = demos[slug as DemoSlug]
 
-  if (!demo) {
-    notFound()
-  }
+  if (!demo) notFound()
 
   return (
-    <main className="min-h-screen bg-[#EEF4F8] text-[#0B1220]">
-      <section className={`relative overflow-hidden bg-gradient-to-br ${demo.gradient} text-white`}>
-        <div className="absolute inset-0 bg-[#0B1220]/30" />
-        <div className="relative mx-auto grid min-h-[92vh] max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
-          <div>
-            <Link
-              href="/#demos"
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Zurück zu den Demos
+    <>
+      <Header />
+      <main className="bg-[#f8fbff] pt-20 text-[#061637]">
+        <section className="relative isolate flex min-h-[620px] items-end overflow-hidden pb-16 pt-24 text-white lg:min-h-[700px]">
+          <Image src={demo.image} alt="" fill priority sizes="100vw" className="-z-20 object-cover" />
+          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(6,22,55,0.94)_0%,rgba(6,22,55,0.76)_48%,rgba(6,22,55,0.3)_100%)]" />
+          <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+            <Link href="/#demos" className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-white/78 hover:text-white">
+              <ArrowLeft className="h-4 w-4" /> Zurück zu den Referenzen
             </Link>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/80">{demo.label}</p>
-            <h1 className="mb-6 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-              {demo.headline}
-            </h1>
-            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">{demo.description}</p>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#7fb7ff]">Demo · {demo.label}</p>
+            <h1 className="mt-5 max-w-3xl text-4xl font-black leading-[1.02] tracking-[-0.045em] sm:text-6xl">{demo.headline}</h1>
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="#kontakt"
-                className="inline-flex items-center justify-center rounded-md bg-white px-6 py-3 font-semibold text-[#0B1220] shadow-lg transition hover:-translate-y-0.5 hover:bg-white/95"
+                href={demo.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 items-center gap-2 rounded-md bg-[#ff6a00] px-6 font-black text-white transition-colors hover:bg-[#e45f00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                {demo.primary}
+                Demo öffnen <ArrowRight className="h-4 w-4" />
               </a>
-              <a
-                href="#leistungen"
-                className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-              >
-                Leistungen ansehen
-              </a>
+              <FlowButton text="Passendes Paket ansehen" href="/preise/business" tone="blue" className="border-white/45 text-white" />
             </div>
           </div>
+        </section>
 
-          <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-white">
-              <Image src={demo.image} alt={`${demo.title} Vorschau`} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" priority />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="leistungen" className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-5 md:grid-cols-3">
-            {demo.features.map((feature) => (
-              <div key={feature} className="rounded-xl border border-[#D7E2EE] bg-[#F8FBFD] p-6">
-                <CheckCircle className="mb-4 h-6 w-6 text-[#3B82F6]" />
-                <h2 className="text-lg font-semibold">{feature}</h2>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="kontakt" className="bg-[#0B1220] py-16 text-white sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+        <section className="border-b border-[#dfeaf5] bg-white py-14 lg:py-18">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
             <div>
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#38BDF8]">Demo-Projekt</p>
-              <h2 className="mb-4 text-3xl font-bold sm:text-4xl">So könnte eine fertige Website wirken.</h2>
-              <p className="max-w-2xl text-white/70">
-                Diese Seite ist eine stabile Demo-Vorschau. Sie ersetzt die bisherigen externen Preview-Links und bleibt innerhalb der LocalSites-Website erreichbar.
-              </p>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#52647d]">Ausgangslage</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em]">Was verbessert werden soll</h2>
+              <p className="mt-5 text-lg leading-8 text-[#52647d]">{demo.situation}</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="space-y-4 text-sm text-white/80">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-[#38BDF8]" />
-                  Region Schweinfurt & Würzburg
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-[#38BDF8]" />
-                  Direkte Kontaktmöglichkeit
-                </div>
-                <div className="flex items-center gap-3">
-                  <CalendarCheck className="h-5 w-5 text-[#38BDF8]" />
-                  Auf Anfragen und Termine ausgelegt
-                </div>
-              </div>
+            <div className="border-t border-[#d7e7f7] pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Lösung</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em]">So löst die Vorschau das Problem</h2>
+              <p className="mt-5 text-lg leading-8 text-[#52647d]">{demo.solution}</p>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <section className="py-14 lg:py-18">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Funktionen</p>
+            <div className="mt-7 grid gap-5 md:grid-cols-3">
+              {demo.features.map((feature) => (
+                <div key={feature} className="flex gap-3 border-t-2 border-[#0b63ce] pt-5 font-bold text-[#263956]">
+                  <CheckCircle className="h-5 w-5 shrink-0 text-[#0b63ce]" /> {feature}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#061637] py-14 text-white">
+          <div className="mx-auto flex max-w-7xl flex-col gap-7 px-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7fb7ff]">Geeignetes Paket</p>
+              <h2 className="mt-3 text-3xl font-black">{demo.package} · {demo.price}</h2>
+              <p className="mt-3 max-w-2xl leading-7 text-white/70">Die gezeigte Vorschau ist ein Demo-Konzept und kein echtes Kundenprojekt.</p>
+            </div>
+            <FlowButton text="Business-Paket ansehen" href="/preise/business" tone="orange" className="shrink-0 bg-white" />
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   )
 }

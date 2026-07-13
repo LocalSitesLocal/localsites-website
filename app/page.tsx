@@ -6,6 +6,7 @@ import { ServicesSection } from '@/components/services-section'
 import { PackagePreviewSection } from '@/components/package-preview-section'
 import { DemosSection } from '@/components/demos-section'
 import { ProcessSection } from '@/components/process-section'
+import { AboutSection } from '@/components/about-section'
 import { FaqSection } from '@/components/faq-section'
 import { ContactSection } from '@/components/contact-section'
 import { Footer } from '@/components/footer'
@@ -22,6 +23,7 @@ export default function Home() {
         <WebsiteCheckSection />
         <DemosSection />
         <ProcessSection />
+        <AboutSection />
         <FaqSection />
         <ContactSection />
       </main>

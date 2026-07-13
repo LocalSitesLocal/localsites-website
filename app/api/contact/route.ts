@@ -52,7 +52,7 @@ export async function POST(request: Request) {
 
   const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <kontakt@send.localsites-mainfranken.de>'
   const to = process.env.CONTACT_TO_EMAIL || 'kontakt@localsites-mainfranken.de'
-  const subject = `Neue Website-Check Anfrage von ${name}`
+  const subject = `Neue LocalSites-Anfrage von ${name}`
   const rows = [
     ['Name', name],
     ['Unternehmen', unternehmen || '-'],
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
 
   const html = `
     <div style="font-family:Arial,sans-serif;line-height:1.5;color:#0b1637">
-      <h1 style="font-size:22px">Neue Website-Check Anfrage</h1>
+      <h1 style="font-size:22px">Neue LocalSites-Anfrage</h1>
       <table cellpadding="8" cellspacing="0" style="border-collapse:collapse">
         ${rows
           .map(

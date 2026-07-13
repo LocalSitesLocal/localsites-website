@@ -65,7 +65,7 @@ export default function KiEmpfangPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ChatTestButton text="KI-Empfang live testen" tone="orange" className="bg-white" />
-                <FlowButton text="Preise ansehen" href="/preise" tone="blue" className="bg-white" />
+                <FlowButton text="Pakete vergleichen" href="/preise" tone="blue" className="bg-white" />
               </div>
             </div>
 
@@ -161,7 +161,7 @@ export default function KiEmpfangPage() {
               bekommen, aber nicht jede Anfrage sofort telefonisch beantworten können.
             </p>
             <FlowButton
-              text="Kostenlosen Website-Check anfragen"
+              text="Kostenlose Ersteinschätzung anfragen"
               href="/#kontakt"
               tone="orange"
               className="mt-8 bg-white"

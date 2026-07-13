@@ -8,12 +8,12 @@ import { Reveal } from '@/components/reveal'
 
 const faqs = [
   [
-    'Was ist der kostenlose Website-Check?',
-    'Eine kurze, verständliche Einschätzung Ihrer aktuellen Website: Eindruck, mobile Ansicht, Kontaktwege, CTAs, Standort, Technik und mögliche Verbesserungen.',
+    'Was ist die kostenlose Website- und Anfrageanalyse?',
+    'Sie erhalten innerhalb von 48-72 Stunden fünf konkrete Verbesserungsvorschläge, eine klare Paketempfehlung und einen groben Kostenrahmen per E-Mail oder als kurzes PDF.',
   ],
   [
     'Was kostet eine Website?',
-    'Der Einstieg liegt bei ab 899 € für eine moderne Onepage-Website. Umfangreichere Websites starten bei ab 1.499 €.',
+    'Starter beginnt bei 899 €, Business bei 1.499 € und das Anfrage-System mit Airtable und Automationen bei 2.499 €.',
   ],
   [
     'Was ist im Website-Preis enthalten?',
@@ -21,7 +21,7 @@ const faqs = [
   ],
   [
     'Gibt es eine monatliche Betreuung?',
-    'Ja. Die Betreuung startet bei ab 79 € pro Monat und kann kleine Änderungen, technische Kontrolle und Optimierung abdecken.',
+    'Ja. Care Basis startet bei 79 € pro Monat mit Funktionstest und bis zu 20 Minuten Änderungen. Größere Pakete enthalten mehr Zeit und Systempflege.',
   ],
   [
     'Was ist ein KI-Empfang?',

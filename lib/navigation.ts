@@ -1,9 +1,9 @@
 export const navItems = [
   { label: 'Leistungen', href: '/#leistungen' },
-  { label: 'Website-Check', href: '/#website-check' },
-  { label: 'Beispiele', href: '/#demos' },
-  { label: 'Angebote & Preise', href: '/preise' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Pakete', href: '/preise' },
+  { label: 'Anfrage-System', href: '/preise/anfrage-system' },
+  { label: 'Referenzen', href: '/#demos' },
+  { label: 'Über uns', href: '/#ueber-uns' },
   { label: 'Kontakt', href: '/#kontakt' },
 ] as const
 
