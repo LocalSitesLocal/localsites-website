@@ -11,7 +11,7 @@ export function Footer() {
               LocalSites<span aria-hidden="true" className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-[#4ea0ff]" />
             </div>
             <p className="mt-4 max-w-sm text-sm leading-6 text-white/58">
-              Websites, Anfrage-Systeme und klar definierte Betreuung für lokale Betriebe in Schweinfurt,
+              Websites, digitale Betriebszentralen und klar definierte Betreuung für lokale Betriebe in Schweinfurt,
               Würzburg und Mainfranken.
             </p>
           </div>

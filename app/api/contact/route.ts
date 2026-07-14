@@ -32,6 +32,7 @@ const AIRTABLE_FIELDS = {
 const AIRTABLE_PACKAGE_ALIASES: Record<string, string> = {
   'Anfrage-Website Starter': 'Anfrage-Website Starter',
   Starter: 'Anfrage-Website Starter',
+  'Website Start': 'Anfrage-Website Starter',
   'Website Business': 'Website Business',
   Business: 'Website Business',
   'Website + Anfrage-System': 'Website + Anfrage-System',
@@ -43,11 +44,15 @@ const AIRTABLE_CARE_ALIASES: Record<string, string> = {
   'Care Basis': 'Care Basis',
   'Care Plus': 'Care Plus',
   'Care System': 'Care System',
+  'Website-Pflege': 'Care Basis',
+  'Pflege & Sichtbarkeit': 'Care Plus',
+  'System-Betreuung': 'Care System',
 }
 
 const AIRTABLE_EXTENSION_ALIASES: Record<string, string> = {
   'Calendly / Terminlink': 'Calendly / Terminlink',
   'Calendly-Einrichtung': 'Calendly / Terminlink',
+  Terminbuchung: 'Calendly / Terminlink',
   'Digitales Anfrage-Board': 'Digitales Anfrage-Board',
   'KI-Empfang Basic': 'KI-Empfang Basic',
 }
@@ -87,12 +92,18 @@ function parseEuroAmount(value: string) {
 function parsePricingSelection(message: string) {
   const rawPackage = getSelectionValue(message, 'Website-Paket')
   const rawCare = getSelectionValue(message, 'Betreuung')
-  const rawExtensions = getSelectionValue(message, 'Erweiterungen')
-  const erweiterungen = rawExtensions
+  const rawOperatingCenter = getSelectionValue(message, 'Betriebszentrale')
+  const rawExtensions = getSelectionValue(message, 'Zusatzleistungen') || getSelectionValue(message, 'Erweiterungen')
+  const mappedExtensions = rawExtensions
     .split(',')
     .map((item) => item.replace(/\s*\(enthalten\)\s*$/i, '').trim())
     .map((item) => AIRTABLE_EXTENSION_ALIASES[item])
     .filter((item): item is string => Boolean(item))
+  const hasOperatingCenter = rawOperatingCenter && !rawOperatingCenter.toLowerCase().startsWith('keine')
+  const erweiterungen = Array.from(new Set([
+    ...(hasOperatingCenter ? ['Digitales Anfrage-Board'] : []),
+    ...mappedExtensions,
+  ]))
 
   return {
     paket: AIRTABLE_PACKAGE_ALIASES[rawPackage] || 'Noch offen',
@@ -101,6 +112,31 @@ function parsePricingSelection(message: string) {
     angebotssumme: parseEuroAmount(getSelectionValue(message, 'Gesch\u00e4tzter Startpreis')),
     monatlicherWert: parseEuroAmount(getSelectionValue(message, 'Gesch\u00e4tzte monatliche Kosten')),
   }
+}
+
+async function createAirtableRecord({
+  airtableToken,
+  airtableBaseId,
+  airtableTableId,
+  fields,
+}: {
+  airtableToken: string
+  airtableBaseId: string
+  airtableTableId: string
+  fields: Record<string, string | string[] | number>
+}) {
+  return fetch(
+    `https://api.airtable.com/v0/${encodeURIComponent(airtableBaseId)}/${encodeURIComponent(airtableTableId)}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${airtableToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ records: [{ fields }] }),
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT),
+    }
+  )
 }
 
 function isHttpUrl(value: string) {
@@ -170,26 +206,54 @@ export async function POST(request: Request) {
   let airtableResponse: Response
 
   try {
-    airtableResponse = await fetch(
-      `https://api.airtable.com/v0/${encodeURIComponent(airtableBaseId)}/${encodeURIComponent(airtableTableId)}`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${airtableToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ records: [{ fields: airtableFields }] }),
-        signal: AbortSignal.timeout(REQUEST_TIMEOUT),
-      }
-    )
+    airtableResponse = await createAirtableRecord({
+      airtableToken,
+      airtableBaseId,
+      airtableTableId,
+      fields: airtableFields,
+    })
   } catch (error) {
     console.error('Airtable request failed', error)
     return NextResponse.json({ error: 'Anfrage konnte nicht gespeichert werden.' }, { status: 502 })
   }
 
   if (!airtableResponse.ok) {
-    console.error('Airtable rejected inquiry', airtableResponse.status, await airtableResponse.text())
-    return NextResponse.json({ error: 'Anfrage konnte nicht gespeichert werden.' }, { status: 502 })
+    const firstStatus = airtableResponse.status
+    const firstError = await airtableResponse.text()
+    let finalError = firstError
+    console.error('Airtable rejected inquiry', firstStatus, firstError)
+
+    if (firstStatus === 400 || firstStatus === 422) {
+      const safeFields: Record<string, string | number> = {
+        [AIRTABLE_FIELDS.name]: name,
+        [AIRTABLE_FIELDS.email]: email,
+        [AIRTABLE_FIELDS.status]: 'Neu',
+        [AIRTABLE_FIELDS.quelle]: 'Website',
+        [AIRTABLE_FIELDS.prioritaet]: 'Mittel',
+      }
+      if (unternehmen) safeFields[AIRTABLE_FIELDS.unternehmen] = unternehmen
+      if (telefon) safeFields[AIRTABLE_FIELDS.telefon] = telefon
+      if (website && isHttpUrl(website)) safeFields[AIRTABLE_FIELDS.website] = website
+      if (nachricht) safeFields[AIRTABLE_FIELDS.nachricht] = nachricht
+
+      try {
+        airtableResponse = await createAirtableRecord({
+          airtableToken,
+          airtableBaseId,
+          airtableTableId,
+          fields: safeFields,
+        })
+        if (!airtableResponse.ok) finalError = await airtableResponse.text()
+      } catch (error) {
+        console.error('Airtable safe retry failed', error)
+        return NextResponse.json({ error: 'Anfrage konnte nicht gespeichert werden.' }, { status: 502 })
+      }
+    }
+
+    if (!airtableResponse.ok) {
+      console.error('Airtable rejected safe inquiry', airtableResponse.status, finalError)
+      return NextResponse.json({ error: 'Anfrage konnte nicht gespeichert werden.' }, { status: 502 })
+    }
   }
 
   const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <kontakt@send.localsites-mainfranken.de>'

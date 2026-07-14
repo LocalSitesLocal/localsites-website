@@ -8,62 +8,68 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Reveal } from '@/components/reveal'
+import {
+  OFFER_SELECTION_STORAGE_KEY,
+  OFFER_SUMMARY_STORAGE_KEY,
+  type StoredOfferSummary,
+} from '@/lib/offers'
 
 const CALENDLY_URL = 'https://calendly.com/ki-contentstudio/30min?hide_event_type_details=1&hide_gdpr_banner=1'
 
-type PricingSummary = {
-  website: string
-  care: string
-  extensions: string[]
-  setup: string
-  monthly: string
-}
-
-function parsePricingSummary(value: string | null): PricingSummary | null {
+function parsePricingSummary(value: string | null): StoredOfferSummary | null {
   if (!value) return null
 
   try {
-    const parsed = JSON.parse(value) as Partial<PricingSummary>
-    const legacyExtension = (parsed as Partial<PricingSummary> & { extension?: string }).extension
+    const parsed = JSON.parse(value) as Partial<StoredOfferSummary>
+    const legacyExtension = (parsed as Partial<StoredOfferSummary> & { extension?: string }).extension
     const extensions = Array.isArray(parsed.extensions)
       ? parsed.extensions.filter((item): item is string => typeof item === 'string')
       : legacyExtension
         ? [legacyExtension]
         : []
 
-    if (!parsed.website || !parsed.care || extensions.length === 0 || !parsed.setup || !parsed.monthly) {
+    const website = typeof parsed.website === 'string' ? parsed.website : null
+    const operatingCenter = typeof parsed.operatingCenter === 'string' ? parsed.operatingCenter : null
+
+    if ((!website && !operatingCenter) || !parsed.care || !parsed.setup || !parsed.monthly) {
       return null
     }
 
     return {
-      website: parsed.website,
+      website,
+      operatingCenter,
       care: parsed.care,
-      extensions,
+      extensions: extensions.length > 0 ? extensions : ['Keine ausgewählt'],
       setup: parsed.setup,
       monthly: parsed.monthly,
+      reason: typeof parsed.reason === 'string' ? parsed.reason : undefined,
     }
   } catch {
     return null
   }
 }
 
-function PricingSelectionCard({ summary }: { summary: PricingSummary }) {
+function PricingSelectionCard({ summary }: { summary: StoredOfferSummary }) {
   return (
-    <div className="rounded-[12px] border border-[#0b63ce]/30 bg-[linear-gradient(145deg,#ffffff_0%,#eef6ff_58%,#f8fbff_100%)] p-5 shadow-[0_18px_55px_rgba(11,99,206,0.12)]">
+    <div className="rounded-[8px] border border-[#0b63ce]/30 bg-[linear-gradient(145deg,#ffffff_0%,#eef6ff_58%,#f8fbff_100%)] p-5 shadow-[0_18px_55px_rgba(11,99,206,0.12)]">
       <div className="mb-5 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#eef6ff] text-[#0b63ce]">
           <MousePointer2 className="h-5 w-5" />
         </div>
         <div>
           <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Ihre Auswahl</p>
-          <h3 className="text-xl font-black text-[#061637]">Paketübersicht</h3>
+          <h3 className="text-xl font-black text-[#061637]">Ihre Empfehlung</h3>
         </div>
       </div>
 
-      <dl className="grid gap-4 text-sm sm:grid-cols-3">
+      <dl className="grid gap-4 text-sm sm:grid-cols-2">
         <div>
-          <dt className="font-bold text-[#52647d]">Website-Basis</dt>
-          <dd className="mt-1 font-black text-[#061637]">{summary.website}</dd>
+          <dt className="font-bold text-[#52647d]">Website</dt>
+          <dd className="mt-1 font-black text-[#061637]">{summary.website ?? 'Nicht benötigt'}</dd>
+        </div>
+        <div>
+          <dt className="font-bold text-[#52647d]">Betriebszentrale</dt>
+          <dd className="mt-1 font-black text-[#061637]">{summary.operatingCenter ?? 'Nicht benötigt'}</dd>
         </div>
         <div>
           <dt className="font-bold text-[#52647d]">Betreuung</dt>
@@ -74,6 +80,8 @@ function PricingSelectionCard({ summary }: { summary: PricingSummary }) {
           <dd className="mt-1 font-black leading-6 text-[#061637]">{summary.extensions.join(', ')}</dd>
         </div>
       </dl>
+
+      {summary.reason && <p className="mt-5 border-l-2 border-[#0b63ce] pl-4 text-sm leading-6 text-[#52647d]">{summary.reason}</p>}
 
       <div className="my-5 h-px bg-[#cfe2f5]" />
 
@@ -99,22 +107,22 @@ export function ContactSection() {
   const [submitError, setSubmitError] = useState('')
   const [showCalendly, setShowCalendly] = useState(false)
   const [message, setMessage] = useState('')
-  const [pricingSummary, setPricingSummary] = useState<PricingSummary | null>(null)
+  const [pricingSummary, setPricingSummary] = useState<StoredOfferSummary | null>(null)
   const isSubmittingRef = useRef(false)
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
-      const savedSelection = window.sessionStorage.getItem('localsites:pricing-selection')
-      const savedSummary = window.sessionStorage.getItem('localsites:pricing-summary')
+      const savedSelection = window.sessionStorage.getItem(OFFER_SELECTION_STORAGE_KEY)
+      const savedSummary = window.sessionStorage.getItem(OFFER_SUMMARY_STORAGE_KEY)
 
       if (savedSelection) {
         setMessage(savedSelection)
-        window.sessionStorage.removeItem('localsites:pricing-selection')
+        window.sessionStorage.removeItem(OFFER_SELECTION_STORAGE_KEY)
       }
 
       if (savedSummary) {
         setPricingSummary(parsePricingSummary(savedSummary))
-        window.sessionStorage.removeItem('localsites:pricing-summary')
+        window.sessionStorage.removeItem(OFFER_SUMMARY_STORAGE_KEY)
       }
     })
 
@@ -191,7 +199,7 @@ export function ContactSection() {
             className="rounded-[10px] border border-[#d7e7f7] bg-white/86 p-5 shadow-[0_24px_80px_rgba(15,55,100,0.1)] backdrop-blur"
           >
             {isSubmitted ? (
-              <div className="text-center">
+              <div className="text-center" role="status" aria-live="polite">
                 <div className="mx-auto max-w-xl py-8">
                   <CheckCircle className="mx-auto mb-5 h-12 w-12 text-[#0b63ce]" />
                   <h3 className="text-2xl font-black text-[#061637]">Danke für Ihre Anfrage.</h3>
@@ -229,19 +237,19 @@ export function ContactSection() {
               <form onSubmit={handleSubmit} className="grid gap-3 sm:grid-cols-2">
                 <div>
                   <Label htmlFor="name" className="sr-only">Name</Label>
-                  <Input id="name" name="name" required placeholder="Ihr Name" className="h-12 rounded-md border-[#d7e7f7]" />
+                  <Input id="name" name="name" autoComplete="name" required placeholder="Ihr Name" className="h-12 rounded-md border-[#d7e7f7]" />
                 </div>
                 <div>
                   <Label htmlFor="unternehmen" className="sr-only">Unternehmen</Label>
-                  <Input id="unternehmen" name="unternehmen" placeholder="Unternehmen optional" className="h-12 rounded-md border-[#d7e7f7]" />
+                  <Input id="unternehmen" name="unternehmen" autoComplete="organization" placeholder="Unternehmen optional" className="h-12 rounded-md border-[#d7e7f7]" />
                 </div>
                 <div>
                   <Label htmlFor="email" className="sr-only">E-Mail</Label>
-                  <Input id="email" name="email" type="email" required placeholder="E-Mail" className="h-12 rounded-md border-[#d7e7f7]" />
+                  <Input id="email" name="email" type="email" autoComplete="email" required placeholder="E-Mail" className="h-12 rounded-md border-[#d7e7f7]" />
                 </div>
                 <div>
                   <Label htmlFor="telefon" className="sr-only">Telefon</Label>
-                  <Input id="telefon" name="telefon" type="tel" placeholder="Telefon optional" className="h-12 rounded-md border-[#d7e7f7]" />
+                  <Input id="telefon" name="telefon" type="tel" autoComplete="tel" placeholder="Telefon optional" className="h-12 rounded-md border-[#d7e7f7]" />
                 </div>
                 <div className="sm:col-span-2">
                   <Label htmlFor="website" className="sr-only">Aktuelle Website</Label>
@@ -281,7 +289,7 @@ export function ContactSection() {
                     {isLoading ? 'Wird gesendet...' : 'Kostenlose Ersteinschätzung anfragen'}
                   </Button>
                 </div>
-                {submitError && <p className="text-sm text-red-600 sm:col-span-2">{submitError}</p>}
+                {submitError && <p role="alert" aria-live="assertive" className="text-sm text-red-600 sm:col-span-2">{submitError}</p>}
               </form>
             )}
           </div>

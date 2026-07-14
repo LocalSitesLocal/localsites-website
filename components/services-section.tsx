@@ -1,34 +1,37 @@
-import { Bot, Check, ClipboardList, Globe2, ShieldCheck } from 'lucide-react'
+import { Bot, Check, Globe2, LayoutDashboard, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
+import { carePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
 
 const services = [
   {
     icon: Globe2,
     title: 'Websites',
-    text: 'Professionelle Onepage- oder Firmenwebsites, die Leistungen verst\u00e4ndlich erkl\u00e4ren und zur Kontaktaufnahme f\u00fchren.',
-    items: ['mobile Optimierung', 'klare Kontaktwege', 'lokale SEO-Grundlage', 'Ver\u00f6ffentlichung auf Domain'],
+    text: 'Professionelle Onepage- oder Firmenwebsites, die Leistungen verständlich erklären und zur Kontaktaufnahme führen.',
+    items: ['mobile Optimierung', 'klare Kontaktwege', 'lokale SEO-Grundlage', 'Veröffentlichung auf Domain'],
+    button: { text: 'Website-Pakete ansehen', href: '/preise#angebote-vergleichen' },
   },
   {
-    icon: ClipboardList,
-    title: 'Anfrage-System',
-    text: 'Website, branchenspezifisches Formular und Airtable-Board f\u00fcr vollst\u00e4ndigere und besser organisierte Anfragen.',
+    icon: LayoutDashboard,
+    title: 'Digitale Betriebszentrale',
+    text: 'Anfragen, Kunden, Angebote, Projekte, Aufgaben und Termine zentral verwalten, statt Informationen verteilt zu suchen.',
     highlighted: true,
-    items: ['strukturierte Formulare', 'automatische Best\u00e4tigung', 'Airtable-Anfrage-Board', 'Status, Filter & Aufgaben'],
-    button: { text: 'Anfrage-System ansehen', href: '/preise/anfrage-system' },
+    items: ['Anfragen & Kunden', 'Angebote & Aufträge', 'Aufgaben & Termine', 'individuell auf Airtable aufgebaut'],
+    button: { text: 'Betriebszentrale verstehen', href: '/betriebszentrale' },
   },
   {
     icon: ShieldCheck,
     title: 'Betreuung',
-    text: 'Definierte monatliche Pflegepakete f\u00fcr Funktionstests, inhaltliche \u00c4nderungen und laufende Systempflege.',
-    items: ['Care Basis ab 79 \u20ac', 'klare Zeitkontingente', 'technische Kontrolle', 'Systempflege nach Paket'],
+    text: 'Klar definierte monatliche Pflege für Websites, Sichtbarkeit und digitale Systeme.',
+    items: [`Website-Pflege ${carePackages[0].price}`, 'klare Leistungen', 'technische Kontrolle', 'Systempflege nach Paket'],
+    button: { text: 'Betreuung vergleichen', href: '/preise#angebote-vergleichen' },
   },
   {
     icon: Bot,
     title: 'KI-Empfang',
-    text: 'Optionales Premium-Upgrade, das Standardfragen beantwortet und Kontaktdaten f\u00fcr den Betrieb aufnimmt.',
-    items: ['h\u00e4ufige Fragen', 'Kontaktdaten sammeln', 'mehrsprachige Antworten', 'Weitergabe an den Betrieb'],
+    text: 'Optionales Premium-Upgrade, das Standardfragen beantwortet und Kontaktdaten für den Betrieb aufnimmt.',
+    items: ['häufige Fragen', 'Kontaktdaten sammeln', 'mehrsprachige Antworten', 'Weitergabe an den Betrieb'],
     button: { text: 'KI-Empfang ansehen', href: '/ki-empfang' },
   },
 ]
@@ -40,7 +43,7 @@ export function ServicesSection() {
         <Reveal className="text-center">
           <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Leistungen</p>
           <h2 className="text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
-            Von der Website bis zum klaren Anfrageprozess.
+            Vom ersten Eindruck bis zum klaren Betriebsablauf.
           </h2>
         </Reveal>
 
@@ -49,7 +52,7 @@ export function ServicesSection() {
             <Reveal key={service.title} delay={index * 80}>
               <article
                 className={cn(
-                  'motion-card group relative h-full overflow-hidden rounded-[10px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)]',
+                  'motion-card group relative h-full overflow-hidden rounded-[8px] border bg-white p-7 shadow-[0_18px_55px_rgba(15,55,100,0.08)]',
                   service.highlighted
                     ? 'border-[#0b63ce]/45 bg-[linear-gradient(145deg,#ffffff_0%,#f0f7ff_65%,#fff7f0_100%)] shadow-[0_28px_90px_rgba(11,99,206,0.14)]'
                     : 'border-[#d7e7f7]'
@@ -57,12 +60,12 @@ export function ServicesSection() {
               >
                 {service.highlighted && (
                   <span className="mb-5 inline-flex rounded-full bg-[#ffefe5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
-                    Website + bessere Anfragen
+                    Alles an einem Ort
                   </span>
                 )}
                 <div
                   className={cn(
-                    'motion-icon motion-icon-spin mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef6ff] text-[#0b63ce]',
+                    'motion-icon motion-icon-spin mb-6 flex h-14 w-14 items-center justify-center rounded-[8px] bg-[#eef6ff] text-[#0b63ce]',
                     service.highlighted && 'bg-[#0b63ce] text-white shadow-[0_16px_35px_rgba(11,99,206,0.28)]'
                   )}
                 >
@@ -78,9 +81,7 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
-                {service.button && (
-                  <FlowButton text={service.button.text} href={service.button.href} tone="blue" className="mt-7 bg-white" />
-                )}
+                <FlowButton text={service.button.text} href={service.button.href} tone="blue" className="mt-7 bg-white" />
               </article>
             </Reveal>
           ))}

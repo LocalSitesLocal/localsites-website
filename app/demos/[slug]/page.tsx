@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { FlowButton } from '@/components/flow-button'
+import { websitePackages } from '@/lib/offers'
+
+const businessPackage = websitePackages.find((item) => item.id === 'business') ?? websitePackages[1]
 
 const demos = {
   restaurant: {
@@ -16,8 +19,8 @@ const demos = {
     situation: 'Speisekarte, Atmosphäre, Öffnungszeiten und Reservierung sind auf vielen Restaurantseiten schwer zu erfassen.',
     solution: 'Eine bildstarke Website bündelt die wichtigsten Informationen und führt ohne Umwege zur Reservierung.',
     features: ['Speisekarte prominent sichtbar', 'Reservierung direkt im Blick', 'Öffnungszeiten und Kontakt klar'],
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
   steuerberatung: {
     label: 'Kanzlei & Beratung',
@@ -28,8 +31,8 @@ const demos = {
     situation: 'Leistungsbereiche und Kontaktwege wirken häufig komplex, obwohl Interessenten vor allem schnelle Orientierung suchen.',
     solution: 'Eine ruhige, klar gegliederte Website schafft Vertrauen und führt gezielt zum passenden Erstkontakt.',
     features: ['Leistungen schnell erfassbar', 'ruhiges Kanzlei-Design', 'Kontakt ohne Umwege'],
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
   haustechnik: {
     label: 'Sanitär & Heizung',
@@ -40,8 +43,8 @@ const demos = {
     situation: 'Kunden müssen Leistungen, Einsatzgebiet und Kontaktmöglichkeit auch unterwegs sofort verstehen.',
     solution: 'Die Vorschau verbindet klare Leistungsbereiche, regionale Nähe und einen gut sichtbaren Anfrageweg.',
     features: ['Leistungen klar gegliedert', 'regionaler Vertrauensaufbau', 'mobil sauber nutzbar'],
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
 }
 
@@ -119,7 +122,7 @@ export default async function DemoPage({ params }: { params: Promise<{ slug: str
               <h2 className="mt-3 text-3xl font-black">{demo.package} · {demo.price}</h2>
               <p className="mt-3 max-w-2xl leading-7 text-white/70">Die gezeigte Vorschau ist ein Demo-Konzept und kein echtes Kundenprojekt.</p>
             </div>
-            <FlowButton text="Business-Paket ansehen" href="/preise/business" tone="orange" className="shrink-0 bg-white" />
+            <FlowButton text="Website Business ansehen" href="/preise/business" tone="orange" className="shrink-0 bg-white" />
           </div>
         </section>
       </main>

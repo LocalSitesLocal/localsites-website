@@ -5,16 +5,16 @@ import { RouteScrollReset } from '@/components/route-scroll-reset'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'LocalSites | Websites & Anfrage-Systeme für lokale Betriebe',
+  title: 'LocalSites | Websites & digitale Betriebszentralen',
   description:
-    'LocalSites erstellt moderne Websites, Airtable-Anfrage-Systeme und klar definierte Betreuung für lokale Betriebe in Schweinfurt, Würzburg und Mainfranken.',
+    'LocalSites erstellt moderne Websites, digitale Betriebszentralen auf Airtable und klar definierte Betreuung für lokale Betriebe in Schweinfurt, Würzburg und Mainfranken.',
   keywords: [
     'Website erstellen Schweinfurt',
     'Webdesign Schweinfurt',
     'Webdesign Würzburg',
     'Website für Handwerker',
     'Website für lokale Betriebe',
-    'Airtable Anfrage-System',
+    'digitale Betriebszentrale Airtable',
     'digitale Automationen',
     'Google Bewertungen',
     'Website Wartung',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'LocalSites | Websites für lokale Betriebe',
     description:
-      'Moderne Websites, Anfrage-Systeme und Betreuung für Unternehmen in Schweinfurt, Würzburg und Mainfranken.',
+      'Moderne Websites, digitale Betriebszentralen und Betreuung für Unternehmen in Schweinfurt, Würzburg und Mainfranken.',
     locale: 'de_DE',
     type: 'website',
   },

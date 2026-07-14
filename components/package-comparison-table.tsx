@@ -1,29 +1,27 @@
 import Link from 'next/link'
-import { Check, Minus } from 'lucide-react'
+import { ArrowRight, Check } from 'lucide-react'
+import { websitePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
-import { websitePackages } from '@/lib/website-packages'
 
 const comparisonRows = [
-  { label: 'Aufbau', values: ['Onepage', '4 bis 6 Seiten', 'Business-Website plus System'] },
-  { label: 'Leistungen', values: ['bis zu 3', 'bis zu 3 Unterseiten', 'bis zu 3 Unterseiten'] },
-  { label: 'Kontaktformular', values: ['Standard', 'Standard', 'branchenspezifisch'] },
-  { label: 'Airtable-Anfrage-Board', values: [false, false, true] },
-  { label: 'Best\u00e4tigung und strukturierte E-Mail', values: [false, false, true] },
-  { label: 'Einfache Automation', values: [false, false, true] },
-  { label: 'Korrekturen', values: ['1 Runde', '2 Runden', '2 Runden + Systemtest'] },
+  { label: 'Umfang', values: websitePackages.map((item) => item.pageScope) },
+  { label: 'Schwerpunkte', values: websitePackages.map((item) => item.highlights) },
+  { label: 'Ergebnis', values: websitePackages.map((item) => item.outcome) },
+  { label: 'Korrekturen', values: websitePackages.map((item) => item.correctionRounds) },
   { label: 'Startpreis', values: websitePackages.map((item) => item.price) },
 ]
 
-function ComparisonValue({ value }: { value: string | boolean }) {
-  if (typeof value === 'boolean') {
-    return value ? (
-      <span className="inline-flex items-center gap-2 font-bold text-[#061637]">
-        <Check className="h-4 w-4 text-[#0b63ce]" /> Enthalten
-      </span>
-    ) : (
-      <span className="inline-flex items-center gap-2 text-[#7b8ba1]">
-        <Minus className="h-4 w-4" /> Nicht enthalten
-      </span>
+function ComparisonValue({ value }: { value: string | string[] }) {
+  if (Array.isArray(value)) {
+    return (
+      <ul className="grid gap-2">
+        {value.map((entry) => (
+          <li key={entry} className="flex gap-2">
+            <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
+            <span>{entry}</span>
+          </li>
+        ))}
+      </ul>
     )
   }
 
@@ -32,11 +30,11 @@ function ComparisonValue({ value }: { value: string | boolean }) {
 
 export function PackageComparisonTable({ activePackageId }: { activePackageId?: string }) {
   return (
-    <div className="overflow-x-auto rounded-[10px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
-      <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+    <div className="overflow-x-auto rounded-[8px] border border-[#d7e7f7] bg-white shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
+      <table className="w-full min-w-[900px] border-collapse text-left text-sm">
         <thead>
           <tr>
-            <th className="w-52 border-b border-[#d7e7f7] p-5 text-[#52647d]">Vergleich</th>
+            <th className="w-44 border-b border-[#d7e7f7] p-5 text-[#52647d]">Vergleich</th>
             {websitePackages.map((candidate) => (
               <th
                 key={candidate.id}
@@ -56,12 +54,12 @@ export function PackageComparisonTable({ activePackageId }: { activePackageId?: 
         <tbody>
           {comparisonRows.map((row) => (
             <tr key={row.label}>
-              <th className="border-b border-[#e5eef7] p-5 font-bold text-[#52647d]">{row.label}</th>
+              <th className="border-b border-[#e5eef7] p-5 align-top font-bold text-[#52647d]">{row.label}</th>
               {row.values.map((value, index) => (
                 <td
                   key={websitePackages[index].id}
                   className={cn(
-                    'border-b border-[#e5eef7] p-5 text-[#263956]',
+                    'border-b border-[#e5eef7] p-5 align-top leading-6 text-[#263956]',
                     websitePackages[index].id === activePackageId && 'bg-[#f4f9ff] font-bold text-[#061637]'
                   )}
                 >
@@ -75,10 +73,10 @@ export function PackageComparisonTable({ activePackageId }: { activePackageId?: 
             {websitePackages.map((candidate) => (
               <td key={candidate.id} className={cn('p-5', candidate.id === activePackageId && 'bg-[#f4f9ff]')}>
                 <Link
-                  href={`/preise?paket=${candidate.id}#konfigurator`}
-                  className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#0b63ce] px-4 font-black text-[#0b63ce] transition-colors hover:bg-[#0b63ce] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
+                  href={`/preise?paket=${candidate.id}#paket-finder`}
+                  className="inline-flex min-h-11 items-center gap-2 font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
                 >
-                  Paket auswählen
+                  Im Finder prüfen <ArrowRight className="h-4 w-4" />
                 </Link>
               </td>
             ))}

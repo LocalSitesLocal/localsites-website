@@ -65,7 +65,7 @@ export default function KiEmpfangPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ChatTestButton text="KI-Empfang live testen" tone="orange" className="bg-white" />
-                <FlowButton text="Pakete vergleichen" href="/preise" tone="blue" className="bg-white" />
+                <FlowButton text="Angebote & Preise" href="/preise" tone="blue" className="bg-white" />
               </div>
             </div>
 

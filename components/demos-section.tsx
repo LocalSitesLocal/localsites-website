@@ -3,28 +3,31 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/reveal'
+import { websitePackages } from '@/lib/offers'
+
+const businessPackage = websitePackages.find((item) => item.id === 'business') ?? websitePackages[1]
 
 const demos = [
   {
     title: 'Sanitär & Heizung',
     href: '/demos/haustechnik',
     image: '/demo-previews/haustechnik-mood.png',
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
   {
     title: 'Restaurant & Bar',
     href: '/demos/restaurant',
     image: '/demo-previews/restaurant-mood.png',
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
   {
     title: 'Kanzlei & Beratung',
     href: '/demos/steuerberatung',
     image: '/demo-previews/steuerberatung-mood.png',
-    package: 'Business',
-    price: 'ab 1.499 €',
+    package: businessPackage.name,
+    price: businessPackage.price,
   },
 ]
 
