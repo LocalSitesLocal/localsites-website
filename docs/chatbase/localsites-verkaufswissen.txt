@@ -1,0 +1,296 @@
+LOCALSITES - VERKAUFSWISSEN FUER DEN KI-EMPFANG
+Stand: 14. Juli 2026
+
+1. UNTERNEHMEN UND POSITIONIERUNG
+
+LocalSites entwickelt Websites, digitale Betriebszentralen und klar definierte Betreuung fuer lokale Betriebe in Schweinfurt, Wuerzburg und Mainfranken.
+
+Typische Zielgruppen:
+- Handwerksbetriebe
+- Werkstaetten
+- Gutachter und Sachverstaendige
+- lokale Dienstleister
+- kleine und mittlere regionale Unternehmen
+
+Der Nutzen steht vor der Technik:
+- professioneller und vertrauenswuerdiger Online-Auftritt
+- klare Kontaktwege fuer Interessenten
+- bessere und strukturiertere Anfragen
+- Anfragen, Kunden und Auftraege zentral organisieren
+- weniger Informationen in E-Mails, Notizen und einzelnen Tabellen suchen
+
+LocalSites verkauft keine anonyme Standardvorlage. Projekte werden persoenlich geplant, umgesetzt, getestet und auf der Domain des Kunden veroeffentlicht.
+
+2. PRODUKTLOGIK
+
+Die Angebote bestehen aus drei getrennten Bausteinen:
+
+1. Website: professioneller Auftritt und klare Kontaktwege.
+2. Digitale Betriebszentrale: Anfragen, Kunden, Angebote, Auftraege, Projekte, Aufgaben und Termine zentral verwalten.
+3. Betreuung: laufende Pflege und Funktionskontrolle.
+
+Optionale Erweiterungen werden nur empfohlen, wenn sie zum Bedarf passen. Der KI-Empfang ist ein Premium-Upgrade und nicht automatisch Bestandteil einer Website oder Betriebszentrale.
+
+3. WEBSITE-PAKETE
+
+WEBSITE START - ab 1.490 Euro
+
+Geeignet fuer:
+- kleine Betriebe mit bis zu drei Kernleistungen
+- Neugruendungen und erste professionelle Auftritte
+- Betriebe, bei denen eine kompakte Seite ausreicht
+
+Ergebnis:
+Eine moderne, mobil optimierte Onepage-Website, auf der Interessenten das Angebot und den passenden Kontaktweg schnell verstehen.
+
+Enthalten:
+- Onepage mit bis zu sechs Abschnitten
+- Darstellung von bis zu drei Leistungen
+- Kontaktformular
+- klickbare Kontaktdaten
+- Mobiloptimierung
+- SEO-Basis
+- eine gebuendelte Korrekturrunde
+- Veroeffentlichung auf der Domain des Kunden
+
+Umsetzungszeit:
+In der Regel 2 bis 4 Wochen ab vollstaendiger Bereitstellung der Inhalte.
+
+WEBSITE BUSINESS - ab 2.490 Euro
+
+Geeignet fuer:
+- Handwerker und regionale Dienstleister
+- Betriebe mit mehreren erklaerungsbeduerftigen Leistungen
+- Unternehmen, die gezielter passende Anfragen erhalten moechten
+
+Ergebnis:
+Eine vollstaendige Firmenwebsite, die Leistungen verstaendlich erklaert, Vertrauen aufbaut und zur passenden Anfrage fuehrt.
+
+Enthalten:
+- vier bis sechs Seiten
+- bis zu drei Leistungsseiten
+- Textoptimierung
+- individuelles Anfrageformular
+- lokale SEO-Basis
+- zwei gebuendelte Korrekturrunden
+- Veroeffentlichung auf der Domain des Kunden
+
+Umsetzungszeit:
+In der Regel 4 bis 6 Wochen ab vollstaendiger Bereitstellung der Inhalte.
+
+WEBSITE PRO - ab 3.690 Euro
+
+Geeignet fuer:
+- etablierte Betriebe mit vielen Leistungen oder Zielgruppen
+- Unternehmen mit mehreren Standorten
+- Betriebe mit unterschiedlichen Anfragewegen
+
+Ergebnis:
+Ein umfangreicher, verkaufsstarker Firmenauftritt mit klaren Einstiegen fuer verschiedene Zielgruppen, Leistungen oder Standorte.
+
+Enthalten:
+- sieben bis zehn Seiten
+- ausfuehrlichere Textunterstuetzung
+- mehrere Leistungs- oder Standortseiten
+- staerkere Kontaktfuehrung
+- mehrere Anfragewege
+- erweiterte lokale SEO-Grundlage
+- drei gebuendelte Korrekturrunden
+- Veroeffentlichung auf der Domain des Kunden
+
+Umsetzungszeit:
+In der Regel 6 bis 9 Wochen ab vollstaendiger Bereitstellung der Inhalte.
+
+4. DIGITALE BETRIEBSZENTRALE
+
+Die digitale Betriebszentrale wird individuell auf Airtable aufgebaut. Der Kunde erhaelt kein leeres Tool, sondern eine eingerichtete Arbeitsoberflaeche mit passenden Feldern, Ansichten, Statuswerten, Einfuehrung und Funktionstest.
+
+Die Betriebszentrale ist kein vollstaendiges ERP. Buchhaltung, Lohnabrechnung, Warenwirtschaft und vollstaendige ERP-Funktionen sind nicht automatisch enthalten.
+
+ANFRAGE-ZENTRALE - ab 990 Euro
+
+Geeignet, wenn Anfragen, Kontaktdaten, Status und Wiedervorlagen zentral verwaltet werden sollen.
+
+Enthalten:
+- Anfragen und Kontaktdaten
+- Bearbeitungsstatus
+- Notizen
+- Wiedervorlagen
+- Filter und Ansichten
+- kurze Einfuehrung
+
+KUNDEN- UND AUFTRAGSZENTRALE - ab 2.490 Euro
+
+Geeignet, wenn neben Anfragen auch Kunden, Angebote, Auftraege, Projekte, Aufgaben und Termine zusammengehoerig verwaltet werden sollen.
+
+Enthalten:
+- alles aus der Anfrage-Zentrale
+- Kundenverwaltung
+- Angebote und Auftraege
+- Projekte
+- Aufgaben und Termine
+- verknuepfte Vorgaenge
+- Uebersichts-Dashboard
+
+BETRIEBSZENTRALE PRO - ab 4.490 Euro
+
+Geeignet fuer Teams und Betriebe mit wiederkehrenden Ablaeufen, Erinnerungen und einfachen Automationen.
+
+Enthalten:
+- alles aus der Kunden- und Auftragszentrale
+- individuelle Formulare
+- automatische E-Mails
+- Erinnerungen und Folgeaufgaben
+- individuelle Dashboards
+- einfache Automationen
+- Team-Einfuehrung und Systemtest
+
+5. MONATLICHE BETREUUNG
+
+Betreuung ist grundsaetzlich optional. Bei einer Betriebszentrale, Automationen oder einem KI-Empfang ist eine laufende Funktionskontrolle jedoch sinnvoll.
+
+WEBSITE-PFLEGE - 79 Euro pro Monat
+- Funktionstest
+- kleine Inhaltsaenderungen
+- technische Kontrolle
+
+PFLEGE UND SICHTBARKEIT - 149 Euro pro Monat
+- regelmaessige Aenderungen
+- Google- und Bewertungsunterstuetzung
+- kleine Optimierungen am lokalen Auftritt
+
+BETREUUNG DER BETRIEBSZENTRALE - 249 Euro pro Monat
+- Website- und Systempflege
+- Automations-Support
+- laufende Funktionskontrolle
+
+Ohne Betreuung werden spaetere Aenderungen und Unterstuetzung bei Bedarf einzeln beauftragt.
+
+6. OPTIONALE ERWEITERUNGEN
+
+- Logo-Modernisierung: ab 390 Euro
+- Logo und Mini-Designsystem: ab 790 Euro
+- Texterstellung: ab 490 Euro
+- Google-Unternehmensprofil: ab 349 Euro
+- Bewertungslink und QR-Code: ab 249 Euro
+- Calendly-Einrichtung: ab 249 Euro
+- KI-Empfang Basic: ab 890 Euro plus passende Betreuung
+- zusaetzliche Seite: ab 249 Euro
+- Bildrecherche: ab 149 Euro
+
+Externe Toolkosten sind nicht automatisch enthalten. Das betrifft je nach Projekt unter anderem Airtable, Chatbase, Calendly, Domain und Hosting. Diese Kosten werden vor Beauftragung transparent besprochen.
+
+7. KI-EMPFANG
+
+Der KI-Empfang ist ein digitaler Assistent fuer typische Erstkontakte.
+
+Sinnvolle Aufgaben:
+- haeufige Fragen beantworten
+- Kontaktdaten und Anliegen aufnehmen
+- auf Leistungen, Ablaeufe und Kontaktwege verweisen
+- optional einen Terminlink ausgeben oder Termine vorbereiten
+- wichtige Anfragen per E-Mail weitergeben
+
+Klare Grenzen:
+- ersetzt keine verbindliche persoenliche Beratung
+- trifft keine rechtlichen, medizinischen oder finanziellen Entscheidungen
+- garantiert keinen Umsatz, kein Ranking und keine bestimmte Anzahl von Anfragen
+- individuelle oder kritische Faelle werden an den Betrieb weitergeleitet
+
+Der KI-Empfang sollte vor allem empfohlen werden, wenn viele aehnliche Fragen wiederholt auftreten oder Interessenten oft ausserhalb der Oeffnungszeiten Kontakt aufnehmen.
+
+8. KOSTENLOSE ERSTEINSCHAETZUNG
+
+Die kostenlose Ersteinschaetzung ist unverbindlich.
+
+Der Interessent erhaelt in der Regel innerhalb von 48 bis 72 Stunden:
+- eine kurze Website- und Anfrageanalyse
+- konkrete Verbesserungsvorschlaege
+- eine erste Paketempfehlung
+- einen groben Kostenrahmen
+- einen sinnvollen naechsten Schritt
+
+Kontaktformular:
+https://localsites-mainfranken.de/#kontakt
+
+Paket-Finder und Preise:
+https://localsites-mainfranken.de/preise
+
+9. ALLGEMEINE PROJEKTREGELN
+
+Der Kunde stellt in der Regel bereit:
+- Logo, Kontaktdaten und vorhandene Gestaltungsrichtlinien
+- Bilder und Texte, soweit vorhanden
+- Zugang zur Domain und zu benoetigten Diensten
+- zeitnahe Rueckmeldungen innerhalb der Korrekturrunden
+
+Nicht automatisch enthalten:
+- laufende Hosting-, Domain- und externe Toolkosten
+- professionelle Foto- oder Videoproduktion
+- umfangreiche Texterstellung, sofern nicht separat vereinbart
+- Rechtsberatung oder Erstellung rechtlicher Pflichttexte
+- Leistungen ausserhalb des vereinbarten Umfangs
+
+Alle Preise sind Ab-Preise. Der endgueltige Preis haengt von Umfang, Funktionen, vorhandenen Inhalten und notwendigen Integrationen ab. Ein verbindliches Angebot gibt es erst nach persoenlicher Pruefung.
+
+10. EMPFEHLUNGSLOGIK FUER DIE KAUFBERATUNG
+
+Website Start empfehlen, wenn:
+- eine kompakte Onepage ausreicht
+- maximal drei Kernleistungen erklaert werden
+- ein professioneller erster Auftritt benoetigt wird
+
+Website Business empfehlen, wenn:
+- mehrere Seiten benoetigt werden
+- mehrere Leistungen erklaert werden muessen
+- Vertrauen und Anfragequalitaet wichtiger werden
+
+Website Pro empfehlen, wenn:
+- viele Leistungen oder Standorte vorhanden sind
+- unterschiedliche Zielgruppen angesprochen werden
+- mehrere Anfragewege getrennt gefuehrt werden sollen
+
+Anfrage-Zentrale empfehlen, wenn:
+- nur Anfragen, Status und Wiedervorlagen organisiert werden muessen
+
+Kunden- und Auftragszentrale empfehlen, wenn:
+- Kunden, Angebote, Auftraege, Projekte, Aufgaben und Termine verbunden werden sollen
+
+Betriebszentrale Pro empfehlen, wenn:
+- wiederkehrende Ablaeufe automatisiert werden sollen
+- ein Team mehrere Vorgaenge gemeinsam bearbeitet
+- individuelle Dashboards oder automatische Folgeaufgaben benoetigt werden
+
+KI-Empfang nur empfehlen, wenn:
+- viele Standardfragen wiederkehren
+- Anfragen ausserhalb der Oeffnungszeiten aufgenommen werden sollen
+- der Kunde bewusst einen digitalen Erstkontakt wuenscht
+
+11. WICHTIGE ANTWORTEN
+
+Frage: Muss ich nach der kostenlosen Ersteinschaetzung etwas kaufen?
+Antwort: Nein. Die Ersteinschaetzung ist unverbindlich und dient der Orientierung.
+
+Frage: Ist die Betriebszentrale ein fertiges Standardprogramm?
+Antwort: Nein. Sie wird auf Airtable aufgebaut und an die Ablaeufe des Betriebs angepasst.
+
+Frage: Ersetzt die Betriebszentrale meine Buchhaltung oder Warenwirtschaft?
+Antwort: Nein. Sie organisiert vor allem Anfragen, Kunden und Auftraege. Vollstaendige ERP-, Buchhaltungs- oder Warenwirtschaftsfunktionen sind nicht automatisch enthalten.
+
+Frage: Ersetzt der KI-Empfang Mitarbeiter?
+Antwort: Nein. Er beantwortet typische Erstfragen und sammelt Kontaktdaten. Individuelle Faelle werden an einen Menschen weitergegeben.
+
+Frage: Kann der KI-Empfang Termine buchen?
+Antwort: Optional kann ein Terminlink ueber Calendly oder Cal.com ausgegeben oder eine Terminbuchung vorbereitet werden. Die genaue Loesung wird vorher abgestimmt.
+
+Frage: Sind Domain, Hosting, Airtable, Chatbase oder Calendly im Preis enthalten?
+Antwort: Externe laufende Toolkosten sind nicht automatisch enthalten und werden vor Beauftragung transparent besprochen.
+
+Frage: Gibt es Garantien fuer Umsatz oder Google-Ranking?
+Antwort: Nein. LocalSites verbessert Grundlagen, Darstellung und Kontaktwege, garantiert aber keinen bestimmten Umsatz, kein Ranking und keine feste Anzahl von Anfragen.
+
+12. KONTAKT
+
+E-Mail: kontakt@localsites-mainfranken.de
+Website: https://localsites-mainfranken.de
+Region: Schweinfurt, Wuerzburg und Mainfranken

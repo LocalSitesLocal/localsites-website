@@ -25,12 +25,12 @@ export function AboutSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Wer hinter LocalSites steht</p>
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Persönliche Zusammenarbeit</p>
             <h2 className="mt-4 text-3xl font-black leading-tight tracking-[-0.04em] text-[#061637] sm:text-4xl">
               Persönlich betreut. Regional gedacht.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-[#52647d]">
-              LocalSites entwickelt klare Websites und Anfrageprozesse für lokale Betriebe. Dabei haben Sie einen direkten Ansprechpartner statt wechselnder Zuständigkeiten.
+              Sie sprechen vom Erstgespräch bis zur Veröffentlichung direkt mit der Person, die Ihr Projekt plant und umsetzt. So bleiben Entscheidungen, Rückfragen und nächste Schritte klar.
             </p>
           </div>
           <div className="grid gap-7 sm:grid-cols-3">

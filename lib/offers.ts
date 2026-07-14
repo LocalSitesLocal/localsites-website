@@ -76,6 +76,8 @@ export type OfferRecommendation = {
   website: WebsitePackage | null
   operatingCenter: OperatingCenterPackage | null
   care: CarePackage
+  recommendedCare: CarePackage
+  careRecommendationReason: string
   addOns: AddOn[]
   setupTotal: number
   monthlyTotal: number
@@ -214,7 +216,7 @@ export const websitePackages: WebsitePackage[] = [
     collaboration,
     clientProvides,
     exclusions: commonExclusions,
-    additions: ['Digitale Betriebszentrale', 'Logo & Mini-Designsystem', 'KI-Empfang Basic', 'System-Betreuung'],
+    additions: ['Digitale Betriebszentrale', 'Logo & Mini-Designsystem', 'KI-Empfang Basic', 'Betreuung der Betriebszentrale'],
     timeline: 'In der Regel 6 bis 9 Wochen ab vollständiger Bereitstellung der Inhalte.',
     pageScope: 'Sieben bis zehn Seiten mit mehreren Leistungs-, Standort- oder Anfragewegen.',
     correctionRounds: 'Drei gebündelte Korrekturrunden sind enthalten.',
@@ -282,7 +284,7 @@ export const carePackages: CarePackage[] = [
   },
   {
     id: 'system-care',
-    name: 'System-Betreuung',
+    name: 'Betreuung der Betriebszentrale',
     price: '249 €/Monat',
     monthlyPrice: 249,
     description: 'Für Betriebe mit digitaler Betriebszentrale, Automationen oder KI-Empfang.',
@@ -343,7 +345,13 @@ export function buildOfferRecommendation(
     : website?.id === 'start'
       ? 'website-care'
       : 'visibility-care'
+  const recommendedCare = getCarePackageById(recommendedCareId)
   const care = getCarePackageById(careOverride ?? recommendedCareId)
+  const careRecommendationReason = hasSystemNeeds
+    ? 'Die Betriebszentrale und verbundene Abläufe sollten regelmäßig technisch geprüft werden.'
+    : website?.id === 'start'
+      ? 'Für eine kompakte Website genügt in der Regel die schlanke Website-Pflege.'
+      : 'Bei umfangreicheren Websites sind regelmäßige Pflege und kleine lokale Optimierungen sinnvoll.'
 
   const reason = answers.goal === 'both'
     ? `${website?.name} schafft einen professionellen Einstieg. Die ${operatingCenter?.name} führt passende Anfragen anschließend zentral bis zum nächsten Schritt weiter.`
@@ -355,6 +363,8 @@ export function buildOfferRecommendation(
     website,
     operatingCenter,
     care,
+    recommendedCare,
+    careRecommendationReason,
     addOns: selectedAddOns,
     setupTotal: (website?.setupPrice ?? 0) + (operatingCenter?.setupPrice ?? 0) + selectedAddOns.reduce((sum, item) => sum + item.setupPrice, 0),
     monthlyTotal: care.monthlyPrice,

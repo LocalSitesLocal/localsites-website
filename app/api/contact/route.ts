@@ -1,4 +1,8 @@
 import { NextResponse } from 'next/server'
+import {
+  buildCustomerConfirmationEmail,
+  buildInternalInquiryEmail,
+} from '@/lib/contact-emails'
 
 type ContactPayload = {
   name?: string
@@ -47,6 +51,7 @@ const AIRTABLE_CARE_ALIASES: Record<string, string> = {
   'Website-Pflege': 'Care Basis',
   'Pflege & Sichtbarkeit': 'Care Plus',
   'System-Betreuung': 'Care System',
+  'Betreuung der Betriebszentrale': 'Care System',
 }
 
 const AIRTABLE_EXTENSION_ALIASES: Record<string, string> = {
@@ -63,15 +68,6 @@ function clean(value: unknown) {
 
 function cleanSingleLine(value: unknown) {
   return clean(value).replace(/[\r\n]+/g, ' ')
-}
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;')
 }
 
 function getSelectionValue(message: string, label: string) {
@@ -259,60 +255,76 @@ export async function POST(request: Request) {
   const from = process.env.CONTACT_FROM_EMAIL || 'LocalSites <kontakt@send.localsites-mainfranken.de>'
   const to = process.env.CONTACT_TO_EMAIL || 'kontakt@localsites-mainfranken.de'
   const subject = `Neue LocalSites-Anfrage von ${name}`
-  const rows = [
-    ['Name', name],
-    ['Unternehmen', unternehmen || '-'],
-    ['E-Mail', email],
-    ['Telefon', telefon || '-'],
-    ['Website', website || '-'],
-    ['Nachricht', nachricht || '-'],
-  ]
-
-  const html = `
-    <div style="font-family:Arial,sans-serif;line-height:1.5;color:#0b1637">
-      <h1 style="font-size:22px">Neue LocalSites-Anfrage</h1>
-      <table cellpadding="8" cellspacing="0" style="border-collapse:collapse">
-        ${rows
-          .map(
-            ([label, value]) => `
-              <tr>
-                <td style="font-weight:bold;border-bottom:1px solid #e5edf7">${escapeHtml(label)}</td>
-                <td style="border-bottom:1px solid #e5edf7">${escapeHtml(value).replaceAll('\n', '<br />')}</td>
-              </tr>
-            `
-          )
-          .join('')}
-      </table>
-    </div>
-  `
+  const rawExtensions = getSelectionValue(nachricht, 'Zusatzleistungen') || getSelectionValue(nachricht, 'Erweiterungen')
+  const selectionRows = [
+    ['Website', getSelectionValue(nachricht, 'Website-Paket')],
+    ['Betriebszentrale', getSelectionValue(nachricht, 'Betriebszentrale')],
+    ['Betreuung', getSelectionValue(nachricht, 'Betreuung')],
+    ['Zusatzleistungen', rawExtensions],
+    ['Startpreis', getSelectionValue(nachricht, 'Geschätzter Startpreis')],
+    ['Monatlich', getSelectionValue(nachricht, 'Geschätzte monatliche Kosten')],
+  ].filter((entry): entry is [string, string] => Boolean(entry[1]))
+  const emailData = {
+    name,
+    unternehmen,
+    email,
+    telefon,
+    website,
+    nachricht,
+    selection: selectionRows,
+  }
+  const internalEmail = buildInternalInquiryEmail(emailData)
+  const confirmationEmail = buildCustomerConfirmationEmail(emailData)
+  const requestId = crypto.randomUUID()
 
   let response: Response
 
   try {
-    response = await fetch('https://api.resend.com/emails', {
+    response = await fetch('https://api.resend.com/emails/batch', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
         'Content-Type': 'application/json',
+        'User-Agent': 'localsites-contact-form/1.0',
+        'Idempotency-Key': `contact-${requestId}`,
       },
-      body: JSON.stringify({
-        from,
-        to,
-        reply_to: email,
-        subject,
-        html,
-      }),
+      body: JSON.stringify([
+        {
+          from,
+          to,
+          reply_to: email,
+          subject,
+          html: internalEmail.html,
+          text: internalEmail.text,
+          tags: [
+            { name: 'type', value: 'inquiry' },
+            { name: 'inquiry_id', value: requestId },
+          ],
+        },
+        {
+          from,
+          to: email,
+          reply_to: to,
+          subject: 'Ihre Anfrage bei LocalSites ist angekommen',
+          html: confirmationEmail.html,
+          text: confirmationEmail.text,
+          tags: [
+            { name: 'type', value: 'confirmation' },
+            { name: 'inquiry_id', value: requestId },
+          ],
+        },
+      ]),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT),
     })
   } catch (error) {
-    console.error('Resend request failed after Airtable save', error)
-    return NextResponse.json({ ok: true, stored: true, emailSent: false })
+    console.error('Resend batch request failed after Airtable save', error)
+    return NextResponse.json({ ok: true, stored: true, emailSent: false, confirmationSent: false })
   }
 
   if (!response.ok) {
-    console.error('Resend rejected inquiry email', response.status, await response.text())
-    return NextResponse.json({ ok: true, stored: true, emailSent: false })
+    console.error('Resend rejected inquiry email batch', response.status, await response.text())
+    return NextResponse.json({ ok: true, stored: true, emailSent: false, confirmationSent: false })
   }
 
-  return NextResponse.json({ ok: true, stored: true, emailSent: true })
+  return NextResponse.json({ ok: true, stored: true, emailSent: true, confirmationSent: true })
 }

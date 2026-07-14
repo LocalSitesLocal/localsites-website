@@ -8,7 +8,7 @@ import { openLocalSitesChat } from '@/lib/chat'
 const trustItems = [
   { icon: MapPin, label: 'Regional & persönlich' },
   { icon: ShieldCheck, label: 'Unverbindlich' },
-  { icon: Clock3, label: 'Ersteinschätzung in 48-72 Std.' },
+  { icon: Clock3, label: 'Ersteinschätzung in 48–72 Std.' },
 ]
 
 export function HeroSection() {
@@ -40,7 +40,7 @@ export function HeroSection() {
             Für <span className="text-[#0b63ce]">lokale Unternehmen.</span>
           </h1>
           <p className="mt-7 max-w-[21rem] text-base leading-8 text-[#334667] sm:max-w-lg sm:text-lg">
-            Anfrage-Websites, Wartung und KI-Empfang für lokale Betriebe in Mainfranken.
+            Websites, digitale Betriebszentralen und Betreuung für lokale Betriebe in Mainfranken.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

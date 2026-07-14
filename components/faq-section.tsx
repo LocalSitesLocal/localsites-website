@@ -8,8 +8,8 @@ import { Reveal } from '@/components/reveal'
 
 const faqs = [
   [
-    'Was ist die kostenlose Website- und Anfrageanalyse?',
-    'Sie erhalten innerhalb von 48–72 Stunden konkrete Verbesserungsvorschläge, eine klare erste Paketempfehlung und einen groben Kostenrahmen per E-Mail oder als kurzes PDF.',
+    'Was ist die kostenlose Ersteinschätzung?',
+    'Sie erhalten innerhalb von 48–72 Stunden eine kurze Website- und Anfrageanalyse mit konkreten Verbesserungsvorschlägen, einer ersten Paketempfehlung und einem groben Kostenrahmen per E-Mail oder als kurzes PDF.',
   ],
   [
     'Was kostet eine Website?',
@@ -21,7 +21,7 @@ const faqs = [
   ],
   [
     'Gibt es eine monatliche Betreuung?',
-    'Ja. Website-Pflege startet bei 79 € pro Monat. Pflege & Sichtbarkeit sowie System-Betreuung ergänzen je nach Bedarf weitere Leistungen. Betreuung bleibt optional.',
+    'Ja. Website-Pflege startet bei 79 € pro Monat. Pflege & Sichtbarkeit sowie die Betreuung der Betriebszentrale ergänzen je nach Bedarf weitere Leistungen. Betreuung bleibt optional.',
   ],
   [
     'Was ist ein KI-Empfang?',

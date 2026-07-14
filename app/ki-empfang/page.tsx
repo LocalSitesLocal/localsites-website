@@ -48,17 +48,17 @@ export default function KiEmpfangPage() {
   return (
     <>
       <Header />
-      <main className="bg-[#f8fbff] pt-28">
+      <main className="overflow-x-clip bg-[#f8fbff] pt-28">
         <section className="border-b border-[#dfeaf5] bg-white pb-14 pt-8 lg:pb-20">
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.95fr_1fr] lg:items-center lg:px-8">
-            <div>
+          <div className="mx-auto grid w-full min-w-0 max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.95fr_1fr] lg:items-center lg:px-8">
+            <div className="min-w-0">
               <p className="mb-4 text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">
                 KI-Empfang
               </p>
-              <h1 className="max-w-3xl text-5xl font-black leading-none text-[#061637] sm:text-6xl">
+              <h1 className="max-w-3xl text-4xl font-black leading-none text-[#061637] sm:text-6xl">
                 Ein digitaler Empfang für wiederkehrende Fragen.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">
+              <p className="mt-6 max-w-2xl text-base leading-7 text-[#52647d] sm:text-lg sm:leading-8">
                 Der KI-Empfang hilft lokalen Betrieben, einfache Fragen schneller zu beantworten und
                 mehr Anfragen sauber aufzunehmen. Er ist kein Ersatz für Menschen, sondern eine
                 vorgeschaltete Hilfe für typische Erstkontakte.
@@ -69,7 +69,7 @@ export default function KiEmpfangPage() {
               </div>
             </div>
 
-            <div className="motion-card group rounded-[14px] border border-[#cfe2f5] bg-[linear-gradient(145deg,#ffffff_0%,#f1f8ff_58%,#fff2e8_100%)] p-5 shadow-[0_30px_90px_rgba(11,99,206,0.14)]">
+            <div className="motion-card group min-w-0 overflow-hidden rounded-[14px] border border-[#cfe2f5] bg-[linear-gradient(145deg,#ffffff_0%,#f1f8ff_58%,#fff2e8_100%)] p-5 shadow-[0_30px_90px_rgba(11,99,206,0.14)]">
               <div className="mb-5 flex items-center gap-3 border-b border-[#d7e7f7] pb-4">
                 <div className="motion-icon motion-icon-spin flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0b63ce] text-white">
                   <Bot className="h-6 w-6" />

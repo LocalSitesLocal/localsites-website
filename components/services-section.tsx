@@ -10,7 +10,7 @@ const services = [
     title: 'Websites',
     text: 'Professionelle Onepage- oder Firmenwebsites, die Leistungen verständlich erklären und zur Kontaktaufnahme führen.',
     items: ['mobile Optimierung', 'klare Kontaktwege', 'lokale SEO-Grundlage', 'Veröffentlichung auf Domain'],
-    button: { text: 'Website-Pakete ansehen', href: '/preise#angebote-vergleichen' },
+    button: { text: 'Website-Pakete ansehen', href: '/preise/vergleich?bereich=websites' },
   },
   {
     icon: LayoutDashboard,
@@ -25,7 +25,7 @@ const services = [
     title: 'Betreuung',
     text: 'Klar definierte monatliche Pflege für Websites, Sichtbarkeit und digitale Systeme.',
     items: [`Website-Pflege ${carePackages[0].price}`, 'klare Leistungen', 'technische Kontrolle', 'Systempflege nach Paket'],
-    button: { text: 'Betreuung vergleichen', href: '/preise#angebote-vergleichen' },
+    button: { text: 'Betreuung vergleichen', href: '/preise/vergleich?bereich=betreuung' },
   },
   {
     icon: Bot,

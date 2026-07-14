@@ -46,7 +46,7 @@ export default async function PackageDetailPage({
           <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[1.05fr_0.75fr] lg:items-center lg:px-8">
             <div>
               <Link
-                href="/preise#angebote-vergleichen"
+                href="/preise/vergleich"
                 className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-[#52647d] transition-colors hover:text-[#0b63ce]"
               >
                 <ArrowLeft className="h-4 w-4" />
@@ -66,8 +66,8 @@ export default async function PackageDetailPage({
               <p className="mt-5 text-3xl font-black tracking-[-0.035em] text-[#0b63ce]">{item.price}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">{item.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <FlowButton text="Im Paket-Finder prüfen" href={`/preise?paket=${item.id}#paket-finder`} tone="orange" className="bg-white" />
-                <FlowButton text="Persönliche Einschätzung" href="/#kontakt" tone="blue" className="bg-white" />
+                <FlowButton text="Im Paket-Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="orange" className="bg-white" />
+                <FlowButton text="Kostenlose Ersteinschätzung" href="/#kontakt" tone="blue" className="bg-white" />
               </div>
             </div>
 
@@ -209,7 +209,7 @@ export default async function PackageDetailPage({
               <p className="mt-4 leading-7 text-[#52647d]">Vergleichen Sie Umfang, Anfrageweg und enthaltene Systeme. Betreuung und Erweiterungen w&auml;hlen Sie anschlie&szlig;end separat.</p>
             </div>
             <div className="mt-8"><PackageComparisonTable activePackageId={item.id} /></div>
-            <Link href="/preise#angebote-vergleichen" className="mt-6 inline-flex min-h-11 items-center font-black text-[#0b63ce] hover:text-[#061637]">
+            <Link href="/preise/vergleich" className="mt-6 inline-flex min-h-11 items-center font-black text-[#0b63ce] hover:text-[#061637]">
               Vollständigen Paketvergleich öffnen
             </Link>
           </div>
@@ -222,7 +222,7 @@ export default async function PackageDetailPage({
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em]">Passt {item.name} zu Ihrem Betrieb?</h2>
               <p className="mt-3 max-w-2xl leading-7 text-white/70">Der Paket-Finder prüft Website, Betriebszentrale, Betreuung und sinnvolle Ergänzungen gemeinsam.</p>
             </div>
-            <FlowButton text="Im Paket-Finder prüfen" href={`/preise?paket=${item.id}#paket-finder`} tone="orange" className="shrink-0 bg-white" />
+            <FlowButton text="Im Paket-Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="orange" className="shrink-0 bg-white" />
           </div>
         </section>
       </main>

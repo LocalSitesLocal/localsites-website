@@ -53,7 +53,7 @@ export default function BetriebszentralePage() {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <FlowButton text="Pakete ansehen" href="#pakete" tone="orange" className="bg-white" />
-                <FlowButton text="Im Paket-Finder prüfen" href="/preise#paket-finder" tone="blue" className="bg-white" />
+                <FlowButton text="Im Paket-Finder prüfen" href="/preise/finder" tone="blue" className="bg-white" />
               </div>
             </Reveal>
 
@@ -207,7 +207,7 @@ export default function BetriebszentralePage() {
                         </li>
                       ))}
                     </ul>
-                    <FlowButton text="Im Finder prüfen" href="/preise#paket-finder" tone={item.recommended ? 'orange' : 'blue'} className="mt-7 bg-white" />
+                    <FlowButton text="Im Finder prüfen" href="/preise/finder" tone={item.recommended ? 'orange' : 'blue'} className="mt-7 bg-white" />
                   </article>
                 </Reveal>
               ))}

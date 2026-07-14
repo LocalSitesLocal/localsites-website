@@ -442,6 +442,10 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
 
               <fieldset className="mt-8">
                 <legend className="text-sm font-black text-[#061637]">Betreuung anpassen</legend>
+                <p className="mt-3 rounded-[8px] border border-[#cfe2f5] bg-[#f2f7ff] px-4 py-3 text-sm leading-6 text-[#415574]">
+                  <span className="font-black text-[#061637]">Empfehlung: {recommendation.recommendedCare.name}.</span>{' '}
+                  {recommendation.careRecommendationReason} Die Auswahl bleibt frei anpassbar.
+                </p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {allCareOptions.map((care) => {
                     const selected = recommendation.care.id === care.id
@@ -493,7 +497,7 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
                   <PencilLine className="h-4 w-4" /> Auswahl ändern
                 </button>
                 <Link
-                  href="#angebote-vergleichen"
+                  href="/preise/vergleich"
                   className="inline-flex min-h-11 items-center gap-2 text-[#0b63ce] hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
                 >
                   <ArrowRight className="h-4 w-4" /> Alle Pakete vergleichen

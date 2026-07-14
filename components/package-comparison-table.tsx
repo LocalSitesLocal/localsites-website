@@ -73,7 +73,7 @@ export function PackageComparisonTable({ activePackageId }: { activePackageId?: 
             {websitePackages.map((candidate) => (
               <td key={candidate.id} className={cn('p-5', candidate.id === activePackageId && 'bg-[#f4f9ff]')}>
                 <Link
-                  href={`/preise?paket=${candidate.id}#paket-finder`}
+                  href={`/preise/finder?paket=${candidate.id}`}
                   className="inline-flex min-h-11 items-center gap-2 font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"
                 >
                   Im Finder prüfen <ArrowRight className="h-4 w-4" />

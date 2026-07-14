@@ -3,7 +3,7 @@ import { Reveal } from '@/components/reveal'
 
 const steps = [
   { icon: ClipboardList, title: 'Verstehen', text: 'Ziele & Anforderungen klären.' },
-  { icon: ScreenShare, title: 'Vorschau erhalten', text: 'Unverbindliche Website in 48-72 Std.' },
+  { icon: ScreenShare, title: 'Vorschau erhalten', text: 'Unverbindliche Website in 48–72 Std.' },
   { icon: CheckCircle2, title: 'Feinschliff', text: 'Gemeinsam anpassen.' },
   { icon: Rocket, title: 'Betreuung', text: 'Wir bleiben an Ihrer Seite.' },
 ]
