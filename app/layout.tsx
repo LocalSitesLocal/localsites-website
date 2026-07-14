@@ -23,20 +23,12 @@ export const metadata: Metadata = {
   generator: 'Next.js',
   icons: {
     icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/localsites-favicon-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/localsites-icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/localsites-icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
-    apple: '/apple-icon.png',
+    apple: '/localsites-apple-icon.png',
   },
   openGraph: {
     title: 'LocalSites | Websites für lokale Betriebe',

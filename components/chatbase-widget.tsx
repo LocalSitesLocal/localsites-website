@@ -1,7 +1,8 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { MessageCircle, X } from 'lucide-react'
+import Image from 'next/image'
+import { X } from 'lucide-react'
 import { OPEN_CHAT_EVENT } from '@/lib/chat'
 import { cn } from '@/lib/utils'
 
@@ -49,7 +50,13 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
         aria-controls="localsites-chat-panel"
         aria-expanded={isOpen}
       >
-        <MessageCircle className="h-4 w-4 text-[#0b63ce]" />
+        <Image
+          src="/localsites-chat-avatar.png"
+          alt=""
+          width={24}
+          height={24}
+          className="h-6 w-6 rounded-full"
+        />
         <span className="hidden sm:inline">KI-Empfang</span>
       </button>
       <div
@@ -62,9 +69,13 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
       >
         <div className="flex h-12 items-center justify-between border-b border-white/10 bg-[#061637] px-4 text-white">
           <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0b63ce] text-white">
-              <MessageCircle className="h-3.5 w-3.5" />
-            </span>
+            <Image
+              src="/localsites-chat-avatar.png"
+              alt="LocalSites"
+              width={28}
+              height={28}
+              className="h-7 w-7 rounded-full"
+            />
             <p className="text-sm font-black">KI-Empfang</p>
           </div>
           <button
