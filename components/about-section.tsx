@@ -5,7 +5,7 @@ const points = [
   {
     icon: UserRound,
     title: 'Fester Ansprechpartner',
-    text: 'Von der ersten Einsch\u00e4tzung bis zur Ver\u00f6ffentlichung bleibt der Kontakt direkt und pers\u00f6nlich.',
+    text: 'Philipp Friedrich begleitet Ihr Projekt von der ersten Einschätzung bis zur Einführung direkt und persönlich.',
   },
   {
     icon: MapPin,
@@ -27,10 +27,10 @@ export function AboutSection() {
           <div>
             <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Persönliche Zusammenarbeit</p>
             <h2 className="mt-4 text-3xl font-black leading-tight tracking-[-0.04em] text-[#061637] sm:text-4xl">
-              Persönlich betreut. Regional gedacht.
+              Persönlich betreut von Philipp Friedrich.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-[#52647d]">
-              Sie sprechen vom Erstgespräch bis zur Veröffentlichung direkt mit der Person, die Ihr Projekt plant und umsetzt. So bleiben Entscheidungen, Rückfragen und nächste Schritte klar.
+              Sie sprechen vom Erstgespräch bis zur Einführung direkt mit der Person, die Ihre Lösung plant und umsetzt. So bleiben Entscheidungen, Rückfragen und nächste Schritte klar.
             </p>
           </div>
           <div className="grid gap-7 sm:grid-cols-3">

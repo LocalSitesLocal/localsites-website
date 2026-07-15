@@ -1,11 +1,11 @@
-import { CheckCircle2, ClipboardList, Rocket, ScreenShare } from 'lucide-react'
+import { ClipboardCheck, Lightbulb, Rocket, SearchCheck } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 
 const steps = [
-  { icon: ClipboardList, title: 'Verstehen', text: 'Ziele & Anforderungen klären.' },
-  { icon: ScreenShare, title: 'Vorschau erhalten', text: 'Unverbindliche Website in 48–72 Std.' },
-  { icon: CheckCircle2, title: 'Feinschliff', text: 'Gemeinsam anpassen.' },
-  { icon: Rocket, title: 'Betreuung', text: 'Wir bleiben an Ihrer Seite.' },
+  { icon: SearchCheck, title: 'Analyse', text: 'Ziele, Ausgangslage und Engpässe klären.' },
+  { icon: Lightbulb, title: 'Konzept', text: 'Die passende Lösung und den Umfang festlegen.' },
+  { icon: ClipboardCheck, title: 'Umsetzung', text: 'Website oder Arbeitsoberfläche gemeinsam aufbauen.' },
+  { icon: Rocket, title: 'Einführung & Betreuung', text: 'Sauber starten und bei Bedarf weiter begleiten.' },
 ]
 
 export function ProcessSection() {

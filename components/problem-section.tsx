@@ -1,4 +1,4 @@
-import { BarChart3, Clock3, HelpCircle } from 'lucide-react'
+import { Clock3, Inbox, ListTodo } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 
 const problems = [
@@ -8,14 +8,14 @@ const problems = [
     text: 'Die Website wirkt nicht mehr so professionell wie der Betrieb dahinter.',
   },
   {
-    icon: HelpCircle,
-    title: 'Kontakt schwer zu finden',
-    text: 'Telefon, E-Mail, Formular oder Standort sind nicht klar genug erreichbar.',
+    icon: Inbox,
+    title: 'Anfragen und Informationen sind verteilt',
+    text: 'E-Mails, Notizen, Nachrichten und Tabellen ergeben kein klares Gesamtbild.',
   },
   {
-    icon: BarChart3,
-    title: 'Anfragen kommen unklar an',
-    text: 'Interessenten melden sich unstrukturiert oder brechen vorher ab.',
+    icon: ListTodo,
+    title: 'Rückrufe und nächste Schritte gehen unter',
+    text: 'Ohne klaren Status und Wiedervorlagen bleibt Wichtiges zu lange liegen.',
   },
 ]
 
@@ -28,7 +28,7 @@ export function ProblemSection() {
             Die Herausforderung
           </p>
           <h2 className="mx-auto max-w-[21rem] text-3xl font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-none sm:text-4xl sm:tracking-[-0.04em]">
-            Wenn Website und Kontaktweg nicht klar genug sind.
+            Wenn Außenauftritt und Abläufe nicht zusammenspielen.
           </h2>
         </Reveal>
 

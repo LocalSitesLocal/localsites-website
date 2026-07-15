@@ -294,6 +294,22 @@ export const carePackages: CarePackage[] = [
 
 export const allCareOptions = [noCareOption, ...carePackages]
 
+export const digitalBusinessPackage = {
+  name: 'Digitaler Betrieb',
+  price: 'ab 4.980 €',
+  setupPrice: 4980,
+  website: websitePackages[1],
+  operatingCenter: operatingCenterPackages[1],
+  care: carePackages[2],
+  includedBenefits: [
+    'Website Business und Kunden- & Auftragszentrale',
+    'verbundenes Anfrageformular mit strukturierter Übergabe',
+    'eine einfache Status- oder E-Mail-Automation',
+    'gemeinsame Einführung und Systemübergabe',
+    'drei Monate Startbegleitung für die Betriebszentrale',
+  ],
+} as const
+
 export const addOns: AddOn[] = [
   { id: 'logo-refresh', name: 'Logo-Modernisierung', price: 'ab 390 €', setupPrice: 390, description: 'Das vorhandene Logo wird zeitgemäß überarbeitet.' },
   { id: 'design-system', name: 'Logo & Mini-Designsystem', price: 'ab 790 €', setupPrice: 790, description: 'Logo, Farben, Schriften und grundlegende Gestaltungsregeln.' },
@@ -388,5 +404,22 @@ export function createOfferSelectionMessage(recommendation: OfferRecommendation)
     `Geschätzter Startpreis: ab ${formatEuro(recommendation.setupTotal)}`,
     `Geschätzte monatliche Kosten: ${recommendation.monthlyTotal === 0 ? '0 €/Monat' : `${formatEuro(recommendation.monthlyTotal)}/Monat`}`,
     `Empfehlungsgrund: ${recommendation.reason}`,
+  ].join('\n')
+}
+
+export function createStoredOfferSelectionMessage(summary: StoredOfferSummary) {
+  const extensions = summary.extensions.length > 0 ? summary.extensions.join(', ') : 'Keine ausgewählt'
+
+  return [
+    'Ich interessiere mich für folgende Paketauswahl:',
+    '',
+    `Website-Paket: ${summary.website ?? 'Keine Website ausgewählt'}`,
+    `Betriebszentrale: ${summary.operatingCenter ?? 'Keine Betriebszentrale ausgewählt'}`,
+    `Betreuung: ${summary.care}`,
+    `Zusatzleistungen: ${extensions}`,
+    `Erweiterungen: ${extensions}`,
+    `Geschätzter Startpreis: ${summary.setup}`,
+    `Geschätzte monatliche Kosten: ${summary.monthly}`,
+    ...(summary.reason ? [`Empfehlungsgrund: ${summary.reason}`] : []),
   ].join('\n')
 }

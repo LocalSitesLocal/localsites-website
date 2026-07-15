@@ -178,10 +178,10 @@ export function ContactSection() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:px-8">
         <Reveal>
           <p className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">
-            Bereit für Ihre kostenlose Ersteinschätzung?
+            {pricingSummary ? 'Bereit für Ihre unverbindliche Paketanfrage?' : 'Bereit für Ihre kostenlose Ersteinschätzung?'}
           </p>
           <h2 className="max-w-[21rem] text-3xl font-black leading-tight tracking-[-0.025em] text-[#061637] sm:max-w-xl sm:text-5xl sm:tracking-[-0.05em]">
-            Lassen Sie uns Ihr Projekt starten.
+            {pricingSummary ? 'Lassen Sie uns Ihre Auswahl konkretisieren.' : 'Lassen Sie uns Ihr Projekt starten.'}
           </h2>
           <div className="mt-8 flex flex-wrap gap-5 text-sm font-medium text-[#415574]">
             {['Unverbindlich', 'Schnell', 'Persönlich'].map((item) => (
@@ -286,7 +286,11 @@ export function ContactSection() {
                     aria-busy={isLoading}
                     className="h-12 w-full rounded-md bg-[#c94f00] font-black text-white shadow-[0_16px_40px_rgba(201,79,0,0.22)] transition-colors hover:bg-[#a94000] active:scale-[0.98]"
                   >
-                    {isLoading ? 'Wird gesendet...' : 'Kostenlose Ersteinschätzung anfragen'}
+                    {isLoading
+                      ? 'Wird gesendet...'
+                      : pricingSummary
+                        ? 'Paketauswahl unverbindlich anfragen'
+                        : 'Kostenlose Ersteinschätzung anfragen'}
                   </Button>
                 </div>
                 {submitError && <p role="alert" aria-live="assertive" className="text-sm text-red-600 sm:col-span-2">{submitError}</p>}

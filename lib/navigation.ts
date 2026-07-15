@@ -2,7 +2,7 @@ export const navItems = [
   { label: 'Leistungen', href: '/#leistungen' },
   { label: 'Angebote & Preise', href: '/preise' },
   { label: 'Betriebszentrale', href: '/betriebszentrale' },
-  { label: 'Referenzen', href: '/#demos' },
+  { label: 'Beispiele', href: '/#demos' },
   { label: 'Über uns', href: '/#ueber-uns' },
   { label: 'Kontakt', href: '/#kontakt' },
 ] as const

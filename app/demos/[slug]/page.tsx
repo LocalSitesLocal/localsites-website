@@ -69,7 +69,7 @@ export default async function DemoPage({ params }: { params: Promise<{ slug: str
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(6,22,55,0.94)_0%,rgba(6,22,55,0.76)_48%,rgba(6,22,55,0.3)_100%)]" />
           <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link href="/#demos" className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-white/78 hover:text-white">
-              <ArrowLeft className="h-4 w-4" /> Zurück zu den Referenzen
+              <ArrowLeft className="h-4 w-4" /> Zurück zu den Beispielen
             </Link>
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#7fb7ff]">Demo · {demo.label}</p>
             <h1 className="mt-5 max-w-3xl text-4xl font-black leading-[1.02] tracking-[-0.045em] sm:text-6xl">{demo.headline}</h1>

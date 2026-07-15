@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, Check, CircleCheck, Clock3, FileText, Handshake, PackageOpen, ShieldCheck, Target } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { DirectOfferRequestButton } from '@/components/direct-offer-request-button'
 import { FlowButton } from '@/components/flow-button'
 import { PackageComparisonTable } from '@/components/package-comparison-table'
 import { getWebsitePackageBySlug, websitePackages } from '@/lib/website-packages'
@@ -66,8 +67,20 @@ export default async function PackageDetailPage({
               <p className="mt-5 text-3xl font-black tracking-[-0.035em] text-[#0b63ce]">{item.price}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">{item.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <FlowButton text="Im Paket-Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="orange" className="bg-white" />
-                <FlowButton text="Kostenlose Ersteinschätzung" href="/#kontakt" tone="blue" className="bg-white" />
+                <DirectOfferRequestButton
+                  text={`${item.name} unverbindlich anfragen`}
+                  summary={{
+                    website: item.name,
+                    operatingCenter: null,
+                    care: 'Noch offen',
+                    extensions: ['Keine ausgewählt'],
+                    setup: item.price,
+                    monthly: 'Noch offen',
+                    reason: `Direktes Interesse am Paket ${item.name}. Details und optionale Ergänzungen werden persönlich geklärt.`,
+                  }}
+                  className="bg-white"
+                />
+                <FlowButton text="Im Paket-Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="blue" className="bg-white" />
               </div>
             </div>
 
@@ -222,7 +235,22 @@ export default async function PackageDetailPage({
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em]">Passt {item.name} zu Ihrem Betrieb?</h2>
               <p className="mt-3 max-w-2xl leading-7 text-white/70">Der Paket-Finder prüft Website, Betriebszentrale, Betreuung und sinnvolle Ergänzungen gemeinsam.</p>
             </div>
-            <FlowButton text="Im Paket-Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="orange" className="shrink-0 bg-white" />
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+              <DirectOfferRequestButton
+                text={`${item.name} anfragen`}
+                summary={{
+                  website: item.name,
+                  operatingCenter: null,
+                  care: 'Noch offen',
+                  extensions: ['Keine ausgewählt'],
+                  setup: item.price,
+                  monthly: 'Noch offen',
+                  reason: `Direktes Interesse am Paket ${item.name}. Details und optionale Ergänzungen werden persönlich geklärt.`,
+                }}
+                className="bg-white"
+              />
+              <FlowButton text="Im Finder prüfen" href={`/preise/finder?paket=${item.id}`} tone="blue" className="bg-white" />
+            </div>
           </div>
         </section>
       </main>

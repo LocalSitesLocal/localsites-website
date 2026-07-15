@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import {
   ArrowRight,
   CalendarDays,
@@ -10,6 +11,7 @@ import {
   Users,
 } from 'lucide-react'
 import { Footer } from '@/components/footer'
+import { DirectOfferRequestButton } from '@/components/direct-offer-request-button'
 import { FlowButton } from '@/components/flow-button'
 import { Header } from '@/components/header'
 import { Reveal } from '@/components/reveal'
@@ -207,7 +209,26 @@ export default function BetriebszentralePage() {
                         </li>
                       ))}
                     </ul>
-                    <FlowButton text="Im Finder prüfen" href="/preise/finder" tone={item.recommended ? 'orange' : 'blue'} className="mt-7 bg-white" />
+                    <DirectOfferRequestButton
+                      text="Unverbindlich anfragen"
+                      summary={{
+                        website: null,
+                        operatingCenter: item.name,
+                        care: 'Noch offen',
+                        extensions: ['Keine ausgewählt'],
+                        setup: item.price,
+                        monthly: 'Noch offen',
+                        reason: `Direktes Interesse an der ${item.name}. Der genaue Umfang wird persönlich abgestimmt.`,
+                      }}
+                      tone={item.recommended ? 'orange' : 'blue'}
+                      className="mt-7 bg-white"
+                    />
+                    <Link
+                      href="/preise/finder"
+                      className="mt-4 inline-flex min-h-11 items-center font-black text-[#0b63ce] transition-colors hover:text-[#061637]"
+                    >
+                      Im Finder prüfen <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </article>
                 </Reveal>
               ))}
@@ -224,7 +245,19 @@ export default function BetriebszentralePage() {
                 Die Betriebszentrale organisiert den Kunden-, Anfrage- und Auftragsprozess. Buchhaltung, Lohnabrechnung, Warenwirtschaft und vollständige ERP-Funktionen sind nicht automatisch enthalten.
               </p>
             </div>
-            <FlowButton text="Persönliches Angebot anfordern" href="/#kontakt" tone="orange" className="bg-white" />
+            <DirectOfferRequestButton
+              text="Kunden- & Auftragszentrale anfragen"
+              summary={{
+                website: null,
+                operatingCenter: operatingCenterPackages[1].name,
+                care: 'Noch offen',
+                extensions: ['Keine ausgewählt'],
+                setup: operatingCenterPackages[1].price,
+                monthly: 'Noch offen',
+                reason: 'Interesse an einer zentralen Arbeitsoberfläche für Kunden, Angebote, Aufträge, Projekte und Termine.',
+              }}
+              className="bg-white"
+            />
           </div>
         </section>
       </main>

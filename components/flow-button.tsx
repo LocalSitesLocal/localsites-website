@@ -63,7 +63,7 @@ export function FlowButton({
     <>
       <ArrowRight
         className={cn(
-          'absolute left-[-25%] z-[9] h-4 w-4 fill-none transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:left-4 group-hover:stroke-white',
+          'absolute left-[-25%] z-[9] h-4 w-4 fill-none transition-[left] duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:left-4 group-hover:stroke-white',
           styles.arrow
         )}
       />
@@ -78,7 +78,7 @@ export function FlowButton({
       />
       <ArrowRight
         className={cn(
-          'absolute right-4 z-[9] h-4 w-4 fill-none transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:right-[-25%] group-hover:stroke-white',
+          'absolute right-4 z-[9] h-4 w-4 fill-none transition-[right] duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:right-[-25%] group-hover:stroke-white',
           styles.arrow
         )}
       />
@@ -86,7 +86,7 @@ export function FlowButton({
   )
 
   const sharedClassName = cn(
-    'group relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-1 overflow-hidden rounded-[100px] border-[1.5px] bg-white/70 px-8 py-3 text-sm font-semibold shadow-[0_12px_35px_rgba(15,40,80,0.08)] backdrop-blur transition-all duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-[12px] hover:border-transparent hover:text-white active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2',
+    'group relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-1 overflow-hidden rounded-[100px] border-[1.5px] bg-white/70 px-8 py-3 text-sm font-semibold shadow-[0_12px_35px_rgba(15,40,80,0.08)] backdrop-blur transition-[border-radius,border-color,background-color,box-shadow,transform] duration-[600ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-[12px] hover:border-transparent hover:text-white active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2',
     styles.button,
     className
   )

@@ -31,20 +31,20 @@ export function HeroSection() {
           <p className="mb-5 inline-flex rounded-full border border-[#0b63ce]/15 bg-white/72 px-4 py-2 text-sm font-semibold text-[#0b63ce] shadow-[0_12px_40px_rgba(15,70,130,0.08)] backdrop-blur">
             Schweinfurt · Würzburg · Mainfranken
           </p>
-          <h1 className="max-w-[680px] text-5xl font-black leading-[0.98] tracking-[-0.055em] text-[#061637] sm:text-6xl lg:text-7xl">
-            Websites.
+          <h1 className="max-w-[760px] text-[2.35rem] font-black leading-[0.98] tracking-[-0.045em] text-[#061637] sm:text-6xl sm:tracking-[-0.055em] lg:text-7xl">
+            Mehr Anfragen.
             <br />
-            Klare Abläufe.
+            Weniger Zettelwirtschaft.
             <br />
             Für <span className="text-[#0b63ce]">lokale Unternehmen.</span>
           </h1>
-          <p className="mt-7 max-w-[21rem] text-base leading-8 text-[#334667] sm:max-w-lg sm:text-lg">
-            Websites und digitale Betriebszentralen für lokale Betriebe in Mainfranken.
+          <p className="mt-7 max-w-[22rem] text-base leading-8 text-[#334667] sm:max-w-2xl sm:text-lg">
+            Websites und digitale Betriebszentralen für lokale Betriebe in Mainfranken – vom ersten Klick bis zum erledigten Auftrag.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <FlowButton text="Kostenlose Ersteinschätzung" href="#kontakt" tone="orange" className="bg-white/85" />
-            <FlowButton text="Lösungen vergleichen" href="/preise" tone="blue" className="bg-white/70" />
+            <FlowButton text="Passende Lösung finden" href="/preise/finder" tone="orange" className="bg-white/85" />
+            <FlowButton text="Kostenlose Ersteinschätzung" href="#kontakt" tone="blue" className="bg-white/70" />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">

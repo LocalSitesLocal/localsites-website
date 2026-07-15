@@ -5,7 +5,7 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { formatEuro, operatingCenterPackages, websitePackages } from '@/lib/offers'
+import { digitalBusinessPackage, operatingCenterPackages, websitePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
@@ -32,9 +32,9 @@ const areas = [
   {
     icon: Combine,
     label: 'Digitaler Betrieb',
-    price: `ab ${formatEuro(websitePackages[1].setupPrice + operatingCenterPackages[1].setupPrice)}`,
+    price: digitalBusinessPackage.price,
     text: 'Website und Betriebszentrale als abgestimmte Gesamtlösung.',
-    href: '/preise/finder',
+    href: '/preise/digitaler-betrieb',
     recommended: true,
   },
 ]

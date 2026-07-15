@@ -22,8 +22,8 @@ export default function Home() {
         <ServicesSection />
         <OperatingCenterProofSection />
         <PackagePreviewSection />
-        <WebsiteCheckSection />
         <DemosSection />
+        <WebsiteCheckSection />
         <ProcessSection />
         <AboutSection />
         <FaqSection />

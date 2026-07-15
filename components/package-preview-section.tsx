@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Combine, Globe2, LayoutDashboard } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { formatEuro, operatingCenterPackages, websitePackages } from '@/lib/offers'
+import { digitalBusinessPackage, operatingCenterPackages, websitePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
 
 const solutionPaths = [
@@ -21,8 +21,8 @@ const solutionPaths = [
   {
     icon: Combine,
     name: 'Digitaler Betrieb',
-    price: `ab ${formatEuro(websitePackages[1].setupPrice + operatingCenterPackages[1].setupPrice)}`,
-    href: '/preise/finder',
+    price: digitalBusinessPackage.price,
+    href: '/preise/digitaler-betrieb',
     recommended: true,
   },
 ]
