@@ -19,9 +19,9 @@ const toneClasses = {
     arrow: 'stroke-[#111111]',
   },
   orange: {
-    button: 'border-[#ff6a00]/45 text-[#0a1733]',
-    circle: 'bg-[#ff6a00]',
-    arrow: 'stroke-[#ff6a00]',
+    button: 'border-[#c94f00]/55 text-[#0a1733]',
+    circle: 'bg-[#c94f00]',
+    arrow: 'stroke-[#c94f00]',
   },
   blue: {
     button: 'border-[#0b63ce]/45 text-[#0a1733]',

@@ -111,7 +111,7 @@ export default function BetriebszentralePage() {
         <section className="border-y border-[#dfeaf5] bg-white py-14 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:px-8">
             <Reveal>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#ff6a00]">Realistisches Beispiel</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#a94000]">Realistisches Beispiel</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-5xl">
                 Ein Dashboard für den täglichen Überblick.
               </h2>
@@ -194,7 +194,7 @@ export default function BetriebszentralePage() {
                     )}
                   >
                     <div className="min-h-7">
-                      {item.recommended && <span className="rounded-full bg-[#fff0e5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">Empfohlen</span>}
+                      {item.recommended && <span className="rounded-full bg-[#fff0e5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#a94000]">Empfohlen</span>}
                     </div>
                     <h3 className="mt-4 text-xl font-black text-[#061637]">{item.name}</h3>
                     <p className="mt-2 text-2xl font-black text-[#0b63ce]">{item.price}</p>

@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
-import { ArrowRight, Clock3, GitCompareArrows, Globe2, LayoutDashboard, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Clock3, Combine, GitCompareArrows, Globe2, LayoutDashboard } from 'lucide-react'
 import Link from 'next/link'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { carePackages, operatingCenterPackages, websitePackages } from '@/lib/offers'
+import { formatEuro, operatingCenterPackages, websitePackages } from '@/lib/offers'
+import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Angebote & Preise | LocalSites',
   description:
-    'Finden Sie in 60 Sekunden eine passende Empfehlung oder vergleichen Sie Websites, digitale Betriebszentralen und Betreuung direkt miteinander.',
+    'Vergleichen Sie Websites, digitale Betriebszentralen und die Komplettlösung Digitaler Betrieb.',
 }
 
 const areas = [
@@ -29,11 +30,12 @@ const areas = [
     href: '/preise/vergleich?bereich=betriebszentrale',
   },
   {
-    icon: ShieldCheck,
-    label: 'Betreuung',
-    price: carePackages[0].price,
-    text: 'Pflege, Sichtbarkeit und System-Support.',
-    href: '/preise/vergleich?bereich=betreuung',
+    icon: Combine,
+    label: 'Digitaler Betrieb',
+    price: `ab ${formatEuro(websitePackages[1].setupPrice + operatingCenterPackages[1].setupPrice)}`,
+    text: 'Website und Betriebszentrale als abgestimmte Gesamtlösung.',
+    href: '/preise/finder',
+    recommended: true,
   },
 ]
 
@@ -63,12 +65,20 @@ export default function PreisePage() {
                 <Reveal key={area.label} delay={index * 70} className="h-full">
                   <Link
                     href={area.href}
-                    className="group flex h-full gap-4 border-b border-[#d7e7f7] py-6 transition-colors hover:bg-[#f8fbff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/40 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+                    className={cn(
+                      'group flex h-full gap-4 border-b border-[#d7e7f7] px-4 py-6 transition-colors hover:bg-[#f8fbff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0b63ce]/40 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0 md:last:pr-0',
+                      area.recommended && 'bg-[linear-gradient(150deg,#f8fbff_0%,#eef6ff_72%,#fff7f0_100%)]'
+                    )}
                   >
                     <span className="motion-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-[8px] bg-[#eef6ff] text-[#0b63ce]">
                       <area.icon className="h-5 w-5" />
                     </span>
                     <span className="min-w-0 flex-1">
+                      {area.recommended && (
+                        <span className="mb-2 inline-flex rounded-full bg-[#ffefe5] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#a94000]">
+                          Empfohlen
+                        </span>
+                      )}
                       <span className="flex items-center justify-between gap-3 font-black text-[#061637]">
                         {area.label}
                         <ArrowRight className="motion-arrow h-4 w-4 shrink-0 text-[#0b63ce]" />

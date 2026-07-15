@@ -1,9 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { ArrowRight, Clock3, MapPin, ShieldCheck } from 'lucide-react'
+import { Clock3, MapPin, ShieldCheck } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
-import { openLocalSitesChat } from '@/lib/chat'
 
 const trustItems = [
   { icon: MapPin, label: 'Regional & persönlich' },
@@ -40,21 +39,13 @@ export function HeroSection() {
             Für <span className="text-[#0b63ce]">lokale Unternehmen.</span>
           </h1>
           <p className="mt-7 max-w-[21rem] text-base leading-8 text-[#334667] sm:max-w-lg sm:text-lg">
-            Websites, digitale Betriebszentralen und Betreuung für lokale Betriebe in Mainfranken.
+            Websites und digitale Betriebszentralen für lokale Betriebe in Mainfranken.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <FlowButton text="Angebote & Preise" href="/preise" tone="orange" className="bg-white/85" />
-            <FlowButton text="Kostenlose Ersteinschätzung" href="#kontakt" tone="blue" className="bg-white/70" />
+            <FlowButton text="Kostenlose Ersteinschätzung" href="#kontakt" tone="orange" className="bg-white/85" />
+            <FlowButton text="Lösungen vergleichen" href="/preise" tone="blue" className="bg-white/70" />
           </div>
-          <button
-            type="button"
-            onClick={() => openLocalSitesChat()}
-            className="mt-5 hidden items-center gap-2 text-sm font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35 sm:inline-flex"
-          >
-            KI-Empfang live testen
-            <ArrowRight className="h-4 w-4" />
-          </button>
 
           <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
             {trustItems.map((item) => (

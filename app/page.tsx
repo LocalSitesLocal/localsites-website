@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/hero-section'
 import { ProblemSection } from '@/components/problem-section'
 import { WebsiteCheckSection } from '@/components/website-check-section'
 import { ServicesSection } from '@/components/services-section'
+import { OperatingCenterProofSection } from '@/components/operating-center-proof-section'
 import { PackagePreviewSection } from '@/components/package-preview-section'
 import { DemosSection } from '@/components/demos-section'
 import { ProcessSection } from '@/components/process-section'
@@ -19,6 +20,7 @@ export default function Home() {
         <HeroSection />
         <ProblemSection />
         <ServicesSection />
+        <OperatingCenterProofSection />
         <PackagePreviewSection />
         <WebsiteCheckSection />
         <DemosSection />

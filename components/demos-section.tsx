@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, LayoutDashboard } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/reveal'
 import { websitePackages } from '@/lib/offers'
@@ -19,13 +19,6 @@ const demos = [
     title: 'Restaurant & Bar',
     href: '/demos/restaurant',
     image: '/demo-previews/restaurant-mood.png',
-    package: businessPackage.name,
-    price: businessPackage.price,
-  },
-  {
-    title: 'Kanzlei & Beratung',
-    href: '/demos/steuerberatung',
-    image: '/demo-previews/steuerberatung-mood.png',
     package: businessPackage.name,
     price: businessPackage.price,
   },
@@ -73,10 +66,52 @@ export function DemosSection() {
               </Link>
             </Reveal>
           ))}
+
+          <Reveal delay={180}>
+            <Link
+              href="#betriebszentrale-demo"
+              className="motion-card group block h-full overflow-hidden rounded-[10px] border border-[#0b63ce]/45 bg-[linear-gradient(145deg,#f7fbff_0%,#eef6ff_66%,#fff7f0_100%)] shadow-[0_22px_65px_rgba(11,99,206,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce] focus-visible:ring-offset-2"
+            >
+              <div className="h-60 overflow-hidden bg-[#061637] p-4">
+                <div className="flex items-center justify-between text-white">
+                  <span className="flex items-center gap-2 text-xs font-black">
+                    <LayoutDashboard className="h-4 w-4 text-[#73adff]" />
+                    Auftragsübersicht
+                  </span>
+                  <Badge className="border-0 bg-white text-[#061637]">Interaktive Demo</Badge>
+                </div>
+                <div className="mt-4 grid h-[178px] grid-cols-2 gap-2 rounded-[7px] bg-[#d7e7f7] p-2 sm:grid-cols-4">
+                  {[
+                    ['Anfrage', 'Müller'],
+                    ['Angebot', 'Mainblick'],
+                    ['Auftrag', ''],
+                    ['Projekt', 'Koch'],
+                  ].map(([stage, customer]) => (
+                    <div key={stage} className="min-w-0 rounded-[5px] bg-[#f8fbff] p-2">
+                      <p className="truncate text-[10px] font-black text-[#061637]">{stage}</p>
+                      {customer && (
+                        <div className="mt-2 rounded-[5px] border border-[#bfd5ea] bg-white p-2 shadow-sm">
+                          <p className="truncate text-[10px] font-bold text-[#061637]">{customer}</p>
+                          <div className="mt-2 h-1.5 w-3/4 rounded-full bg-[#dbeafb]" />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center justify-between gap-4 p-6">
+                <div>
+                  <h3 className="font-black text-[#061637]">Digitale Betriebszentrale</h3>
+                  <p className="mt-1 text-sm text-[#52647d]">Anfragen und Aufträge sichtbar organisieren</p>
+                </div>
+                <ArrowRight className="motion-arrow h-5 w-5 shrink-0 text-[#0b63ce]" />
+              </div>
+            </Link>
+          </Reveal>
         </div>
 
         <p className="mt-7 text-center text-sm text-[#52647d]">
-          Alle Vorschauen sind Demo-Websites und keine echten Kundenprojekte.
+          Die Vorschauen zeigen Demo-Websites und eine beispielhafte Betriebszentrale, keine echten Kundendaten.
         </p>
       </div>
     </section>

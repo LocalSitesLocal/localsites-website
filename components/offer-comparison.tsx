@@ -33,7 +33,7 @@ function PackageCards({ tab }: { tab: ComparisonTab }) {
           >
             <div className="min-h-7">
               {item.recommended && (
-                <span className="inline-flex rounded-full bg-[#fff0e5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+                <span className="inline-flex rounded-full bg-[#fff0e5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#a94000]">
                   Empfohlen
                 </span>
               )}

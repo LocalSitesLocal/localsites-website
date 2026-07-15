@@ -55,7 +55,7 @@ export default async function PackageDetailPage({
               <div className="flex flex-wrap items-center gap-3">
                 <p className="text-xs font-black uppercase tracking-[0.2em] text-[#0b63ce]">Website-Paket</p>
                 {item.recommended && (
-                  <span className="rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+                  <span className="rounded-full bg-[#fff2e8] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#a94000]">
                     Beliebt
                   </span>
                 )}
@@ -97,7 +97,7 @@ export default async function PackageDetailPage({
               </ul>
             </div>
             <div className="border-t border-[#d7e7f7] pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ff6a00]">Gut zu wissen</p>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a94000]">Gut zu wissen</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Wann die n&auml;chste Stufe sinnvoll ist</h2>
               <p className="mt-6 text-lg leading-8 text-[#52647d]">{item.nextPackageHint}</p>
             </div>
@@ -129,7 +129,7 @@ export default async function PackageDetailPage({
                 <p className="mt-3 leading-7 text-[#52647d]">{item.correctionRounds}</p>
               </div>
               <div className="border-l-4 border-[#ff6a00] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)] sm:p-8">
-                <Clock3 className="h-6 w-6 text-[#ff6a00]" />
+                <Clock3 className="h-6 w-6 text-[#a94000]" />
                 <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Dauer der Umsetzung</h2>
                 <p className="mt-4 leading-7 text-[#52647d]">{item.timeline}</p>
               </div>
@@ -186,13 +186,13 @@ export default async function PackageDetailPage({
               </ul>
             </div>
             <div>
-              <Target className="h-7 w-7 text-[#ff6a00]" />
-              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#ff6a00]">Optional</p>
+              <Target className="h-7 w-7 text-[#a94000]" />
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#a94000]">Optional</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Sinnvolle Zusatzleistungen</h2>
               <ul className="mt-7 grid gap-4">
                 {item.additions.map((entry) => (
                   <li key={entry} className="flex gap-3 leading-7 text-[#263956]">
-                    <Check className="mt-1 h-5 w-5 shrink-0 text-[#ff6a00]" />
+                    <Check className="mt-1 h-5 w-5 shrink-0 text-[#a94000]" />
                     <span>{entry}</span>
                   </li>
                 ))}

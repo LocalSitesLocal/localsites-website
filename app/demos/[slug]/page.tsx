@@ -78,7 +78,7 @@ export default async function DemoPage({ params }: { params: Promise<{ slug: str
                 href={demo.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center gap-2 rounded-md bg-[#ff6a00] px-6 font-black text-white transition-colors hover:bg-[#e45f00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="inline-flex min-h-12 items-center gap-2 rounded-md bg-[#c94f00] px-6 font-black text-white transition-colors hover:bg-[#a94000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Demo öffnen <ArrowRight className="h-4 w-4" />
               </a>

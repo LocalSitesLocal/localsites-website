@@ -132,14 +132,14 @@ export default function KiEmpfangPage() {
             </div>
 
             <div>
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff2e8] text-[#ff6a00]">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff2e8] text-[#a94000]">
                 <ShieldCheck className="h-6 w-6" />
               </div>
               <h2 className="text-3xl font-black text-[#061637]">Wo klare Grenzen bleiben</h2>
               <ul className="mt-6 space-y-3">
                 {limits.map((limit) => (
                   <li key={limit} className="flex gap-3 text-[#263956]">
-                    <UserCheck className="mt-1 h-4 w-4 shrink-0 text-[#ff6a00]" />
+                    <UserCheck className="mt-1 h-4 w-4 shrink-0 text-[#a94000]" />
                     <span>{limit}</span>
                   </li>
                 ))}

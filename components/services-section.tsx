@@ -1,7 +1,6 @@
-import { Bot, Check, Globe2, LayoutDashboard, ShieldCheck } from 'lucide-react'
+import { Check, Globe2, LayoutDashboard } from 'lucide-react'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { carePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
 
 const services = [
@@ -17,22 +16,8 @@ const services = [
     title: 'Digitale Betriebszentrale',
     text: 'Anfragen, Kunden, Angebote, Projekte, Aufgaben und Termine zentral verwalten, statt Informationen verteilt zu suchen.',
     highlighted: true,
-    items: ['Anfragen & Kunden', 'Angebote & Aufträge', 'Aufgaben & Termine', 'individuell auf Airtable aufgebaut'],
+    items: ['Anfragen & Kunden', 'Angebote & Aufträge', 'Aufgaben & Termine', 'fertig eingerichtete Arbeitsoberfläche'],
     button: { text: 'Betriebszentrale verstehen', href: '/betriebszentrale' },
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Betreuung',
-    text: 'Klar definierte monatliche Pflege für Websites, Sichtbarkeit und digitale Systeme.',
-    items: [`Website-Pflege ${carePackages[0].price}`, 'klare Leistungen', 'technische Kontrolle', 'Systempflege nach Paket'],
-    button: { text: 'Betreuung vergleichen', href: '/preise/vergleich?bereich=betreuung' },
-  },
-  {
-    icon: Bot,
-    title: 'KI-Empfang',
-    text: 'Optionales Premium-Upgrade, das Standardfragen beantwortet und Kontaktdaten für den Betrieb aufnimmt.',
-    items: ['häufige Fragen', 'Kontaktdaten sammeln', 'mehrsprachige Antworten', 'Weitergabe an den Betrieb'],
-    button: { text: 'KI-Empfang ansehen', href: '/ki-empfang' },
   },
 ]
 
@@ -59,7 +44,7 @@ export function ServicesSection() {
                 )}
               >
                 {service.highlighted && (
-                  <span className="mb-5 inline-flex rounded-full bg-[#ffefe5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ff6a00]">
+                  <span className="mb-5 inline-flex rounded-full bg-[#ffefe5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#a94000]">
                     Alles an einem Ort
                   </span>
                 )}

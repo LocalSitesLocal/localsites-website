@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { MessageCircle, X } from 'lucide-react'
 import { OPEN_CHAT_EVENT } from '@/lib/chat'
 import { cn } from '@/lib/utils'
@@ -12,9 +12,16 @@ type ChatbaseWidgetProps = {
 export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [hasOpened, setHasOpened] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   const openChat = useCallback(() => {
     setHasOpened(true)
     setIsOpen(true)
+  }, [])
+
+  const closeChat = useCallback(() => {
+    setIsOpen(false)
+    window.requestAnimationFrame(() => triggerRef.current?.focus())
   }, [])
 
   useEffect(() => {
@@ -29,17 +36,33 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
     }
   }, [chatbotId, openChat])
 
+  useEffect(() => {
+    if (!isOpen) return
+
+    const frame = window.requestAnimationFrame(() => closeRef.current?.focus())
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeChat()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [closeChat, isOpen])
+
   if (!chatbotId) return null
 
   return (
     <div
       className={cn(
-        'fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6',
+        'fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-[90] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6',
         isOpen ? 'pointer-events-auto' : 'pointer-events-none'
       )}
     >
       <button
         type="button"
+        ref={triggerRef}
         onClick={openChat}
         className={cn(
           'pointer-events-auto hidden items-center justify-center rounded-full border border-[#061637] bg-[#061637] text-sm font-black text-white shadow-[0_18px_50px_rgba(15,55,100,0.2)] transition-[opacity,transform,background-color] duration-250 hover:-translate-y-0.5 hover:bg-[#0b63ce] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/40 sm:inline-flex sm:gap-2 sm:px-4 sm:py-3',
@@ -54,9 +77,12 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
       </button>
       <div
         id="localsites-chat-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="localsites-chat-title"
         aria-hidden={!isOpen}
         className={cn(
-          'h-[min(680px,calc(100vh-7rem))] w-[calc(100vw-2.5rem)] overflow-hidden rounded-[12px] border border-[#b8d0ec] bg-[#061637] shadow-[0_28px_90px_rgba(6,22,55,0.24)] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:w-[390px]',
+          'h-[min(680px,calc(100dvh-2rem-env(safe-area-inset-top)))] w-[calc(100vw-2rem)] max-w-[390px] overflow-hidden rounded-[12px] border border-[#b8d0ec] bg-[#061637] shadow-[0_28px_90px_rgba(6,22,55,0.24)] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-[min(680px,calc(100dvh-7rem))]',
           isOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
         )}
       >
@@ -65,11 +91,12 @@ export function ChatbaseWidget({ chatbotId }: ChatbaseWidgetProps) {
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0b63ce] text-white">
               <MessageCircle className="h-3.5 w-3.5" />
             </span>
-            <p className="text-sm font-black">KI-Empfang</p>
+            <p id="localsites-chat-title" className="text-sm font-black">KI-Empfang</p>
           </div>
           <button
             type="button"
-            onClick={() => setIsOpen(false)}
+            ref={closeRef}
+            onClick={closeChat}
             className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
             aria-label="Chat schliessen"
           >

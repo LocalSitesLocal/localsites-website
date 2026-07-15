@@ -284,7 +284,7 @@ export function ContactSection() {
                     type="submit"
                     disabled={isLoading}
                     aria-busy={isLoading}
-                    className="h-12 w-full rounded-md bg-[#ff6a00] font-black text-white shadow-[0_16px_40px_rgba(255,106,0,0.22)] transition-transform active:scale-[0.98]"
+                    className="h-12 w-full rounded-md bg-[#c94f00] font-black text-white shadow-[0_16px_40px_rgba(201,79,0,0.22)] transition-colors hover:bg-[#a94000] active:scale-[0.98]"
                   >
                     {isLoading ? 'Wird gesendet...' : 'Kostenlose Ersteinschätzung anfragen'}
                   </Button>
