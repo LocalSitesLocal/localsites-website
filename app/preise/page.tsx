@@ -5,13 +5,13 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { FlowButton } from '@/components/flow-button'
 import { Reveal } from '@/components/reveal'
-import { digitalBusinessPackage, operatingCenterPackages, websitePackages } from '@/lib/offers'
+import { digitalBusinessPackage, operatingCenterPackages, pricingDisclosure, websitePackages } from '@/lib/offers'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Angebote & Preise | LocalSites',
   description:
-    'Vergleichen Sie Websites, digitale Betriebszentralen und die Komplettlösung Digitaler Betrieb.',
+    'Vergleichen Sie Websites, Betriebszentralen und die Komplettlösung Digitaler Betrieb.',
 }
 
 const areas = [
@@ -24,7 +24,7 @@ const areas = [
   },
   {
     icon: LayoutDashboard,
-    label: 'Digitale Betriebszentrale',
+    label: 'Betriebszentrale',
     price: operatingCenterPackages[0].price,
     text: 'Anfragen und Aufträge zentral organisieren.',
     href: '/preise/vergleich?bereich=betriebszentrale',
@@ -95,6 +95,7 @@ export default function PreisePage() {
               <span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4 text-[#0b63ce]" /> Kurze Empfehlung</span>
               <span className="inline-flex items-center gap-2"><GitCompareArrows className="h-4 w-4 text-[#0b63ce]" /> Transparenter Vergleich</span>
             </div>
+            <p className="mt-5 max-w-3xl text-xs font-bold leading-5 text-[#52647d]">{pricingDisclosure}</p>
           </div>
         </section>
       </main>

@@ -49,6 +49,12 @@ function PackageCards({ tab }: { tab: ComparisonTab }) {
                 </li>
               ))}
             </ul>
+            {'responseTime' in item && (
+              <div className="mt-5 border-t border-[#d7e7f7] pt-4 text-xs leading-5 text-[#52647d]">
+                <p className="font-black text-[#061637]">{item.responseTime}</p>
+                {item.conditions.map((condition) => <p key={condition} className="mt-1">{condition}</p>)}
+              </div>
+            )}
             <Link
               href={href}
               className="mt-7 inline-flex min-h-12 items-center justify-between border-t border-[#d7e7f7] pt-4 text-sm font-black text-[#0b63ce] transition-colors hover:text-[#061637] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b63ce]/35"

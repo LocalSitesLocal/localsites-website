@@ -10,18 +10,19 @@ import {
   LayoutDashboard,
   RefreshCw,
   ShieldCheck,
+  WalletCards,
 } from 'lucide-react'
 import { DirectOfferRequestButton } from '@/components/direct-offer-request-button'
 import { FlowButton } from '@/components/flow-button'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { Reveal } from '@/components/reveal'
-import { digitalBusinessPackage, type StoredOfferSummary } from '@/lib/offers'
+import { digitalBusinessPackage, formatEuro, ownershipNote, paymentPlan, pricingDisclosure, type StoredOfferSummary } from '@/lib/offers'
 
 export const metadata: Metadata = {
   title: 'Digitaler Betrieb | LocalSites',
   description:
-    'Website und digitale Betriebszentrale als verbundene Gesamtlösung für lokale Betriebe in Mainfranken.',
+    'Website und Betriebszentrale als verbundene Gesamtlösung für lokale Betriebe in Mainfranken.',
 }
 
 const workflow = [
@@ -40,16 +41,21 @@ const idealFor = [
 const directSummary: StoredOfferSummary = {
   website: digitalBusinessPackage.website.name,
   operatingCenter: digitalBusinessPackage.operatingCenter.name,
-  care: digitalBusinessPackage.care.name,
+  care: 'Keine Betreuung',
   extensions: [
     'Verbundenes Anfrageformular',
     'einfache Status- oder E-Mail-Automation',
     'drei Monate Startbegleitung enthalten',
   ],
   setup: digitalBusinessPackage.price,
-  monthly: '249 €/Monat nach 3 Monaten',
+  monthly: '0 €/Monat; danach Systembetreuung optional 249 €/Monat',
   reason:
     'Website und Betriebszentrale werden als zusammenhängende Lösung eingerichtet – vom ersten Kundenkontakt bis zum sichtbaren nächsten Schritt.',
+  packageName: digitalBusinessPackage.name,
+  individualValue: `ab ${formatEuro(digitalBusinessPackage.individualValue)}`,
+  packageAdvantage: formatEuro(digitalBusinessPackage.packageAdvantage),
+  includedSupport: 'Drei Monate enthalten',
+  externalCosts: 'Je nach eingesetzten Diensten separat',
 }
 
 export default function DigitalerBetriebPage() {
@@ -79,8 +85,9 @@ export default function DigitalerBetriebPage() {
               <p className="mt-5 text-3xl font-black tracking-[-0.035em] text-[#0b63ce]">
                 {digitalBusinessPackage.price}
               </p>
+              <p className="mt-2 text-xs font-bold leading-5 text-[#52647d]">{pricingDisclosure}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">
-                Eine professionelle Website gewinnt und strukturiert Anfragen. Die digitale Betriebszentrale führt Kunden, Angebote, Aufgaben und Projekte anschließend bis zum nächsten Schritt weiter.
+                Eine professionelle Website gewinnt und strukturiert Anfragen. Die Betriebszentrale führt Kunden, Angebote, Aufgaben und Projekte anschließend bis zum nächsten Schritt weiter.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <DirectOfferRequestButton
@@ -184,8 +191,22 @@ export default function DigitalerBetriebPage() {
                 Der Mehrwert liegt in der Verbindung.
               </h2>
               <p className="mt-5 leading-7 text-[#52647d]">
-                Der Preis entspricht den beiden empfohlenen Basislösungen. Zusätzlich sind die technische Verbindung, eine erste Automation und die Startbegleitung bereits als gemeinsamer Projektumfang eingeplant.
+                Einzelwert ab {formatEuro(digitalBusinessPackage.individualValue)} – als abgestimmte Gesamtlösung ab {formatEuro(digitalBusinessPackage.setupPrice)}. Die technische Verbindung, eine erste Automation und drei Monate Startbegleitung sind bereits eingeplant.
               </p>
+              <div className="mt-7 grid gap-3 sm:grid-cols-3">
+                <div className="border-t-2 border-[#0b63ce] pt-4">
+                  <p className="text-xs font-black uppercase tracking-[0.12em] text-[#52647d]">Einzelwert</p>
+                  <p className="mt-1 text-xl font-black text-[#061637]">ab {formatEuro(digitalBusinessPackage.individualValue)}</p>
+                </div>
+                <div className="border-t-2 border-[#0b63ce] pt-4">
+                  <p className="text-xs font-black uppercase tracking-[0.12em] text-[#52647d]">Paketpreis</p>
+                  <p className="mt-1 text-xl font-black text-[#061637]">ab {formatEuro(digitalBusinessPackage.setupPrice)}</p>
+                </div>
+                <div className="border-t-2 border-[#ff6a00] pt-4">
+                  <p className="text-xs font-black uppercase tracking-[0.12em] text-[#52647d]">Paketvorteil</p>
+                  <p className="mt-1 text-xl font-black text-[#a94000]">{formatEuro(digitalBusinessPackage.packageAdvantage)}</p>
+                </div>
+              </div>
             </Reveal>
             <Reveal delay={100}>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -223,6 +244,33 @@ export default function DigitalerBetriebPage() {
                 In den ersten drei Monaten prüfen wir die Betriebszentrale im Alltag, beantworten Rückfragen und nehmen kleine Korrekturen an den eingerichteten Abläufen vor. Danach ist die laufende Systembetreuung für 249 €/Monat optional.
               </p>
             </Reveal>
+          </div>
+        </section>
+
+        <section className="border-y border-[#dfeaf5] bg-[#f8fbff] py-14 lg:py-20">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <Reveal className="max-w-3xl">
+              <WalletCards className="h-7 w-7 text-[#0b63ce]" />
+              <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Klar vereinbart</p>
+              <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637] sm:text-4xl">Umfang, Übergabe und laufende Kosten bleiben transparent.</h2>
+            </Reveal>
+            <div className="mt-9 grid gap-6 lg:grid-cols-3">
+              <div className="bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
+                <h3 className="font-black text-[#061637]">Umsetzung</h3>
+                <p className="mt-3 text-sm leading-6 text-[#52647d]">In der Regel 6 bis 10 Wochen nach Bereitstellung der Inhalte, Daten und Zugänge. Enthalten sind zwei Korrekturrunden für die Website und ein gemeinsamer Systemtest.</p>
+              </div>
+              <div className="bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
+                <h3 className="font-black text-[#061637]">Zahlungsplan</h3>
+                <ul className="mt-3 grid gap-2">
+                  {paymentPlan.map((step) => <li key={step} className="text-sm leading-6 text-[#52647d]">{step}</li>)}
+                </ul>
+              </div>
+              <div className="bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)]">
+                <h3 className="font-black text-[#061637]">Externe Dienste</h3>
+                <p className="mt-3 text-sm leading-6 text-[#52647d]">Airtable, Resend, Calendly, Vercel, Domain und weitere Tools laufen nach Möglichkeit im Kundenkonto und werden separat ausgewiesen.</p>
+              </div>
+            </div>
+            <p className="mt-7 border-l-2 border-[#0b63ce] pl-4 text-sm leading-6 text-[#52647d]">{ownershipNote}</p>
           </div>
         </section>
 

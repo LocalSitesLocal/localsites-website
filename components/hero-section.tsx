@@ -31,7 +31,7 @@ export function HeroSection() {
           <p className="mb-5 inline-flex rounded-full border border-[#0b63ce]/15 bg-white/72 px-4 py-2 text-sm font-semibold text-[#0b63ce] shadow-[0_12px_40px_rgba(15,70,130,0.08)] backdrop-blur">
             Schweinfurt · Würzburg · Mainfranken
           </p>
-          <h1 className="max-w-[760px] text-[2.35rem] font-black leading-[0.98] tracking-[-0.045em] text-[#061637] sm:text-6xl sm:tracking-[-0.055em] lg:text-7xl">
+          <h1 className="max-w-[760px] text-[2.35rem] font-black leading-[1.06] tracking-[-0.045em] text-[#061637] sm:text-6xl sm:leading-[0.98] sm:tracking-[-0.055em] lg:text-7xl">
             Mehr Anfragen.
             <br />
             Weniger Zettelwirtschaft.
@@ -39,7 +39,7 @@ export function HeroSection() {
             Für <span className="text-[#0b63ce]">lokale Unternehmen.</span>
           </h1>
           <p className="mt-7 max-w-[22rem] text-base leading-8 text-[#334667] sm:max-w-2xl sm:text-lg">
-            Websites und digitale Betriebszentralen für lokale Betriebe in Mainfranken – vom ersten Klick bis zum erledigten Auftrag.
+            LocalSites erstellt professionelle Websites und Betriebszentralen für lokale Betriebe – vom ersten Kundenkontakt bis zum nächsten klaren Arbeitsschritt.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

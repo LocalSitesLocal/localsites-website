@@ -4,18 +4,18 @@ import { Reveal } from '@/components/reveal'
 const problems = [
   {
     icon: Clock3,
-    title: 'Veralteter Online-Auftritt',
-    text: 'Die Website wirkt nicht mehr so professionell wie der Betrieb dahinter.',
+    title: 'Website wirkt nicht so professionell wie der Betrieb',
+    text: 'Ein veralteter Auftritt kostet Vertrauen, bevor ein persönlicher Kontakt entsteht.',
   },
   {
     icon: Inbox,
-    title: 'Anfragen und Informationen sind verteilt',
-    text: 'E-Mails, Notizen, Nachrichten und Tabellen ergeben kein klares Gesamtbild.',
+    title: 'Informationen sind über E-Mail, Notizen und Tabellen verteilt',
+    text: 'Anfragen und Kundendaten ergeben dadurch kein verlässliches Gesamtbild.',
   },
   {
     icon: ListTodo,
-    title: 'Rückrufe und nächste Schritte gehen unter',
-    text: 'Ohne klaren Status und Wiedervorlagen bleibt Wichtiges zu lange liegen.',
+    title: 'Rückrufe und nächste Schritte werden vergessen',
+    text: 'Ohne klaren Status und Wiedervorlage bleibt Wichtiges im Tagesgeschäft liegen.',
   },
 ]
 

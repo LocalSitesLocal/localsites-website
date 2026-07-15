@@ -19,7 +19,7 @@ export default function DatenschutzPage() {
               <h2 className="text-xl font-black text-[#0b1220]">1. Verantwortlicher</h2>
               <div className="leading-7 text-[#5b6b7d]">
                 <p>LocalSites</p>
-                <p>[Vollständiger Name und Unternehmensform ergänzen]</p>
+                <p>Philipp Friedrich</p>
                 <p>[Ladungsfähige Anschrift ergänzen]</p>
                 <p>E-Mail: kontakt@localsites-mainfranken.de</p>
                 <p>Telefon: [Telefonnummer ergänzen]</p>

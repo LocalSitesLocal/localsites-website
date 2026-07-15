@@ -16,12 +16,12 @@ const faqs = [
     'Website Start beginnt bei 1.490 €, Website Business bei 2.490 € und Website Pro bei 3.690 €. Den endgültigen Preis erhalten Sie nach einer kurzen Prüfung des Umfangs.',
   ],
   [
-    'Was ist eine digitale Betriebszentrale?',
+    'Was ist eine Betriebszentrale?',
     'Eine individuell auf Airtable aufgebaute Arbeitsoberfläche, in der Anfragen, Kunden, Angebote, Aufträge, Projekte, Aufgaben und Termine zentral verwaltet werden können.',
   ],
   [
     'Gibt es eine monatliche Betreuung?',
-    'Ja. Website-Pflege startet bei 79 € pro Monat. Pflege & Sichtbarkeit sowie die Betreuung der Betriebszentrale ergänzen je nach Bedarf weitere Leistungen. Betreuung bleibt optional.',
+    'Ja, immer optional: Website-Pflege kostet 79 € pro Monat und enthält den Funktionstest sowie bis zu 20 Minuten Änderungen. Pflege & Sichtbarkeit kostet 149 € mit bis zu 60 Minuten Änderungen. Systembetreuung kostet 249 € mit Systemprüfung und bis zu 90 Minuten Anpassungen. Nicht genutzte Zeit verfällt; zusätzliche Arbeiten werden vorher angeboten.',
   ],
   [
     'Was ist ein KI-Empfang?',

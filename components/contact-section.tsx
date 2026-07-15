@@ -43,6 +43,11 @@ function parsePricingSummary(value: string | null): StoredOfferSummary | null {
       setup: parsed.setup,
       monthly: parsed.monthly,
       reason: typeof parsed.reason === 'string' ? parsed.reason : undefined,
+      packageName: typeof parsed.packageName === 'string' ? parsed.packageName : undefined,
+      individualValue: typeof parsed.individualValue === 'string' ? parsed.individualValue : undefined,
+      packageAdvantage: typeof parsed.packageAdvantage === 'string' ? parsed.packageAdvantage : undefined,
+      includedSupport: typeof parsed.includedSupport === 'string' ? parsed.includedSupport : undefined,
+      externalCosts: typeof parsed.externalCosts === 'string' ? parsed.externalCosts : undefined,
     }
   } catch {
     return null
@@ -82,6 +87,19 @@ function PricingSelectionCard({ summary }: { summary: StoredOfferSummary }) {
       </dl>
 
       {summary.reason && <p className="mt-5 border-l-2 border-[#0b63ce] pl-4 text-sm leading-6 text-[#52647d]">{summary.reason}</p>}
+
+      {summary.packageName && (
+        <div className="mt-5 rounded-[8px] bg-[#061637] p-4 text-white">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-[#7fb7ff]">Empfohlenes Gesamtpaket</p>
+          <p className="mt-1 text-lg font-black">{summary.packageName}</p>
+          <div className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+            {summary.individualValue && <p>Einzelwert: <span className="font-black">{summary.individualValue}</span></p>}
+            {summary.packageAdvantage && <p>Paketvorteil: <span className="font-black">{summary.packageAdvantage}</span></p>}
+            {summary.includedSupport && <p>Startbegleitung: <span className="font-black">{summary.includedSupport}</span></p>}
+            {summary.externalCosts && <p>Toolkosten: <span className="font-black">{summary.externalCosts}</span></p>}
+          </div>
+        </div>
+      )}
 
       <div className="my-5 h-px bg-[#cfe2f5]" />
 

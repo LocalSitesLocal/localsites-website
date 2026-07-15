@@ -8,13 +8,13 @@ import { cn } from '@/lib/utils'
 const solutionPaths = [
   {
     icon: Globe2,
-    name: 'Website',
-    price: websitePackages[0].price,
-    href: '/preise/vergleich?bereich=websites',
+    name: 'Website Business',
+    price: websitePackages[1].price,
+    href: '/preise/business',
   },
   {
     icon: LayoutDashboard,
-    name: 'Betriebszentrale',
+    name: 'Anfrage-Zentrale',
     price: operatingCenterPackages[0].price,
     href: '/preise/vergleich?bereich=betriebszentrale',
   },
@@ -33,12 +33,12 @@ export function PackagePreviewSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
-            <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Angebote & Preise</p>
+            <p className="mb-3 text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Meistgewählte Angebote</p>
             <h2 className="text-3xl font-black leading-tight tracking-[-0.04em] text-[#061637] sm:text-4xl">
-              Drei Wege. Eine klare Entscheidung.
+              Drei klare Einstiege.
             </h2>
             <p className="mt-4 max-w-xl leading-7 text-[#52647d]">
-              Website, Betriebszentrale oder beides als abgestimmte Gesamtlösung.
+              Der häufigste Website-Einstieg, die schlanke Anfrage-Zentrale oder beides als abgestimmte Gesamtlösung.
             </p>
             <FlowButton text="Angebote & Preise ansehen" href="/preise" tone="orange" className="mt-7 bg-white" />
           </div>

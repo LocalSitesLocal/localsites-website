@@ -52,6 +52,7 @@ const AIRTABLE_CARE_ALIASES: Record<string, string> = {
   'Pflege & Sichtbarkeit': 'Care Plus',
   'System-Betreuung': 'Care System',
   'Betreuung der Betriebszentrale': 'Care System',
+  Systembetreuung: 'Care System',
 }
 
 const AIRTABLE_EXTENSION_ALIASES: Record<string, string> = {
@@ -60,6 +61,7 @@ const AIRTABLE_EXTENSION_ALIASES: Record<string, string> = {
   Terminbuchung: 'Calendly / Terminlink',
   'Digitales Anfrage-Board': 'Digitales Anfrage-Board',
   'KI-Empfang Basic': 'KI-Empfang Basic',
+  'KI-Empfang-Einrichtung': 'KI-Empfang Basic',
 }
 
 function clean(value: unknown) {

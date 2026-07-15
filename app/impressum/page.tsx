@@ -18,14 +18,14 @@ export default function ImpressumPage() {
             <section className="space-y-2">
               <h2 className="text-xl font-semibold text-[#0B1220]">Anbieter</h2>
               <p className="text-[#5B6B7D]">LocalSites</p>
-              <p className="text-[#5B6B7D]">[Ihr vollständiger Name]</p>
+              <p className="text-[#5B6B7D]">Philipp Friedrich</p>
               <p className="text-[#5B6B7D]">[Ihre Straße und Hausnummer]</p>
               <p className="text-[#5B6B7D]">[PLZ Ort]</p>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-xl font-semibold text-[#0B1220]">Vertreten durch</h2>
-              <p className="text-[#5B6B7D]">[Ihr vollständiger Name]</p>
+              <p className="text-[#5B6B7D]">Philipp Friedrich</p>
             </section>
 
             <section className="space-y-2">
@@ -41,7 +41,7 @@ export default function ImpressumPage() {
 
             <section className="space-y-2">
               <h2 className="text-xl font-semibold text-[#0B1220]">Verantwortlich für den Inhalt</h2>
-              <p className="text-[#5B6B7D]">[Ihr vollständiger Name]</p>
+              <p className="text-[#5B6B7D]">Philipp Friedrich</p>
               <p className="text-[#5B6B7D]">[Ihre Straße und Hausnummer]</p>
               <p className="text-[#5B6B7D]">[PLZ Ort]</p>
             </section>

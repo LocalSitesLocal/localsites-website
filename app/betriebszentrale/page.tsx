@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import {
   ArrowRight,
   CalendarDays,
@@ -14,12 +13,13 @@ import { Footer } from '@/components/footer'
 import { DirectOfferRequestButton } from '@/components/direct-offer-request-button'
 import { FlowButton } from '@/components/flow-button'
 import { Header } from '@/components/header'
+import { PackageComparisonTable } from '@/components/package-comparison-table'
 import { Reveal } from '@/components/reveal'
 import { operatingCenterPackages } from '@/lib/offers'
-import { cn } from '@/lib/utils'
+import { ownershipNote, paymentPlan, pricingDisclosure } from '@/lib/offers'
 
 export const metadata: Metadata = {
-  title: 'Digitale Betriebszentrale | LocalSites',
+  title: 'Betriebszentrale | LocalSites',
   description:
     'Anfragen, Kunden, Angebote, Projekte, Aufgaben und Termine in einer individuell angepassten Airtable-Betriebszentrale verwalten.',
 }
@@ -38,7 +38,38 @@ const dashboardRows = [
   { customer: 'Mainblick Gutachten', request: 'Projektstart', status: 'In Arbeit', date: '18.07.' },
 ]
 
+const comparisonRows = [
+  { label: 'Zentraler Bereich', values: ['Anfragen & Kontakte', 'Kunden, Angebote & Aufträge', 'Individuelle Betriebsabläufe'] },
+  { label: 'Formular-Übernahme', values: [true, true, true] },
+  { label: 'Status & Wiedervorlage', values: [true, true, true] },
+  { label: 'Kanban-Übersicht', values: [true, true, true] },
+  { label: 'Kundenverwaltung', values: [false, true, true] },
+  { label: 'Angebote & Aufträge', values: [false, true, true] },
+  { label: 'Projekte, Aufgaben & Termine', values: [false, true, true] },
+  { label: 'Automationen', values: ['1 Benachrichtigung', 'Bis zu 2 einfache Automationen', 'Bis zu 5 einfache Automationen'] },
+  { label: 'Dashboards', values: ['5 sinnvolle Ansichten', '1 Übersichts-Dashboard', '2 individuelle Dashboards'] },
+  { label: 'Einführung', values: ['60 Minuten', '90 Minuten', 'Team-Einführung'] },
+  { label: 'Startunterstützung', values: ['30 Tage', '30 Tage', '60 Tage'] },
+  { label: 'Typische Umsetzung', values: ['2 bis 4 Wochen', '4 bis 7 Wochen', '6 bis 10 Wochen'] },
+]
+
 export default function BetriebszentralePage() {
+  const packages = operatingCenterPackages.map((item) => ({
+    name: item.name,
+    price: item.price,
+    description: item.description,
+    recommended: item.recommended,
+    summary: {
+      website: null,
+      operatingCenter: item.name,
+      care: 'Noch offen',
+      extensions: ['Keine ausgewählt'],
+      setup: item.price,
+      monthly: 'Noch offen',
+      reason: `Direktes Interesse an der ${item.name}. Der genaue Umfang wird persönlich abgestimmt.`,
+    },
+  }))
+
   return (
     <>
       <Header />
@@ -46,7 +77,7 @@ export default function BetriebszentralePage() {
         <section className="border-b border-[#dfeaf5] bg-white py-14 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8">
             <Reveal>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Ihre digitale Betriebszentrale</p>
+              <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Ihre Betriebszentrale</p>
               <h1 className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.045em] text-[#061637] sm:text-6xl">
                 Weniger suchen. Klarer weiterarbeiten.
               </h1>
@@ -113,12 +144,12 @@ export default function BetriebszentralePage() {
         <section className="border-y border-[#dfeaf5] bg-white py-14 lg:py-20">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:px-8">
             <Reveal>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#a94000]">Realistisches Beispiel</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#a94000]">Zwei Beispiele</p>
               <h2 className="mt-3 text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-5xl">
-                Ein Dashboard für den täglichen Überblick.
+                Zwei Ansichten für Überblick und tägliche Arbeit.
               </h2>
               <p className="mt-5 leading-7 text-[#52647d]">
-                Statt jedes Detail gleichzeitig zu zeigen, bündelt die Startansicht offene Anfragen, nächste Termine und wichtige Vorgänge. Von dort gelangen Sie in die zugehörigen Datensätze.
+                Die Startansicht zeigt wichtige Zahlen. Das Auftragsboard macht sichtbar, welcher Vorgang als Nächstes bearbeitet werden muss.
               </p>
             </Reveal>
 
@@ -174,6 +205,43 @@ export default function BetriebszentralePage() {
                 </div>
               </div>
             </Reveal>
+
+            <Reveal delay={160} className="min-w-0 lg:col-span-2">
+              <div className="overflow-hidden rounded-[8px] border border-[#bfd5ea] bg-[#f8fbff] shadow-[0_24px_75px_rgba(15,55,100,0.12)]">
+                <div className="flex items-center justify-between border-b border-[#d7e7f7] bg-[#061637] px-5 py-4 text-white">
+                  <div>
+                    <p className="text-xs font-bold text-white/60">LocalSites Beispiel</p>
+                    <h3 className="font-black">Anfrage- und Auftragsboard</h3>
+                  </div>
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white/80">Status per Drag-and-drop</span>
+                </div>
+                <div className="overflow-x-auto">
+                  <div className="grid min-w-[760px] grid-cols-4 gap-3 p-4 sm:p-5">
+                  {[
+                    { stage: 'Neue Anfrage', items: ['Müller Haustechnik', 'Kanzlei Weber'] },
+                    { stage: 'Qualifiziert', items: ['Schreinerei Koch'] },
+                    { stage: 'Angebot offen', items: ['Mainblick Gutachten', 'Autohaus Frank'] },
+                    { stage: 'Auftrag', items: ['Elektro Schäfer'] },
+                  ].map((column) => (
+                    <div key={column.stage} className="rounded-[6px] border border-[#d7e7f7] bg-[#eef6ff] p-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <h4 className="text-xs font-black text-[#061637]">{column.stage}</h4>
+                        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-white text-xs font-black text-[#0b63ce]">{column.items.length}</span>
+                      </div>
+                      <div className="mt-3 grid gap-2">
+                        {column.items.map((item) => (
+                          <div key={item} className="rounded-[5px] border border-[#bfd5ea] bg-white p-3 shadow-sm">
+                            <p className="text-sm font-black text-[#061637]">{item}</p>
+                            <p className="mt-2 text-xs text-[#52647d]">Nächster Schritt festgelegt</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -186,52 +254,36 @@ export default function BetriebszentralePage() {
               </h2>
             </Reveal>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              {operatingCenterPackages.map((item, index) => (
-                <Reveal key={item.id} delay={index * 70}>
-                  <article
-                    className={cn(
-                      'motion-card flex h-full flex-col rounded-[8px] border bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)]',
-                      item.recommended ? 'border-[#0b63ce] bg-[linear-gradient(150deg,#ffffff_0%,#f0f7ff_72%,#fff7f0_100%)] shadow-[0_24px_70px_rgba(11,99,206,0.13)]' : 'border-[#d7e7f7]'
-                    )}
-                  >
-                    <div className="min-h-7">
-                      {item.recommended && <span className="rounded-full bg-[#fff0e5] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#a94000]">Empfohlen</span>}
-                    </div>
-                    <h3 className="mt-4 text-xl font-black text-[#061637]">{item.name}</h3>
-                    <p className="mt-2 text-2xl font-black text-[#0b63ce]">{item.price}</p>
-                    <p className="mt-4 text-sm leading-6 text-[#52647d]">{item.description}</p>
-                    <ul className="mt-6 grid flex-1 gap-3">
-                      {item.features.map((feature) => (
-                        <li key={feature} className="flex gap-2 text-sm leading-6 text-[#263956]">
-                          <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <DirectOfferRequestButton
-                      text="Unverbindlich anfragen"
-                      summary={{
-                        website: null,
-                        operatingCenter: item.name,
-                        care: 'Noch offen',
-                        extensions: ['Keine ausgewählt'],
-                        setup: item.price,
-                        monthly: 'Noch offen',
-                        reason: `Direktes Interesse an der ${item.name}. Der genaue Umfang wird persönlich abgestimmt.`,
-                      }}
-                      tone={item.recommended ? 'orange' : 'blue'}
-                      className="mt-7 bg-white"
-                    />
-                    <Link
-                      href="/preise/finder"
-                      className="mt-4 inline-flex min-h-11 items-center font-black text-[#0b63ce] transition-colors hover:text-[#061637]"
-                    >
-                      Im Finder prüfen <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </article>
-                </Reveal>
-              ))}
+            <Reveal delay={80} className="mt-10">
+              <PackageComparisonTable packages={packages} rows={comparisonRows} />
+            </Reveal>
+          </div>
+        </section>
+
+        <section className="border-t border-[#dfeaf5] bg-white py-14 lg:py-18">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-3 lg:px-8">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Übergabe</p>
+              <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-[#061637]">Ihr eingerichtetes System bleibt zugänglich.</h2>
+              <p className="mt-4 text-sm leading-6 text-[#52647d]">{ownershipNote}</p>
+            </div>
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Zahlungsplan</p>
+              <ul className="mt-4 grid gap-3">
+                {paymentPlan.map((step) => (
+                  <li key={step} className="flex gap-3 text-sm leading-6 text-[#263956]">
+                    <Check className="mt-1 h-4 w-4 shrink-0 text-[#0b63ce]" />
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Toolkosten & Grenzen</p>
+              <p className="mt-4 text-sm leading-6 text-[#52647d]">
+                Airtable und weitere externe Dienste laufen nach Möglichkeit im Kundenkonto und werden separat ausgewiesen. Komplexe ERP-, Buchhaltungs-, Lager- und Branchensoftware-Anbindungen sind nicht enthalten.
+              </p>
+              <p className="mt-4 text-xs font-bold leading-5 text-[#52647d]">{pricingDisclosure}</p>
             </div>
           </div>
         </section>

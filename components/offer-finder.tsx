@@ -19,6 +19,7 @@ import {
   buildOfferRecommendation,
   createOfferSelectionMessage,
   formatEuro,
+  pricingDisclosure,
   type AddOn,
   type CarePackage,
   type FinderAnswers,
@@ -320,6 +321,11 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
       setup: `ab ${formatEuro(recommendation.setupTotal)}`,
       monthly: recommendation.monthlyTotal === 0 ? '0 €/Monat' : `${formatEuro(recommendation.monthlyTotal)}/Monat`,
       reason: recommendation.reason,
+      packageName: recommendation.isDigitalBusinessBundle ? 'Digitaler Betrieb' : undefined,
+      individualValue: recommendation.individualValue ? `ab ${formatEuro(recommendation.individualValue)}` : undefined,
+      packageAdvantage: recommendation.packageAdvantage ? formatEuro(recommendation.packageAdvantage) : undefined,
+      includedSupport: recommendation.isDigitalBusinessBundle ? 'Drei Monate enthalten' : undefined,
+      externalCosts: 'Je nach eingesetzten Diensten separat',
     }
 
     try {
@@ -415,7 +421,7 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
                 <p className="text-xs font-black uppercase tracking-[0.2em] text-[#0b63ce]">Unsere Empfehlung</p>
               </div>
               <h2 className="mt-4 text-3xl font-black tracking-[-0.04em] text-[#061637] sm:text-4xl">
-                Eine Lösung, die zu Ihrem Bedarf passt.
+                {recommendation.isDigitalBusinessBundle ? 'Empfohlenes Gesamtpaket: Digitaler Betrieb' : 'Eine Lösung, die zu Ihrem Bedarf passt.'}
               </h2>
               <p className="mt-4 max-w-2xl leading-7 text-[#52647d]">{recommendation.reason}</p>
 
@@ -441,10 +447,10 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
               </dl>
 
               <fieldset className="mt-8">
-                <legend className="text-sm font-black text-[#061637]">Betreuung anpassen</legend>
+                <legend className="text-sm font-black text-[#061637]">Optionale Betreuung auswählen</legend>
                 <p className="mt-3 rounded-[8px] border border-[#cfe2f5] bg-[#f2f7ff] px-4 py-3 text-sm leading-6 text-[#415574]">
                   <span className="font-black text-[#061637]">Empfehlung: {recommendation.recommendedCare.name}.</span>{' '}
-                  {recommendation.careRecommendationReason} Die Auswahl bleibt frei anpassbar.
+                  {recommendation.careRecommendationReason} Betreuung ist optional und wird nur bei Auswahl berechnet.
                 </p>
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {allCareOptions.map((care) => {
@@ -478,15 +484,26 @@ export function OfferFinder({ initialWebsiteId }: { initialWebsiteId?: WebsitePa
             </div>
 
             <aside className="border-l-4 border-[#0b63ce] bg-[#eef6ff] p-6 sm:p-8">
+              {recommendation.isDigitalBusinessBundle && (
+                <div className="mb-7 border-b border-[#cfe2f5] pb-6">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">Einzelwert</p>
+                  <p className="mt-1 text-xl font-black text-[#061637]">ab {formatEuro(recommendation.individualValue ?? 0)}</p>
+                  <p className="mt-4 text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">Paketvorteil</p>
+                  <p className="mt-1 text-xl font-black text-[#a94000]">{formatEuro(recommendation.packageAdvantage ?? 0)}</p>
+                  <p className="mt-4 text-sm font-bold leading-6 text-[#263956]">Drei Monate Startbegleitung sind enthalten.</p>
+                </div>
+              )}
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">Geschätzter Startpreis</p>
               <p className="mt-2 text-4xl font-black tracking-[-0.04em] text-[#061637]">ab {formatEuro(recommendation.setupTotal)}</p>
               <p className="mt-7 text-xs font-black uppercase tracking-[0.16em] text-[#52647d]">Geschätzte monatliche Kosten</p>
               <p className="mt-2 text-3xl font-black tracking-[-0.04em] text-[#061637]">
                 {recommendation.monthlyTotal === 0 ? '0 €/Monat' : `${formatEuro(recommendation.monthlyTotal)}/Monat`}
               </p>
+              <p className="mt-2 text-xs font-bold leading-5 text-[#52647d]">Betreuung optional. Airtable, Hosting, Domain, Chatbase und weitere externe Dienste werden separat ausgewiesen.</p>
               <p className="mt-6 text-sm leading-6 text-[#52647d]">
                 Diese Empfehlung und die dargestellte Kostenspanne sind unverbindlich. Das endgültige Angebot erhalten Sie nach einer kurzen persönlichen Prüfung.
               </p>
+              <p className="mt-3 text-xs font-bold leading-5 text-[#52647d]">{pricingDisclosure}</p>
               <FlowButton text="Persönliches Angebot anfordern" tone="orange" onClick={saveRecommendation} className="mt-6 w-full bg-white" />
               <div className="mt-5 flex flex-col gap-2 text-sm font-black">
                 <button

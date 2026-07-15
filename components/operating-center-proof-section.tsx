@@ -74,7 +74,7 @@ export function OperatingCenterProofSection() {
     <section id="betriebszentrale-demo" className="border-y border-[#dfeaf5] bg-white py-16 lg:py-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:px-8">
         <Reveal>
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Digitale Betriebszentrale</p>
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[#0b63ce]">Betriebszentrale</p>
           <h2 className="mt-3 text-3xl font-black leading-tight tracking-[-0.04em] text-[#061637] sm:text-4xl">
             Vom Website-Kontakt bis zum erledigten Auftrag.
           </h2>

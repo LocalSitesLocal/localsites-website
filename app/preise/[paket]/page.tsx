@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, Check, CircleCheck, Clock3, FileText, Handshake, PackageOpen, ShieldCheck, Target } from 'lucide-react'
+import { ArrowLeft, Check, CircleCheck, Clock3, FileText, Handshake, PackageOpen, ShieldCheck, Target, WalletCards } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { DirectOfferRequestButton } from '@/components/direct-offer-request-button'
 import { FlowButton } from '@/components/flow-button'
 import { PackageComparisonTable } from '@/components/package-comparison-table'
 import { getWebsitePackageBySlug, websitePackages } from '@/lib/website-packages'
+import { ownershipNote, paymentPlan, pricingDisclosure } from '@/lib/offers'
 
 export function generateStaticParams() {
   return websitePackages.map((item) => ({ paket: item.slug }))
@@ -65,6 +66,7 @@ export default async function PackageDetailPage({
                 {item.name}
               </h1>
               <p className="mt-5 text-3xl font-black tracking-[-0.035em] text-[#0b63ce]">{item.price}</p>
+              <p className="mt-2 text-xs font-bold leading-5 text-[#52647d]">{pricingDisclosure}</p>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#52647d]">{item.description}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <DirectOfferRequestButton
@@ -134,7 +136,7 @@ export default async function PackageDetailPage({
 
         <section className="py-14 lg:py-18">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-            <div className="grid gap-8 lg:grid-cols-2">
+            <div className="grid gap-8 lg:grid-cols-3">
               <div className="border-l-4 border-[#0b63ce] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)] sm:p-8">
                 <FileText className="h-6 w-6 text-[#0b63ce]" />
                 <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Seitenumfang und Korrekturen</h2>
@@ -145,6 +147,11 @@ export default async function PackageDetailPage({
                 <Clock3 className="h-6 w-6 text-[#a94000]" />
                 <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Dauer der Umsetzung</h2>
                 <p className="mt-4 leading-7 text-[#52647d]">{item.timeline}</p>
+              </div>
+              <div className="border-l-4 border-[#0b63ce] bg-white p-6 shadow-[0_18px_55px_rgba(15,55,100,0.06)] sm:p-8">
+                <ShieldCheck className="h-6 w-6 text-[#0b63ce]" />
+                <h2 className="mt-4 text-2xl font-black tracking-[-0.03em] text-[#061637]">Unterstützung nach dem Start</h2>
+                <p className="mt-4 leading-7 text-[#52647d]">{item.supportPeriod}</p>
               </div>
             </div>
           </div>
@@ -210,6 +217,44 @@ export default async function PackageDetailPage({
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[#dfeaf5] bg-white py-14 lg:py-18">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div>
+                <WalletCards className="h-7 w-7 text-[#0b63ce]" />
+                <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Zahlung & Übergabe</p>
+                <h2 className="mt-3 text-3xl font-black tracking-[-0.035em] text-[#061637]">Klare Schritte bis zur Übergabe.</h2>
+                <ul className="mt-7 grid gap-3">
+                  {paymentPlan.map((step) => (
+                    <li key={step} className="flex gap-3 leading-7 text-[#263956]">
+                      <Check className="mt-1 h-5 w-5 shrink-0 text-[#0b63ce]" />
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 border-l-2 border-[#0b63ce] pl-4 text-sm leading-6 text-[#52647d]">{ownershipNote}</p>
+              </div>
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#0b63ce]">Paketbezogene FAQ</p>
+                <div className="mt-5 divide-y divide-[#d7e7f7] border-y border-[#d7e7f7]">
+                  <details className="group py-5">
+                    <summary className="cursor-pointer font-black text-[#061637]">Welche Inhalte werden benötigt?</summary>
+                    <p className="mt-3 text-sm leading-6 text-[#52647d]">{item.clientProvides.join(' ')}</p>
+                  </details>
+                  <details className="group py-5">
+                    <summary className="cursor-pointer font-black text-[#061637]">Sind Domain und externe Dienste enthalten?</summary>
+                    <p className="mt-3 text-sm leading-6 text-[#52647d]">Die Veröffentlichung auf Ihrer Domain ist enthalten. Laufende Kosten für Domain, Hosting und externe Dienste werden separat ausgewiesen.</p>
+                  </details>
+                  <details className="group py-5">
+                    <summary className="cursor-pointer font-black text-[#061637]">Was passiert bei zusätzlichem Aufwand?</summary>
+                    <p className="mt-3 text-sm leading-6 text-[#52647d]">Leistungen außerhalb des vereinbarten Umfangs werden vor der Umsetzung beschrieben und separat angeboten.</p>
+                  </details>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -101,7 +101,7 @@ export function DemosSection() {
               </div>
               <div className="flex items-center justify-between gap-4 p-6">
                 <div>
-                  <h3 className="font-black text-[#061637]">Digitale Betriebszentrale</h3>
+                  <h3 className="font-black text-[#061637]">Betriebszentrale</h3>
                   <p className="mt-1 text-sm text-[#52647d]">Anfragen und Aufträge sichtbar organisieren</p>
                 </div>
                 <ArrowRight className="motion-arrow h-5 w-5 shrink-0 text-[#0b63ce]" />
